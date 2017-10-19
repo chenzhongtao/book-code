@@ -58,3 +58,12 @@ void __exit find_vma_intersection_exit(void)
 
 module_init(find_vma_intersection_init); 
 module_exit(find_vma_intersection_exit);
+
+/*
+mm_start = 0x400000
+
+In first situation:
+vma->vm_start = 0x400000
+In second situation:
+There is no vma exists between start_addr and end_addr!
+*/

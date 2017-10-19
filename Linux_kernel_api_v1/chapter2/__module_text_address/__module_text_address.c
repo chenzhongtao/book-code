@@ -74,3 +74,13 @@ void __exit __module_text_address_exit(void)
 
 module_init(__module_text_address_init); 
 module_exit(__module_text_address_exit); 
+
+/*
+it's about fun_a:
+ret->name: __module_text_address
+ret->state: 1
+ret->core_size: 1095
+
+it's about var_b:
+var_b is not in text area!
+*/

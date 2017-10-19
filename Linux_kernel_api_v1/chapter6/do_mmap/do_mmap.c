@@ -28,9 +28,9 @@ int __init do_mmap_init(void)
 	addr = do_mmap(NULL,100,len,PROT_WRITE|PROT_READ,MAP_ANONYMOUS|MAP_SHARED,0); 
 	up_write(&current->mm->mmap_sem);    //释放当前进程空间的mmap_sem信号量
 
-	if ( addr > 0xc0000000 )         //分配不成功或是运行结果错误
+	if (IS_ERR_VALUE(addr))       //分配不成功或是运行结果错误
 	{ 
-            printk("<0>do_mmap( ) failed\n"); 
+            printk("<0>do_mmap( ) failed %ld\n",(long)addr); 
     	} 
     	else                          // else指do_mmap( ) 操作成功
 	{	 
@@ -43,7 +43,7 @@ int __init do_mmap_init(void)
 
 void __exit do_mmap_exit(void) 
 { 
-	if( addr < 0xc000000 ) 
+	if( !IS_ERR_VALUE(addr) ) 
 	{ 
 		down_write(&current->mm->mmap_sem); 
 		do_munmap(current->mm,addr,len); 
@@ -54,3 +54,9 @@ void __exit do_mmap_exit(void)
 
 module_init(do_mmap_init); 
 module_exit(do_mmap_exit);
+
+/*
+before do_mmap( ),map_count = 16
+after do_mmap( ),map_count = 17
+The addr = 0x7f62db4f1000
+*/

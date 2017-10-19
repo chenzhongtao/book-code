@@ -44,3 +44,7 @@ void __exit alloc_vm_area_exit(void)
 
 module_init(alloc_vm_area_init); 
 module_exit(alloc_vm_area_exit);
+/*
+vm->addr= 0xffffc9000066c000
+vm->size= 12288
+*/

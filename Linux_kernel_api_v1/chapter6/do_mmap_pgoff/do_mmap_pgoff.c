@@ -28,7 +28,7 @@ int __init do_mmap_pgoff_init(void)
 	addr =do_mmap_pgoff( NULL, 100, len , PROT_WRITE | PROT_READ , MAP_ANONYMOUS | MAP_SHARED , 0 );
 	up_write(&current->mm->mmap_sem);     //释放当前进程空间的mmap_sem信号量
 
-	if ( addr > 0xc0000000 )         //分配不成功或是运行结果错误
+	if ( IS_ERR_VALUE(addr) )         //分配不成功或是运行结果错误
 	{ 
         	printk("<0>do_mmap_pgoff ( ) failed\n"); 
     	} 
@@ -43,7 +43,7 @@ int __init do_mmap_pgoff_init(void)
 
 void __exit do_mmap_pgoff_exit(void) 
 { 
-	if( addr < 0xc000000 ) 
+	if( !IS_ERR_VALUE(addr) ) 
 	{ 
 		down_write(&current->mm->mmap_sem); 
 		do_munmap(current->mm,addr,len); 
@@ -54,3 +54,10 @@ void __exit do_mmap_pgoff_exit(void)
 
 module_init(do_mmap_pgoff_init); 
 module_exit(do_mmap_pgoff_exit); 
+
+/*
+before do_mmap_pgoff( ),map_count = 16
+after do_mmap_pgoff( ),map_count = 17
+The addr = 0x7f61d43c1000
+
+*/

@@ -36,8 +36,8 @@ int __init __print_symbol_init(void)
 	printk("<0>\n\n");
 
 
-	name = "vboxvideo";           
-	fmodule = find_module( name );   //查找模块名为　"vboxvideo"　的模块
+	name = "cifs";           
+	fmodule = find_module( name );   //查找模块名为　"cifs"　的模块
 	
 	if( fmodule != NULL )
 	{
@@ -63,3 +63,18 @@ void __exit __print_symbol_exit(void)
 
 module_init(__print_symbol_init); 
 module_exit(__print_symbol_exit); 
+
+/*
+it's the first part,
+ do_one_initcall+0x3c/0x1d0
+
+
+fmodule->name: cifs
+it's the second part,
+ cifs_sb_active+0x0/0x30 [cifs]
+
+
+it's the third part,
+ a_symbol+0x5/0x10 [__print_symbol]
+
+*/

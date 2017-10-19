@@ -28,9 +28,9 @@ int __init alloc_pages_init(void)
 	{ 
 		printk("<0>alloc_pages Successfully!\n"); 
 		printk("<0>pages = 0x%lx\n",(unsigned long)pages); 
-		printk("<0>mem_map = 0x%lx\n",(unsigned long)mem_map); 
-		printk("<0>pages-mem_map = 0x%lx\n",(unsigned long)pages-(unsigned long)mem_map);
-		printk("(pages-mem_map)*4096 = 0x%lx\n",(unsigned long)(pages-mem_map)*4096);
+		//printk("<0>mem_map = 0x%lx\n",(unsigned long)mem_map); 
+		//printk("<0>pages-mem_map = 0x%lx\n",(unsigned long)pages-(unsigned long)mem_map);
+		//printk("(pages-mem_map)*4096 = 0x%lx\n",(unsigned long)(pages-mem_map)*4096);
 		printk("<0>page_address(pages) = 0x%lx\n",(unsigned long)page_address(pages));
 	}	 
 	return 0; 
@@ -48,3 +48,9 @@ void __exit alloc_pages_exit(void)
 
 module_init(alloc_pages_init); 
 module_exit(alloc_pages_exit);
+
+/*
+pages = 0xffffea00044ab840
+page_address(pages) = 0xffff880139eb8000
+
+*/

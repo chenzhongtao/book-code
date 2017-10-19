@@ -42,3 +42,11 @@ void __exit module_is_live_exit(void)
 
 module_init(module_is_live_init); 
 module_exit(module_is_live_exit); 
+
+/*
+init:
+kernel:in init,state is:not GOING!
+
+exit:
+kernel:in exit,state is:GOING
+*/

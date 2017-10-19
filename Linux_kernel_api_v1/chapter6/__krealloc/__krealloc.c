@@ -14,15 +14,18 @@ MODULE_LICENSE("GPL");
 static int __init __krealloc_init(void); 
 static void __exit __krealloc_exit(void); 
 
-struct page * pages = NULL; 
-#define new_size  26 
+//struct page * pages = NULL; 
+char * pages = NULL; 
+#define new_size  2 * 4096
 int __init __krealloc_init(void) 
 {	 
+	printk("<0>start __krealloc_init!\n");
 	char * temp, * addr;
 	char x;
 	int i;
 
-	pages = alloc_pages(GFP_KERNEL,0);       //分配一个物理页，pages为指向该页的指针 
+	//pages = alloc_pages(GFP_KERNEL,0);       //分配一个物理页，pages为指向该页的指针 
+	pages = (char *)kmalloc( 4096, GFP_KERNEL); 	 
 	if(!pages) 
 	{ 
 		printk("<0>alloc failed!\n"); 
@@ -33,23 +36,29 @@ int __init __krealloc_init(void)
 		temp = (char *)pages;     //临时指针指向刚分配页的起始地址 		
 		*temp = 'a'; 
 		i = 0; 
-		for(;i < new_size; i ++)        //为分配的页前new_size个字节进行赋值 
+		for(;i < 26; i ++)        //为分配的页前26个字节进行赋值 
 		{ 
 			x = *temp; 
 			temp ++; 
 			*temp = x+1; 
 		}	
-       		//调用函数，重新分配内存，pages为起始地址的前new_size个字节的内容不改变
-	    	addr = __krealloc( pages,new_size,GFP_KERNEL);  
+       	//调用函数，重新分配内存，pages为起始地址的前new_size个字节的内容不改变
+	    addr = __krealloc( pages,new_size,GFP_KERNEL);
+		if(!addr) 
+		{ 
+			printk("<0>__krealloc failed!\n"); 
+			return -ENOMEM; 
+		} 		
 		printk("<0>addr = 0x%lx\n",(unsigned long)addr);      //输出所拷贝的目标起始地址 
 		printk("<0>*addr = %c\n",*addr);                      //输出第一个字符 
 		printk("<0>*addr+4 = %c\n",*(addr+4));                //输出第五个字符 
 		 
 		i = 0 ; temp = addr; 
-		for(; i<new_size; i ++,temp ++)                    //输出新内存中的内容 
-			printk("%c",*temp); 	
+		for(; i<26; i ++,temp ++)                    //输出新内存中的内容 
+			printk("%d",*temp); 	
 		
-	}	 	 
+	}
+	return 0;	
 }
 
 void __exit __krealloc_exit(void) 

@@ -52,3 +52,11 @@ void __exit __module_address_exit(void)
 
 module_init(__module_address_init); 
 module_exit(__module_address_exit); 
+
+/*
+ret->name: __module_address
+ret->state: 1
+ret->core_size: 1031
+refs of __module_address is 1
+
+*/

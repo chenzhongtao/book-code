@@ -45,3 +45,7 @@ void __exit alloc_pages_exact_exit(void)
 
 module_init(alloc_pages_exact_init); 
 module_exit(alloc_pages_exact_exit);
+
+/*
+kernel:addr = 0xffff88013b7b0000
+*/

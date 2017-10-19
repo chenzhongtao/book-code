@@ -16,7 +16,7 @@ static void __exit module_put_exit(void);
 
 int __init module_put_init(void) 
 { 
-	const char *name = "test_module";  //定义待查找的模块名为“test_module”
+	const char *name = "cifs";  //定义待查找的模块名为“test_module”
 	struct module * fmodule = find_module( name );  //调用查找模块函数
 	
 	if( fmodule != NULL )
@@ -47,3 +47,11 @@ void __exit module_put_exit(void)
 
 module_init(module_put_init); 
 module_exit(module_put_exit); 
+
+/*
+before calling module_put,
+refs of cifs is: 2
+after calling module_put,
+refs of cifs is: 1
+
+*/

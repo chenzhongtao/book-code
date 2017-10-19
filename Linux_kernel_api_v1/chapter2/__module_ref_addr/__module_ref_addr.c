@@ -47,3 +47,14 @@ void __exit __module_ref_addr_exit(void)
 
 module_init(__module_ref_addr_init); 
 module_exit(__module_ref_addr_exit); 
+
+/*
+addr: ffff8800282575a8
+originally,
+refs of this module is: 1
+after calling local_inc,
+refs of this module is: 2
+after calling local_dec,
+refs of this module is: 1
+
+*/

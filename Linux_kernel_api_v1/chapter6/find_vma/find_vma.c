@@ -46,3 +46,9 @@ void __exit find_vma_exit(void)
 
 module_init(find_vma_init); 
 module_exit(find_vma_exit);
+
+/*
+addr = 0x602001
+vma->vm_start = 0x602000
+vma->vm_end = 0x603000
+*/

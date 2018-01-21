@@ -1,0 +1,52 @@
+		Chapter 10 Elementary Data Structures
+
+10.1 Stacks and queues
+
+STACK-EMPTY	:	stack.hpp	
+PUSH		:	stack.hpp
+POP		:	stack.hpp
+
+ENQUEUE		:	queue.hpp
+DEQUEUE		:	queue.hpp
+
+Exercises
+10.1-4		:	queue.hpp
+10.1-5		:	deque.hpp
+10.1-6		:	queue_by_2stacks.hpp
+10.1-7		:	stack_by_2queues.hpp
+
+
+
+10.2 Linked lists
+
+LIST-INSERT	:	list.hpp 
+LIST-SEARCH	:	list.hpp
+LIST-DELETE	:	list.hpp
+
+LIST-INSERT'	:	circular_list.hpp
+LIST-SEARCH'	:	circular_list.hpp
+LIST-DELETE'	:	circular_list.hpp
+
+Exercises
+10.2-1		:	single_list.hpp
+10.2-2		:	stack_by_list.hpp
+10.2-3		:	queue_by_list.hpp
+10.2-4		:	circular_list.hpp
+10.2-5		:	single_list.hpp	
+10.2-6		:	list.hpp
+10.2-7		:	single_list.hpp
+10.4-2		:	tree.hpp	
+10.4-3		:	tree.hpp
+10.4-4		:	tree.hpp(only pseudocode)
+10.4-5		:	tree.hpp
+
+Problems
+10-2 Mergeable heaps using linked lists
+		:	mergeable_heap.hpp
+		:	merge_sort_for_list.hpp
+
+=========
+note:
+Use -std=c++11 flag  when compiling.
+
+

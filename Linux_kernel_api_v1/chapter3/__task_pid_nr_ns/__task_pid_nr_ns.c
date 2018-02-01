@@ -11,31 +11,29 @@
 
 MODULE_LICENSE("GPL");
 
-//×Óœø³Ìº¯Êý¶šÒå
 int my_function(void * argc)
 {
 	printk("<0>in the kernel thread function!\n");	
 	return 0;
 }
 
-//Ä£¿éŒÓÔØº¯Êý¶šÒå
+//模块加载函数定义
 static int __init __task_pid_nr_ns_init(void)
 {	
 	int result;	
 	printk("<0> into __task_pid_nr_ns_init.\n");		
-	result=kernel_thread(my_function,NULL,CLONE_KERNEL);  //ŽŽœšÐÂœø³Ì
-	struct pid * kpid=find_get_pid(result);  //»ñÈ¡×Óœø³ÌµÄœø³ÌÃèÊö·û
-	struct task_struct * task=pid_task(kpid,PIDTYPE_PID); //»ñÈ¡œø³ÌËùÊôµÄÈÎÎñµÄÈÎÎñÃèÊö·û
-	pid_t result1=__task_pid_nr_ns(task,PIDTYPE_PID,kpid->numbers[kpid->level].ns); //»ñÈ¡ÈÎÎñ¶ÔÓŠœø³ÌµÄœø³ÌÃèÊö·û
-	printk("<0>the pid of the find_get_pid is :%d\n",kpid->numbers[kpid->level].nr); //ÏÔÊŸº¯Êýfind_get_pid()·µ»ØÖµµÄœø³ÌÃèÊö·ûµÄœø³ÌºÅ
-	printk("<0>the result of the __task_pid_nr_ns is:%d\n",result1); //ÏÔÊŸº¯Êý__task_pid_nr_ns()µÄ·µ»ØÖµ
-	printk("<0>the result of the kernel_thread is :%d\n",result);  //ÏÔÊŸº¯Êýkernel_thread()µÄ·µ»ØÖµ
-	printk("<0>the pid of current thread is :%d\n",current->pid);  //ÏÔÊŸµ±Ç°œø³ÌºÅ
+	result=kernel_thread(my_function,NULL,CLONE_KERNEL);  //创建新进程
+	struct pid * kpid=find_get_pid(result);  //获取子进程的进程描述符
+	struct task_struct * task=pid_task(kpid,PIDTYPE_PID); //获取进程所属的任务的任务描述符
+	pid_t result1=__task_pid_nr_ns(task,PIDTYPE_PID,kpid->numbers[kpid->level].ns); //获取任务对应进程的进程描述符
+	printk("<0>the pid of the find_get_pid is :%d\n",kpid->numbers[kpid->level].nr); //显示函数find_get_pid()返回值的进程描述符的进程号
+	printk("<0>the result of the __task_pid_nr_ns is:%d\n",result1); //显示函数__task_pid_nr_ns()的返回值
+	printk("<0>the result of the kernel_thread is :%d\n",result);  //显示函数kernel_thread()的返回值
+	printk("<0>the pid of current thread is :%d\n",current->pid);  //显示当前进程号
 	printk("<0> out __task_pid_nr_ns_init.\n");
 	return 0;
 }
 
-//Ä£¿éÍË³öº¯Êý¶šÒå
 static void __exit __task_pid_nr_ns_exit(void)
 {
         printk("<0>Goodbye __task_pid_nr_ns\n");	
@@ -44,4 +42,12 @@ static void __exit __task_pid_nr_ns_exit(void)
 module_init(__task_pid_nr_ns_init);
 module_exit(__task_pid_nr_ns_exit);
 
-
+/*
+into __task_pid_nr_ns_init.
+the pid of the find_get_pid is :6782
+in the kernel thread function!
+the result of the __task_pid_nr_ns is:6782
+the result of the kernel_thread is :6782
+the pid of current thread is :6781
+ out __task_pid_nr_ns_init.
+*/

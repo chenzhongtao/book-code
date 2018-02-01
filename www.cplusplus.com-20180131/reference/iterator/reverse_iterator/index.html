@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>reverse_iterator - C++ Reference</title>
+<link rel="canonical" href="http://www.cplusplus.com/reference/iterator/reverse_iterator/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../reference/">Reference</a></li>
+<li><a href="../../../reference/iterator/">&lt;iterator&gt;</a></li>
+<li class="here">reverse_iterator</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<div id="I_type">class template</div>
+<div id="I_file">&lt;iterator&gt;</div>
+<h1><span class="namespace" title="namespace std">std::</span>reverse_iterator</h1>
+<div class="C_prototype"><pre>template &lt;class Iterator&gt; class reverse_iterator;</pre></div><div id="I_description">Reverse iterator</div>
+<section id="description">
+<div class="hierarchy">
+<ul>
+<li><b><a href="../../../iterator">iterator</a></b></li>
+<li><b>reverse_iterator</b></li>
+</ul>
+</div>
+<br>
+This class reverses the direction in which a <i><a href="../../../BidirectionalIterator">bidirectional</a></i> or <i><a href="../../../RandomAccessIterator">random-access</a></i> iterator iterates through a range.<br>
+<br>
+A copy of the original iterator (the <i><a href="/reverse_iterator::base">base iterator</a></i>) is kept internally and used to reflect the operations performed on the <samp>reverse_iterator</samp>: whenever the <samp>reverse_iterator</samp> is incremented, its base iterator is decreased, and vice versa. A copy of the <i>base iterator</i> with the current state can be obtained at any time by calling member <samp><a href="/reverse_iterator::base">base</a></samp>.<br>
+<br>
+Notice however that when an iterator is reversed, the reversed version does not point to the same element in the range, but to <b>the one preceding it</b>. This is so, in order to arrange for the <i>past-the-end</i> element of a range: An iterator pointing to a <i>past-the-end</i> element in a range, when reversed, is pointing to the last element (not past it) of the range (this would be the <i>first element</i> of the reversed range). And if an iterator to the first element in a range is reversed, the reversed iterator points to the element before the first element (this would be the <i>past-the-end</i> element of the reversed range).<br>
+</section>
+<br>
+<section id="parameters">
+<h3>Template parameters</h3>
+<dl>
+<dt>Iterator</dt>
+<dd>A <i><a href="/BidirectionalIterator">bidirectional iterator</a></i> type.<br>
+Or a <i><a href="/RandomAccessIterator">random-access iterator</a></i>, if an operator that requires such a category of iterators is used.<br>
+</dd>
+</dl>
+</section>
+<br>
+<section id="types">
+<h3>Member types</h3>
+<table class="boxed">
+<tr><th>member</th><th>definition in <samp>reverse_iterator</samp></th><th>description</th></tr>
+<tr><td><samp>iterator_type</samp></td><td><samp>Iterator</samp></td><td><samp>Iterator</samp>'s type</td></tr>
+<tr><td><samp>iterator_category</samp></td><td><code>iterator_traits&lt;Iterator&gt;::iterator_category</code></td><td>Preserves <samp>Iterator</samp>'s category</td></tr>
+<tr><td><samp>value_type</samp></td><td><code>iterator_traits&lt;Iterator&gt;::value_type</code></td><td>Preserves <samp>Iterator</samp>'s value type</td></tr>
+<tr><td><samp>difference_type</samp></td><td><code>iterator_traits&lt;Iterator&gt;::difference_type</code></td><td>Preserves <samp>Iterator</samp>'s difference type</td></tr>
+<tr><td><samp>pointer</samp></td><td><code>iterator_traits&lt;Iterator&gt;::pointer</code></td><td>Preserves <samp>Iterator</samp>'s pointer type</td></tr>
+<tr><td><samp>reference</samp></td><td><code>iterator_traits&lt;Iterator&gt;::reference</code></td><td>Preserves <samp>Iterator</samp>'s reference type</td></tr>
+</table>
+</section>
+<br>
+<section id="functions">
+<h3>Member functions</h3>
+<dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/reverse_iterator/"><b>(constructor)</b></a></dt><dd>Constructs reverse_iterator object <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/base/"><b>base</b></a></dt><dd>Return base iterator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator*/"><b>operator*</b></a></dt><dd>Dereference iterator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator+/"><b>operator+</b></a></dt><dd>Addition operator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator++/"><b>operator++</b></a></dt><dd>Increment iterator position <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator+=/"><b>operator+=</b></a></dt><dd>Advance iterator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator-/"><b>operator-</b></a></dt><dd>Subtraction operator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator--/"><b>operator--</b></a></dt><dd>Decrease iterator position <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator-=/"><b>operator-=</b></a></dt><dd>Retrocede iterator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator->/"><b>operator-&gt;</b></a></dt><dd>Dereference iterator <span class="typ">(public member function)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator[]/"><b>operator[]</b></a></dt><dd>Dereference iterator with offset <span class="typ">(public member function)</span></dd></dl>
+<br>
+<h3>Non-member function overloads</h3>
+<dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operators/"><b>relational operators</b></a></dt><dd>Relational operators for reverse_iterator <span class="typ">(function template)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator_plus-free/"><b>operator+</b></a></dt><dd>Addition operator <span class="typ">(function template)</span></dd></dl><dl class="links"><dt><a href= "/reference/iterator/reverse_iterator/operator_minus-free/"><b>operator-</b></a></dt><dd>Subtraction operator <span class="typ">(function template)</span></dd></dl>
+</section></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder selected reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="reference_box">
+<h3><b><a href="../../../reference/">Reference</a></b></h3>
+<ul>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/clibrary/">C library:</a></h4><ul>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cassert/"><span>&lt;cassert&gt; (assert.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cctype/"><span>&lt;cctype&gt; (ctype.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cerrno/"><span>&lt;cerrno&gt; (errno.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cfenv/"><span>&lt;cfenv&gt; (fenv.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cfloat/"><span>&lt;cfloat&gt; (float.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cinttypes/"><span>&lt;cinttypes&gt; (inttypes.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ciso646/"><span>&lt;ciso646&gt; (iso646.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/climits/"><span>&lt;climits&gt; (limits.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/clocale/"><span>&lt;clocale&gt; (locale.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cmath/"><span>&lt;cmath&gt; (math.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csetjmp/"><span>&lt;csetjmp&gt; (setjmp.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csignal/"><span>&lt;csignal&gt; (signal.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdarg/"><span>&lt;cstdarg&gt; (stdarg.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cstdbool/"><span>&lt;cstdbool&gt; (stdbool.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstddef/"><span>&lt;cstddef&gt; (stddef.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cstdint/"><span>&lt;cstdint&gt; (stdint.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdio/"><span>&lt;cstdio&gt; (stdio.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdlib/"><span>&lt;cstdlib&gt; (stdlib.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstring/"><span>&lt;cstring&gt; (string.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/ctgmath/"><span>&lt;ctgmath&gt; (tgmath.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ctime/"><span>&lt;ctime&gt; (time.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cuchar/"><span>&lt;cuchar&gt; (uchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwchar/"><span>&lt;cwchar&gt; (wchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwctype/"><span>&lt;cwctype&gt; (wctype.h)</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/stl/">Containers:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/array/"><span>&lt;array&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/deque/"><span>&lt;deque&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/forward_list/"><span>&lt;forward_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/list/"><span>&lt;list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/map/"><span>&lt;map&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/queue/"><span>&lt;queue&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/set/"><span>&lt;set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stack/"><span>&lt;stack&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_map/"><span>&lt;unordered_map&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_set/"><span>&lt;unordered_set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/vector/"><span>&lt;vector&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/iolibrary/">Input/Output:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/fstream/"><span>&lt;fstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iomanip/"><span>&lt;iomanip&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ios/"><span>&lt;ios&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iosfwd/"><span>&lt;iosfwd&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iostream/"><span>&lt;iostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/istream/"><span>&lt;istream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ostream/"><span>&lt;ostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/sstream/"><span>&lt;sstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/streambuf/"><span>&lt;streambuf&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/multithreading/">Multi-threading:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/atomic/"><span>&lt;atomic&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/condition_variable/"><span>&lt;condition_variable&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/future/"><span>&lt;future&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/mutex/"><span>&lt;mutex&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/thread/"><span>&lt;thread&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4><a href="../../../reference/std/">Other:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/algorithm/"><span>&lt;algorithm&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/bitset/"><span>&lt;bitset&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/chrono/"><span>&lt;chrono&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/codecvt/"><span>&lt;codecvt&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/complex/"><span>&lt;complex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/exception/"><span>&lt;exception&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/functional/"><span>&lt;functional&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/initializer_list/"><span>&lt;initializer_list&gt;</span></a></li>
+<li class="cpp98 cpp11 selected folder"><a href="../../../reference/iterator/"><span>&lt;iterator&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/limits/"><span>&lt;limits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/locale/"><span>&lt;locale&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/memory/"><span>&lt;memory&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/new/"><span>&lt;new&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/numeric/"><span>&lt;numeric&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/random/"><span>&lt;random&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/ratio/"><span>&lt;ratio&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/regex/"><span>&lt;regex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stdexcept/"><span>&lt;stdexcept&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/string/"><span>&lt;string&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/system_error/"><span>&lt;system_error&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/tuple/"><span>&lt;tuple&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/typeindex/"><span>&lt;typeindex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/typeinfo/"><span>&lt;typeinfo&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/type_traits/"><span>&lt;type_traits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/utility/"><span>&lt;utility&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/valarray/"><span>&lt;valarray&gt;</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="iterator_box">
+<h3><b><a href="../../../reference/iterator/">&lt;iterator&gt;</a></b></h3>
+<ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/iterator/"><span>iterator</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/iterator_traits/"><span>iterator_traits</span></a></li>
+<li class="C_Collapsable"><h4>functions:</h4><ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/advance/"><span>advance</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/back_inserter/"><span>back_inserter</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/begin/"><span>begin</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/distance/"><span>distance</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/end/"><span>end</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/front_inserter/"><span>front_inserter</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/inserter/"><span>inserter</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/make_move_iterator/"><span>make_move_iterator</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/next/"><span>next</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/prev/"><span>prev</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>iterator categories:</h4><ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/BidirectionalIterator/"><span>bidirectional_iterator_tag</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/ForwardIterator/"><span>forward_iterator_tag</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/InputIterator/"><span>input_iterator_tag</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/OutputIterator/"><span>output_iterator_tag</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/RandomAccessIterator/"><span>random_access_iterator_tag</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>predefined iterators:</h4><ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/back_insert_iterator/"><span>back_insert_iterator</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/front_insert_iterator/"><span>front_insert_iterator</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/insert_iterator/"><span>insert_iterator</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/istreambuf_iterator/"><span>istreambuf_iterator</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iterator/istream_iterator/"><span>istream_iterator</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/iterator/move_iterator/"><span>move_iterator</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/ostreambuf_iterator/"><span>ostreambuf_iterator</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iterator/ostream_iterator/"><span>ostream_iterator</span></a></li>
+<li class="cpp98 cpp11 selected folder"><a href="../../../reference/iterator/reverse_iterator/"><span>reverse_iterator</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="reverse_iterator_box">
+<h3><b><a href="../../../reference/iterator/reverse_iterator/">reverse_iterator</a></b></h3>
+<ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/reverse_iterator/"><span>reverse_iterator::reverse_iterator</span></a></li>
+<li class="C_Collapsable"><h4>member functions:</h4><ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/base/"><span>reverse_iterator::base</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator*/"><span>reverse_iterator::operator*</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator+/"><span>reverse_iterator::operator+</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator++/"><span>reverse_iterator::operator++</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator+=/"><span>reverse_iterator::operator+=</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator-/"><span>reverse_iterator::operator-</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator--/"><span>reverse_iterator::operator--</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator-=/"><span>reverse_iterator::operator-=</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator->/"><span>reverse_iterator::operator-&gt;</span></a></li>
+<li class="cpp11"><a href="../../../reference/iterator/reverse_iterator/operator=/"><span>reverse_iterator::operator=</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator[]/"><span>reverse_iterator::operator[]</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>non-member overloads:</h4><ul>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operators/"><span>relational operators (reverse_iterator)</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator_minus-free/"><span>operator- (reverse_iterator)</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/iterator/reverse_iterator/operator_plus-free/"><span>operator+ (reverse_iterator)</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Freference%2Fiterator%2Freverse_iterator%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			el.appendChild(btn('New Page','New Page','new','/reference/new.cgi?a=iterator+reverse_iterator'));
+			el.appendChild(btn('Edit Page','Edit Page','edit','/reference/edit.cgi?a=iterator+reverse_iterator'));
+			
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/reference/delete.cgi?a=iterator+reverse_iterator'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

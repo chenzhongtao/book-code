@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Variables. Data Types. - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/variables/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Variables. Data Types.</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Variables. Data Types.</h1>
+The usefulness of the <em>"Hello World"</em> programs shown in the previous section is quite questionable. We had to write several lines of code, compile them, and then execute the resulting program just to obtain a simple sentence written on the screen as result. It certainly would have been much faster to type the output sentence by ourselves. However, programming is not limited only to printing simple texts on the screen. In order to go a little further on and to become able to write programs that perform useful tasks that really save us work we need to introduce the concept of <em>variable</em>.<br>
+<br>
+Let us think that I ask you to retain the number 5 in your mental memory, and then I ask you to memorize also the number 2 at the same time. You have just stored two different values in your memory. Now, if I ask you to add 1 to the first number I said, you should be retaining the numbers 6 (that is 5+1) and 2 in your memory. Values that we could now -for example- subtract and obtain 4 as result.<br>
+<br>
+The whole process that you have just done with your mental memory is a simile of what a computer can do with two variables. The same process can be expressed in C++ with the following instruction set: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>a = 5;
+b = 2;
+a = a + 1;
+result = a - b;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Obviously, this is a very simple example since we have only used two small integer values, but consider that your computer can store millions of numbers like these at the same time and conduct sophisticated mathematical operations with them.<br>
+<br>
+Therefore, we can define a <dfn>variable</dfn> as a portion of memory to store a determined value.<br>
+<br>
+Each variable needs an identifier that distinguishes it from the others. For example, in the previous code the <em>variable identifiers</em> were <code>a</code>, <code>b</code> and <code>result</code>, but we could have called the variables any names we wanted to invent, as long as they were valid identifiers.<br>
+<br>
+<h3>Identifiers</h3>
+A <dfn>valid identifier</dfn> is a sequence of one or more letters, digits or underscore characters (<code>_</code>). Neither spaces nor punctuation marks or symbols can be part of an identifier. Only letters, digits and single underscore characters are valid. In addition, variable identifiers always have to begin with a letter. They can also begin with an underline character (<code>_</code> ), but in some cases these may be reserved for compiler specific keywords or external identifiers, as well as identifiers containing two successive underscore characters anywhere. In no case can they begin with a digit.<br>
+<br>
+Another rule that you have to consider when inventing your own identifiers is that they cannot match any keyword of the C++ language nor your compiler's specific ones, which are <em>reserved keywords</em>. The standard reserved keywords are:<br>
+<br>
+<code>
+asm, auto, bool, break, case, catch, char, class, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, float, for, friend, goto, if, inline, int, long, mutable, namespace, new, operator, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while <br>
+</code>
+<br>
+Additionally, alternative representations for some operators cannot be used as identifiers since they are reserved words under some circumstances: <br>
+<br>
+<code>
+and, and_eq, bitand, bitor, compl, not, not_eq, or, or_eq, xor, xor_eq <br>
+</code>
+<br>
+Your compiler may also include some additional specific reserved keywords.<br>
+ <br>
+<strong>Very important:</strong> The C++ language is a <em>"case sensitive"</em> language. That means that an identifier written in capital letters is not equivalent to another one with the same name but written in small letters. Thus, for example, the <code>RESULT</code> variable is not the same as the <code>result</code> variable or the <code>Result</code> variable. These are three different variable identifiers.<br>
+<br>
+<h3>Fundamental data types</h3>
+When programming, we store the variables in our computer's memory, but the computer has to know what kind of data we want to store in them, since it is not going to occupy the same amount of memory to store a simple number than to store a single letter or a large number, and they are not going to be interpreted the same way.<br>
+<br>
+The memory in our computers is organized in bytes. A byte is the minimum amount of memory that we can manage in C++. A byte can store a relatively small amount of data: one single character or a small integer (generally an integer between 0 and 255). In addition, the computer can manipulate more complex data types that come from grouping several bytes, such as long numbers or non-integer numbers.<br>
+<br>
+Next you have a summary of the basic fundamental data types in C++, as well as the range of values that can be represented with each one:<br>
+ <br>
+<table class="boxed">
+<tr><th>Name</th><th>Description</th><th>Size*</th><th>Range*</th></tr>
+<tr><td><code>char</code></td>
+ <td>Character or small integer.</td>
+ <td>1byte</td>
+ <td>signed: -128 to 127<br>
+ unsigned: 0 to 255</td></tr>
+<tr><td><code>short int</code>
+(<code>short</code>)</td>
+ <td>Short Integer.</td>
+ <td>2bytes</td>
+ <td>signed: -32768 to 32767<br>
+ unsigned: 0 to 65535</td></tr>
+<tr><td><code>int</code></td>
+ <td>Integer.</td>
+ <td>4bytes</td>
+ <td>signed: -2147483648 to 2147483647<br>
+ unsigned: 0 to 4294967295</td></tr>
+<tr><td><code>long int</code>
+(<code>long</code>)</td>
+ <td>Long integer.</td>
+ <td>4bytes</td>
+ <td>signed: -2147483648 to 2147483647<br>
+ unsigned: 0 to 4294967295</td></tr>
+<tr><td><code>bool</code></td>
+ <td>Boolean value. It can take one of two values: true or false.</td>
+ <td>1byte</td>
+ <td><code>true</code> or <code>false</code></td></tr>
+<tr><td><code>float</code></td>
+ <td>Floating point number.</td>
+ <td>4bytes</td>
+ <td>+/- 3.4e +/- 38 (~7 digits)</td></tr>
+<tr><td><code>double</code></td>
+ <td>Double precision floating point number.</td>
+ <td>8bytes</td>
+ <td>+/- 1.7e +/- 308 (~15 digits)</td></tr>
+<tr><td><code>long double</code></td>
+ <td>Long double precision floating point number.</td>
+ <td>8bytes</td>
+ <td>+/- 1.7e +/- 308 (~15 digits)</td></tr>
+<tr><td><code>wchar_t</code></td>
+ <td>Wide character.</td>
+ <td>2 <i>or</i> 4 bytes</td>
+ <td>1 wide character</td></tr>
+</table>
+<br>
+* The values of the columns <em>Size</em> and <em>Range</em> depend on the system the program is compiled for. The values shown above are those found on most 32-bit systems. But for other systems, the general specification is that <code>int</code> has the natural size suggested by the system architecture (one <em>"word"</em>) and the four integer types <code>char</code>, <code>short</code>, <code>int</code> and <code>long</code> must each one be at least as large as the one preceding it, with <code>char</code> being always one byte in size. The same applies to the floating point types <code>float</code>, <code>double</code> and <code>long double</code>, where each one must provide at least as much precision as the preceding one.<br>
+<br>
+<h3>Declaration of variables</h3>
+In order to use a variable in C++, we must first declare it specifying which data type we want it to be. The syntax to declare a new variable is to write the specifier of the desired data type (like int, bool, float...) followed by a valid variable identifier. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> a;
+<var>float</var> mynumber;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+These are two valid declarations of variables. The first one declares a variable of type <var>int</var> with the identifier <var>a</var>. The second one declares a variable of type <var>float</var> with the identifier <var>mynumber</var>. Once declared, the variables <var>a</var> and <var>mynumber</var> can be used within the rest of their scope in the program.<br>
+<br>
+If you are going to declare more than one variable of the same type, you can declare all of them in a single statement by separating their identifiers with commas. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> a, b, c;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This declares three variables (<var>a</var>, <var>b</var> and <var>c</var>), all of them of type <var>int</var>, and has exactly the same meaning as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> a;
+<var>int</var> b;
+<var>int</var> c;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The integer data types <var>char</var>, <var>short</var>, <var>long</var> and <var>int</var> can be either signed or unsigned depending on the range of numbers needed to be represented. Signed types can represent both positive and negative values, whereas unsigned types can only represent positive values (and zero). This can be specified by using either the specifier <var>signed</var> or the specifier <var>unsigned</var> before the type name. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>unsigned</var> <var>short</var> <var>int</var> NumberOfSisters;
+<var>signed</var> <var>int</var> MyAccountBalance;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+By default, if we do not specify either <var>signed</var> or <var>unsigned</var> most compiler settings will assume the type to be signed, therefore instead of the second declaration above we could have written:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> MyAccountBalance;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+with exactly the same meaning (with or without the keyword <code>signed</code>)<br>
+<br>
+An exception to this general rule is the <var>char</var> type, which exists by itself and is considered a different fundamental data type from <var>signed char</var> and <var>unsigned char</var>, thought to store characters. You should use either <code>signed</code> or <code>unsigned</code> if you intend to store numerical values in a <var>char</var>-sized variable.<br>
+<br>
+<code>short</code> and <code>long</code> can be used alone as type specifiers. In this case, they refer to their respective integer fundamental types: <code>short</code> is equivalent to <code>short int</code> and <code>long</code> is equivalent to <code>long int</code>. The following two variable declarations are equivalent:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>short</var> Year;
+<var>short</var> <var>int</var> Year;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Finally, <code>signed</code> and <code>unsigned</code> may also be used as standalone type specifiers, meaning the same as <code>signed int</code> and <code>unsigned int</code> respectively. The following two declarations are equivalent: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>unsigned</var> NextYear;
+<var>unsigned</var> <var>int</var> NextYear;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+To see what variable declarations look like in action within a program, we are going to see the C++ code of the example about your mental memory proposed at the beginning of this section:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br></code></pre></td>
+<td class="source"><pre><code><cite>// operating with variables</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <cite>// declaring variables:</cite>
+  <var>int</var> a, b;
+  <var>int</var> result;
+
+  <cite>// process:</cite>
+  a = 5;
+  b = 2;
+  a = a + 1;
+  result = a - b;
+
+  <cite>// print out the result:</cite>
+  cout &lt;&lt; result;
+
+  <cite>// terminate the program:</cite>
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>4</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Do not worry if something else than the variable declarations themselves looks a bit strange to you. You will see the rest in detail in coming sections. <br>
+<br>
+<h3>Scope of variables</h3>
+All the variables that we intend to use in a program must have been declared with its type specifier in an earlier point in the code, like we did in the previous code at the beginning of the body of the function main when we declared that <var>a</var>, <var>b</var>, and <var>result</var> were of type <var>int</var>.<br>
+<br>
+A variable can be either of global or local scope. A global variable is a variable declared in the main body of the source code, outside all functions, while a local variable is one declared within the body of a function or a block.<br>
+<br>
+<img src="scope_of_variables.gif" alt="">
+<br>
+Global variables can be referred from anywhere in the code, even inside functions, whenever it is after its declaration.<br>
+<br>
+The scope of local variables is limited to the block enclosed in braces (<code>{}</code>) where they are declared. For example, if they are declared at the beginning of the body of a function (like in function <var>main</var>) their scope is between its declaration point and the end of that function. In the example above, this means that if another function existed in addition to <var>main</var>, the local variables declared in <var>main</var> could not be accessed from the other function and vice versa.<br>
+ <br>
+<h3>Initialization of variables</h3>
+When declaring a regular local variable, its value is by default undetermined. But you may want a variable to store a concrete value at the same moment that it is declared. In order to do that, you can initialize the variable. There are two ways to do this in C++:<br>
+<br>
+The first one, known as <dfn>c-like initialization</dfn>, is done by appending an equal sign followed by the value to which the variable will be initialized:<br>
+<br>
+<code>type identifier = initial_value ;</code>
+<br>
+For example, if we want to declare an <var>int</var> variable called <var>a</var> initialized with a value of 0 at the moment in which it is declared, we could write:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> a = 0;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The other way to initialize variables, known as <dfn>constructor initialization</dfn>, is done by enclosing the initial value between parentheses (<code>()</code>): <br>
+<br>
+<code>type identifier (initial_value) ;</code>
+<br>
+For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> a (0); </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Both ways of initializing variables are valid and equivalent in C++.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></code></pre></td>
+<td class="source"><pre><code><cite>// initialization of variables</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>int</var> a=5;               <cite>// initial value = 5</cite>
+  <var>int</var> b(2);              <cite>// initial value = 2</cite>
+  <var>int</var> result;            <cite>// initial value undetermined</cite>
+
+  a = a + 3;
+  result = a - b;
+  cout &lt;&lt; result;
+
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>6</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<h3>Introduction to strings</h3>
+Variables that can store non-numerical values that are longer than one single character are known as strings.<br>
+<br>
+The C++ language library provides support for strings through the standard <code>string</code> class. This is not a fundamental type, but it behaves in a similar way as fundamental types do in its most basic usage.<br>
+ <br>
+A first difference with fundamental data types is that in order to declare and use objects (variables) of this type we need to include an additional header file in our source code: <code>&lt;string&gt;</code> and have access to the <code>std</code> namespace (which we already had in all our previous programs thanks to the <code>using namespace</code> statement).<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br></code></pre></td>
+<td class="source"><pre><code><cite>// my first string</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;string&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  string mystring = <kbd>"This is a string"</kbd>;
+  cout &lt;&lt; mystring;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>This is a string</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As you may see in the previous example, strings can be initialized with any valid string literal just like numerical type variables can be initialized to any valid numerical literal. Both initialization formats are valid with strings:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>string mystring = <kbd>"This is a string"</kbd>;
+string mystring (<kbd>"This is a string"</kbd>);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Strings can also perform all the other basic operations that fundamental data types can, like being declared without an initial value and being assigned values during execution:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br></code></pre></td>
+<td class="source"><pre><code><cite>// my first string</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;string&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  string mystring;
+  mystring = <kbd>"This is the initial string content"</kbd>;
+  cout &lt;&lt; mystring &lt;&lt; endl;
+  mystring = <kbd>"This is a different string content"</kbd>;
+  cout &lt;&lt; mystring &lt;&lt; endl;
+  <var>return</var> 0;
+}
+</code></pre></td>
+<td class="output"><pre><samp>This is the initial string content
+This is a different string content</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+For more details on C++ strings, you can have a look at the <a href="../../../string">string class reference</a>.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/program_structure/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Structure of a program</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/constants/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Constants</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="/doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="/doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fvariables%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+variables'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+variables'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

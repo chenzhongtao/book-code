@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Other Data Types - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/other_data_types/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Other Data Types</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Other Data Types</h1>
+<a name="typedef"></a><h3>Defined data types (typedef)</h3>
+C++ allows the definition of our own types based on other existing data types. We can do this using the keyword <tt>typedef</tt>, whose format is: <br>
+<br>
+<tt>
+typedef  existing_type  new_type_name ;<br>
+</tt>
+<br>
+where <tt>existing_type</tt> is a C++ fundamental or compound type and <tt>new_type_name</tt> is the name for the new type we are defining. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>typedef</var> <var>char</var> C;
+<var>typedef</var> <var>unsigned</var> <var>int</var> WORD;
+<var>typedef</var> <var>char</var> * pChar;
+<var>typedef</var> <var>char</var> field [50]; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case we have defined four data types: <tt>C</tt>, <tt>WORD</tt>, <tt>pChar</tt> and <tt>field</tt> as <tt>char</tt>, <tt>unsigned int</tt>, <tt>char*</tt> and <tt>char[50]</tt> respectively, that we could perfectly use in declarations later as any other valid type:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>C mychar, anotherchar, *ptc1;
+WORD myword;
+pChar ptc2;
+field name; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<tt>typedef</tt> does not create different types. It only creates synonyms of existing types. That means that the type of <tt>myword</tt> can be considered to be either <tt>WORD</tt> or <tt>unsigned int</tt>, since both are in fact the same type.<br>
+<br>
+<tt>typedef</tt> can be useful to define an alias for a type that is frequently used within a program. It is also useful to define types when it is possible that we will need to change the type in later versions of our program, or if a type you want to use has a name that is too long or confusing. <br>
+<br>
+<a name="union"></a><h3>Unions</h3>
+Unions allow one same portion of memory to be accessed as different data types, since all of them are in fact the same location in memory. Its declaration and use is similar to the one of structures but its functionality is totally different:<br>
+<br>
+<pre >
+union union_name {
+  member_type1 member_name1;
+  member_type2 member_name2;
+  member_type3 member_name3;
+  .
+  .
+} object_names;
+</pre>
+<br>
+All the elements of the <tt>union</tt> declaration occupy the same physical space in memory. Its size is the one of the greatest element of the declaration. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>union</var> mytypes_t {
+  <var>char</var> c;
+  <var>int</var> i;
+  <var>float</var> f;
+  } mytypes;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+defines three elements:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>mytypes.c
+mytypes.i
+mytypes.f</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+each one with a different data type. Since all of them are referring to the same location in memory, the modification of one of the elements will affect the value of all of them. We cannot store different values in them independent of each other.<br>
+<br>
+One of the uses a union may have is to unite an elementary type with an array or structures of smaller elements. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br></code></pre></td>
+<td class="source"><pre><code><var>union</var> mix_t {
+  <var>long</var> l;
+  <var>struct</var> {
+    <var>short</var> hi;
+    <var>short</var> lo;
+    } s;
+  <var>char</var> c[4];
+} mix;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+defines three names that allow us to access the same group of 4 bytes: <tt>mix.l</tt>, <tt>mix.s</tt> and <tt>mix.c</tt> and which we can use according to how we want to access these bytes, as if they were a single <tt>long</tt>-type data, as if they were two <tt>short</tt> elements or as an array of <tt>char</tt> elements, respectively. I have mixed types, arrays and structures in the union so that you can see the different ways that we can access the data. For a <i>little-endian</i> system (most PC platforms), this union could be represented as:<br>
+<br>
+<img src="union.gif" alt="">
+<br>
+The exact alignment and order of the members of a union in memory is platform dependent. Therefore be aware of possible portability issues with this type of use.<br>
+<br>
+<h3>Anonymous unions</h3>
+In C++ we have the option to declare anonymous unions. If we declare a union without any name, the union will be anonymous and we will be able to access its members directly by their member names. For example, look at the difference between these two structure declarations: <br>
+<br>
+<table class="boxed">
+<tr><th>structure with regular union</th><th>structure with anonymous union</th></tr>
+<tr><td><pre >
+struct {
+  char title[50];
+  char author[50];
+  union {
+    float dollars;
+    int yen;
+  } price;
+} book;
+</pre></td><td><pre >
+struct {
+  char title[50];
+  char author[50];
+  union {
+    float dollars;
+    int yen;
+  };
+} book;
+</pre></td></tr>
+</table>
+<br>
+The only difference between the two pieces of code is that in the first one we have given a name to the union (<tt>price</tt>) and in the second one we have not. The difference is seen when we access the members <tt>dollars</tt> and <tt>yen</tt> of an object of this type. For an object of the first type, it would be: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>book.price.dollars
+book.price.yen</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+whereas for an object of the second type, it would be: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>book.dollars
+book.yen</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Once again I remind you that because it is a union and not a struct, the members <tt>dollars</tt> and <tt>yen</tt> occupy the same physical space in the memory so they cannot be used to store two different values simultaneously. You can set a value for <tt>price</tt> in dollars or in yen, but not in both.<br>
+<br>
+<a name="enum"></a><h3>Enumerations (enum)</h3>
+Enumerations create new data types to contain something different that is not limited to the values fundamental data types may take. Its form is the following:<br>
+<br>
+<pre >
+enum enumeration_name {
+  value1,
+  value2,
+  value3,
+  .
+  .
+} object_names;
+</pre>
+<br>
+For example, we could create a new type of variable called <tt>colors_t</tt> to store colors with the following declaration: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>enum</var> colors_t {black, blue, green, cyan, red, purple, yellow, white}; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice that we do not include any fundamental data type in the declaration. To say it somehow, we have created a whole new data type from scratch without basing it on any other existing type. The possible values that variables of this new type <tt>color_t</tt> may take are the new constant values included within braces. For example, once the <tt>colors_t</tt> enumeration is declared the following expressions will be valid:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>colors_t mycolor;
+ 
+mycolor = blue;
+<var>if</var> (mycolor == green) mycolor = red; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Enumerations are type compatible with numeric variables, so their constants are always assigned an integer numerical value internally. If it is not specified, the integer value equivalent to the first possible value is equivalent to <tt>0</tt> and the following ones follow a +1 progression. Thus, in our data type <tt>colors_t</tt> that we have defined above, <tt>black</tt> would be equivalent to <tt>0</tt>, <tt>blue</tt> would be equivalent to <tt>1</tt>, <tt>green</tt> to <tt>2</tt>, and so on.<br>
+<br>
+We can explicitly specify an integer value for any of the constant values that our enumerated type can take. If the constant value that follows it is not given an integer value, it is automatically assumed the same value as the previous one plus one. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>enum</var> months_t { january=1, february, march, april,
+                may, june, july, august,
+                september, october, november, december} y2k;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case, variable <tt>y2k</tt> of enumerated type <tt>months_t</tt> can contain any of the 12 possible values that go from <tt>january</tt> to <tt>december</tt> and that are equivalent to values between <tt>1</tt> and <tt>12</tt> (not between <tt>0</tt> and <tt>11</tt>, since we have made <tt>january</tt> equal to <tt>1</tt>).<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/structures/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Data Structures</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/classes/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Classes (I)</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="/doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="/doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fother_data_types%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+other_data_types'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+other_data_types'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

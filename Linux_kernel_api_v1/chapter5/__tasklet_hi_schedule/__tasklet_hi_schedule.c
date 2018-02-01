@@ -40,7 +40,8 @@ static int  __init __tasklet_hi_schedule_init(void)
 	tasklet_schedule(&tasklet);               //把中断送入普通中断队列
 	if(!test_and_set_bit(TASKLET_STATE_SCHED, &tasklet1.state))
 		__tasklet_hi_schedule(&tasklet1); //调用函数__tasklet_hi_schedule()把中断送入高优先级队列，
-       //tasklet_schedule(&tasklet1);        
+       //tasklet_schedule(&tasklet1);
+    printk("<0>start tasklet_kill\n");
    	tasklet_kill(&tasklet);                  //等待中断处理函数执行完毕，恢复调度之前的状态
 	tasklet_kill(&tasklet1);
 	printk("<0>out __tasklet_hi_schedule\n");
@@ -55,3 +56,18 @@ static void  __exit __tasklet_hi_schedule_exit(void)
 
 module_init(__tasklet_hi_schedule_init);
 module_exit(__tasklet_hi_schedule_exit);
+
+
+/*
+into __tasklet_hi_schedule
+The state of the tasklet is :0
+The state of the tasklet1 is :0
+start tasklet_kill
+in irq_tasklet_action1 the state of the tasklet1 is :2
+tasklet1 running. by author
+in irq_tasklet_action the state of the tasklet is :2
+tasklet running. by author
+out __tasklet_hi_schedule
+
+Goodbye __tasklet_hi_schedule
+*/

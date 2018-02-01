@@ -10,36 +10,31 @@
 #include <linux/pid.h>
 MODULE_LICENSE("GPL");
 
-//×Óœø³Ìº¯Êý¶šÒå
+
 int my_function(void * argc)
 {
 	printk("<0>in the kernel thread function!\n");	
 	return 0;
 }
 
-//Ä£¿é³õÊŒ»¯º¯Êý¶šÒå
 static int __init find_pid_ns_init(void)
 {	
 	int result;
 	printk("<0> into find_pid_ns_init.\n");		
-	result=kernel_thread(my_function,NULL,CLONE_KERNEL); //ŽŽœšÐÂœø³Ì
+	result=kernel_thread(my_function,NULL,CLONE_KERNEL);
       
-       //µ÷ÓÃº¯Êýfind_get_pid()»ñÈ¡×Óœø³ÌµÄÃèÊö·û
 	struct pid * kpid=find_get_pid(result);	
       
-       //µ÷ÓÃº¯Êýfind_pid_ns()»ñÈ¡×Óœø³ÌµÄÃèÊö·û	
-       struct pid * fpid=find_pid_ns(kpid->numbers[kpid->level].nr,kpid->numbers[kpid->level].ns);
+    struct pid * fpid=find_pid_ns(kpid->numbers[kpid->level].nr,kpid->numbers[kpid->level].ns);
       
-       //ÏÔÊŸ×Óœø³ÌÃèÊö·ûÐÅÏ¢
 	printk("<0>the find_pid_ns result's count is:%d\n",fpid->count);
 	printk("<0>the find_pid_ns result's level is:%d\n",fpid->level);
-	printk("<0>the find_pid_ns result's pid is:%d\n",fpid->numbers[fpid->level].nr);//×Óœø³Ìœø³ÌºÅ
-	printk("<0>the kernel_thread result is:%d\n",result); //ÏÔÊŸkernel_thread()º¯Êý·µ»Øœá¹û
+	printk("<0>the find_pid_ns result's pid is:%d\n",fpid->numbers[fpid->level].nr);
+	printk("<0>the kernel_thread result is:%d\n",result); 
 	printk("<0> out find_pid_ns_init.\n");
 	return 0;
 }
 
-//Ä£¿éÐ¶ÔØº¯Êý¶šÒå
 static void __exit find_pid_ns_exit(void)
 {
         printk("<0>Goodbye  find_pid_ns\n");
@@ -49,3 +44,12 @@ module_init(find_pid_ns_init);
 module_exit(find_pid_ns_exit);
 
 
+/*
+ into find_pid_ns_init.
+the find_pid_ns result's count is:2
+in the kernel thread function!
+the find_pid_ns result's level is:0
+the find_pid_ns result's pid is:7243
+the kernel_thread result is:7243
+ out find_pid_ns_init.
+*/

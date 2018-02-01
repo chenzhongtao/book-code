@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>partial_sort - C++ Reference</title>
+<link rel="canonical" href="http://www.cplusplus.com/reference/algorithm/partial_sort/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../reference/">Reference</a></li>
+<li><a href="../../../reference/algorithm/">&lt;algorithm&gt;</a></li>
+<li class="here">partial_sort</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<div id="I_type">function template</div>
+<div id="I_file">&lt;algorithm&gt;</div>
+<h1><span class="namespace" title="namespace std">std::</span>partial_sort</h1>
+<div class="C_prototype"><table><tr class="odd"><th>default (1)</th><td><pre>template &lt;class RandomAccessIterator&gt;  void partial_sort (RandomAccessIterator first, RandomAccessIterator middle,                     RandomAccessIterator last);</pre></td></tr><tr class="even"><th>custom (2)</th><td><pre>template &lt;class RandomAccessIterator, class Compare&gt;  void partial_sort (RandomAccessIterator first, RandomAccessIterator middle,                     RandomAccessIterator last, Compare comp);</pre></td></tr></table></div><div id="I_description">Partially sort elements in range</div>
+<section id="description">
+Rearranges the elements in the range <code>[first,last)</code>, in such a way that the elements before <var>middle</var> are the smallest elements in the entire range and are sorted in ascending order, while the remaining elements are left without any specific order.<br>
+<br>
+The elements are compared using <code>operator&lt;</code> for the first version, and <var>comp</var> for the second.<br>
+</section>
+<br>
+<section id="parameters">
+<h3>Parameters</h3>
+<dl>
+<dt>first, last</dt>
+<dd><a href="../../../RandomAccessIterator">Random-access iterators</a> to the initial and final positions of the sequence to be partially sorted. The range used is <code>[first,last)</code>, which contains all the elements between <var>first</var> and <var>last</var>, including the element pointed by <var>first</var> but not the element pointed by <var>last</var>.<br>
+Notice that in this function these are not consecutive parameters, but the first and the <strong>third</strong>.</dd>
+<dt>middle</dt>
+<dd><a href="../../../RandomAccessIterator">Random-access iterator</a> pointing to the element within the range <code>[first,last)</code> that is used as the upper boundary of the elements that are fully sorted.</dd>
+<dt>comp</dt>
+<dd>Binary function that accepts two elements in the range as arguments, and returns a value convertible to <code>bool</code>. The value returned indicates whether the element passed as first argument is considered to go before the second in the specific <i>strict weak ordering</i> it defines.<br>
+The function shall not modify any of its arguments.<br>
+This can either be a function pointer or a function object.<br>
+</dd>
+</dl>
+<br>
+<samp>RandomAccessIterator</samp> shall point to a type for which <samp><a href="/swap">swap</a></samp> is properly defined and which is both <i><a href="/is_move_constructible">move-constructible</a></i> and <i><a href="/is_move_assignable">move-assignable</a></i>.<br>
+</section>
+<br>
+<section id="return">
+<h3>Return value</h3>
+none<br>
+</section>
+<br>
+<section id="example">
+<h3>Example</h3>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br></code></pre></td>
+<td class="source"><pre><code><cite>// partial_sort example</cite>
+<dfn>#include &lt;iostream&gt;     </dfn><cite>// std::cout</cite>
+<dfn>#include &lt;algorithm&gt;    </dfn><cite>// std::partial_sort</cite>
+<dfn>#include &lt;vector&gt;       </dfn><cite>// std::vector</cite>
+
+<var>bool</var> myfunction (<var>int</var> i,<var>int</var> j) { <var>return</var> (i&lt;j); }
+
+<var>int</var> main () {
+  <var>int</var> myints[] = {9,8,7,6,5,4,3,2,1};
+  std::vector&lt;<var>int</var>&gt; myvector (myints, myints+9);
+
+  <cite>// using default comparison (operator &lt;):</cite>
+  std::partial_sort (myvector.begin(), myvector.begin()+5, myvector.end());
+
+  <cite>// using function as comp</cite>
+  std::partial_sort (myvector.begin(), myvector.begin()+5, myvector.end(),myfunction);
+
+  <cite>// print out content:</cite>
+  std::cout &lt;&lt; <kbd>"myvector contains:"</kbd>;
+  <var>for</var> (std::vector&lt;<var>int</var>&gt;::iterator it=myvector.begin(); it!=myvector.end(); ++it)
+    std::cout &lt;&lt; <kbd>' '</kbd> &lt;&lt; *it;
+  std::cout &lt;&lt; <kbd>'\n'</kbd>;
+
+  <var>return</var> 0;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Possible output:<br>
+<div class="auto"><table class="snippet"><tr><td class="output"><pre><samp>myvector contains: 1 2 3 4 5 9 8 7 6
+</samp></pre></td></tr></table></div>
+</section>
+<br>
+<section id="complexity">
+<h3>Complexity</h3>
+On average, less than linearithmic in the <a href="/distance">distance</a> between <var>first</var> and <var>last</var>: Performs approximately <code>N*log(M)</code> comparisons of elements (where <var>N</var> is this distance, and <var>M</var> is the <a href="/distance">distance</a> between <var>first</var> and <var>middle</var>). It also performs up to that many element swaps (or moves).<br>
+</section>
+<br>
+<section id="access">
+<h3>Data races</h3>
+The objects in the range <code>[first,last)</code> are modified.<br>
+</section>
+<br>
+<section id="exceptions">
+<h3>Exceptions</h3>
+Throws if any of the element comparisons, the element swaps (or moves) or the operations on iterators throws.<br>
+Note that invalid arguments cause <i>undefined behavior</i>.<br>
+</section>
+<br>
+<section id="see">
+<h3>See also</h3>
+<dl class="links"><dt><a href= "/reference/algorithm/sort/"><b>sort</b></a></dt><dd>Sort elements in range <span class="typ">(function template)</span></dd></dl><dl class="links"><dt><a href= "/reference/algorithm/stable_sort/"><b>stable_sort</b></a></dt><dd>Sort elements preserving order of equivalents <span class="typ">(function template)</span></dd></dl><dl class="links"><dt><a href= "/reference/algorithm/search/"><b>search</b></a></dt><dd>Search range for subsequence <span class="typ">(function template)</span></dd></dl><dl class="links"><dt><a href= "/reference/algorithm/reverse/"><b>reverse</b></a></dt><dd>Reverse range <span class="typ">(function template)</span></dd></dl>
+</section></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder selected reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="reference_box">
+<h3><b><a href="../../../reference/">Reference</a></b></h3>
+<ul>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/clibrary/">C library:</a></h4><ul>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cassert/"><span>&lt;cassert&gt; (assert.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cctype/"><span>&lt;cctype&gt; (ctype.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cerrno/"><span>&lt;cerrno&gt; (errno.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cfenv/"><span>&lt;cfenv&gt; (fenv.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cfloat/"><span>&lt;cfloat&gt; (float.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cinttypes/"><span>&lt;cinttypes&gt; (inttypes.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ciso646/"><span>&lt;ciso646&gt; (iso646.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/climits/"><span>&lt;climits&gt; (limits.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/clocale/"><span>&lt;clocale&gt; (locale.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cmath/"><span>&lt;cmath&gt; (math.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csetjmp/"><span>&lt;csetjmp&gt; (setjmp.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csignal/"><span>&lt;csignal&gt; (signal.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdarg/"><span>&lt;cstdarg&gt; (stdarg.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cstdbool/"><span>&lt;cstdbool&gt; (stdbool.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstddef/"><span>&lt;cstddef&gt; (stddef.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cstdint/"><span>&lt;cstdint&gt; (stdint.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdio/"><span>&lt;cstdio&gt; (stdio.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdlib/"><span>&lt;cstdlib&gt; (stdlib.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstring/"><span>&lt;cstring&gt; (string.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/ctgmath/"><span>&lt;ctgmath&gt; (tgmath.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ctime/"><span>&lt;ctime&gt; (time.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cuchar/"><span>&lt;cuchar&gt; (uchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwchar/"><span>&lt;cwchar&gt; (wchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwctype/"><span>&lt;cwctype&gt; (wctype.h)</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/stl/">Containers:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/array/"><span>&lt;array&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/deque/"><span>&lt;deque&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/forward_list/"><span>&lt;forward_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/list/"><span>&lt;list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/map/"><span>&lt;map&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/queue/"><span>&lt;queue&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/set/"><span>&lt;set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stack/"><span>&lt;stack&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_map/"><span>&lt;unordered_map&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_set/"><span>&lt;unordered_set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/vector/"><span>&lt;vector&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/iolibrary/">Input/Output:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/fstream/"><span>&lt;fstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iomanip/"><span>&lt;iomanip&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ios/"><span>&lt;ios&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iosfwd/"><span>&lt;iosfwd&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iostream/"><span>&lt;iostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/istream/"><span>&lt;istream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ostream/"><span>&lt;ostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/sstream/"><span>&lt;sstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/streambuf/"><span>&lt;streambuf&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/multithreading/">Multi-threading:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/atomic/"><span>&lt;atomic&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/condition_variable/"><span>&lt;condition_variable&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/future/"><span>&lt;future&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/mutex/"><span>&lt;mutex&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/thread/"><span>&lt;thread&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4><a href="../../../reference/std/">Other:</a></h4><ul>
+<li class="cpp98 cpp11 selected folder"><a href="../../../reference/algorithm/"><span>&lt;algorithm&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/bitset/"><span>&lt;bitset&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/chrono/"><span>&lt;chrono&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/codecvt/"><span>&lt;codecvt&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/complex/"><span>&lt;complex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/exception/"><span>&lt;exception&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/functional/"><span>&lt;functional&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/initializer_list/"><span>&lt;initializer_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iterator/"><span>&lt;iterator&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/limits/"><span>&lt;limits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/locale/"><span>&lt;locale&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/memory/"><span>&lt;memory&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/new/"><span>&lt;new&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/numeric/"><span>&lt;numeric&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/random/"><span>&lt;random&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/ratio/"><span>&lt;ratio&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/regex/"><span>&lt;regex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stdexcept/"><span>&lt;stdexcept&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/string/"><span>&lt;string&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/system_error/"><span>&lt;system_error&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/tuple/"><span>&lt;tuple&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/typeindex/"><span>&lt;typeindex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/typeinfo/"><span>&lt;typeinfo&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/type_traits/"><span>&lt;type_traits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/utility/"><span>&lt;utility&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/valarray/"><span>&lt;valarray&gt;</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp98 cpp11" id="algorithm_box">
+<h3><b><a href="../../../reference/algorithm/">&lt;algorithm&gt;</a></b></h3>
+<ul>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/adjacent_find/"><span>adjacent_find</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/all_of/"><span>all_of</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/any_of/"><span>any_of</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/binary_search/"><span>binary_search</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/copy/"><span>copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/copy_backward/"><span>copy_backward</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/copy_if/"><span>copy_if</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/copy_n/"><span>copy_n</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/count/"><span>count</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/count_if/"><span>count_if</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/equal/"><span>equal</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/equal_range/"><span>equal_range</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/fill/"><span>fill</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/fill_n/"><span>fill_n</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/find/"><span>find</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/find_end/"><span>find_end</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/find_first_of/"><span>find_first_of</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/find_if/"><span>find_if</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/find_if_not/"><span>find_if_not</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/for_each/"><span>for_each</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/generate/"><span>generate</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/generate_n/"><span>generate_n</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/includes/"><span>includes</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/inplace_merge/"><span>inplace_merge</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_heap/"><span>is_heap</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_heap_until/"><span>is_heap_until</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_partitioned/"><span>is_partitioned</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_permutation/"><span>is_permutation</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_sorted/"><span>is_sorted</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/is_sorted_until/"><span>is_sorted_until</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/iter_swap/"><span>iter_swap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/lexicographical_compare/"><span>lexicographical_compare</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/lower_bound/"><span>lower_bound</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/make_heap/"><span>make_heap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/max/"><span>max</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/max_element/"><span>max_element</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/merge/"><span>merge</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/min/"><span>min</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/minmax/"><span>minmax</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/minmax_element/"><span>minmax_element</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/min_element/"><span>min_element</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/mismatch/"><span>mismatch</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/move/"><span>move</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/move_backward/"><span>move_backward</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/next_permutation/"><span>next_permutation</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/none_of/"><span>none_of</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/nth_element/"><span>nth_element</span></a></li>
+<li class="cpp98 cpp11 selected"><a href="../../../reference/algorithm/partial_sort/"><span>partial_sort</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/partial_sort_copy/"><span>partial_sort_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/partition/"><span>partition</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/partition_copy/"><span>partition_copy</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/partition_point/"><span>partition_point</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/pop_heap/"><span>pop_heap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/prev_permutation/"><span>prev_permutation</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/push_heap/"><span>push_heap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/random_shuffle/"><span>random_shuffle</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/remove/"><span>remove</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/remove_copy/"><span>remove_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/remove_copy_if/"><span>remove_copy_if</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/remove_if/"><span>remove_if</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/replace/"><span>replace</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/replace_copy/"><span>replace_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/replace_copy_if/"><span>replace_copy_if</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/replace_if/"><span>replace_if</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/reverse/"><span>reverse</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/reverse_copy/"><span>reverse_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/rotate/"><span>rotate</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/rotate_copy/"><span>rotate_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/search/"><span>search</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/search_n/"><span>search_n</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/set_difference/"><span>set_difference</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/set_intersection/"><span>set_intersection</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/set_symmetric_difference/"><span>set_symmetric_difference</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/set_union/"><span>set_union</span></a></li>
+<li class="cpp11"><a href="../../../reference/algorithm/shuffle/"><span>shuffle</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/sort/"><span>sort</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/sort_heap/"><span>sort_heap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/stable_partition/"><span>stable_partition</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/stable_sort/"><span>stable_sort</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/swap/"><span>swap</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/swap_ranges/"><span>swap_ranges</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/transform/"><span>transform</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/unique/"><span>unique</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/unique_copy/"><span>unique_copy</span></a></li>
+<li class="cpp98 cpp11"><a href="../../../reference/algorithm/upper_bound/"><span>upper_bound</span></a></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Freference%2Falgorithm%2Fpartial_sort%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/reference/edit.cgi?a=algorithm+partial_sort'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/reference/delete.cgi?a=algorithm+partial_sort'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

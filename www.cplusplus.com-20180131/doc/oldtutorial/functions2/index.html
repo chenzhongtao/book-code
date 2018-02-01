@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Functions (II) - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/functions2/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Functions </li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Functions (II)</h1>
+<a name="by_reference"></a><h3>Arguments passed by value and by reference.</h3>
+<br>
+Until now, in all the functions we have seen, the arguments passed to the functions have been passed <i>by value</i>. This means that when calling a function with parameters, what we have passed to the function were copies of their values but never the variables themselves. For example, suppose that we called our first function <tt>addition</tt> using the following code:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> x=5, y=3, z;
+z = addition ( x , y ); </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+What we did in this case was to call to function addition passing the values of <tt>x</tt> and <tt>y</tt>, i.e. <tt>5</tt> and <tt>3</tt> respectively, but not the variables <tt>x</tt> and <tt>y</tt> themselves.<br>
+<br>
+<img src="function_arguments.gif" alt="">  <br>
+<br>
+This way, when the function addition is called, the value of its local variables <tt>a</tt> and <tt>b</tt> become <tt>5</tt> and <tt>3</tt> respectively, but any modification to either <tt>a</tt> or <tt>b</tt> within the function addition will not have any effect in the values of <tt>x</tt> and <tt>y</tt> outside it, because variables <tt>x</tt> and <tt>y</tt> were not themselves passed to the function, but only copies of their values at the moment the function was called.<br>
+<br>
+But there might be some cases where you need to manipulate from inside a function the value of an external variable. For that purpose we can use arguments passed by reference, as in the function duplicate of the following example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br></code></pre></td>
+<td class="source"><pre><code><cite>// passing parameters by reference</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> duplicate (<var>int</var>&amp; a, <var>int</var>&amp; b, <var>int</var>&amp; c)
+{
+  a*=2;
+  b*=2;
+  c*=2;
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> x=1, y=3, z=7;
+  duplicate (x, y, z);
+  cout &lt;&lt; <kbd>"x="</kbd> &lt;&lt; x &lt;&lt; <kbd>", y="</kbd> &lt;&lt; y &lt;&lt; <kbd>", z="</kbd> &lt;&lt; z;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>x=2, y=6, z=14</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first thing that should call your attention is that in the declaration of <tt>duplicate</tt> the type of each parameter was followed by an ampersand sign (<tt>&</tt>). This ampersand is what specifies that their corresponding arguments are to be passed <i>by reference</i> instead of <i>by value</i>.<br>
+<br>
+When a variable is passed by reference we are not passing a copy of its value, but we are somehow passing the variable itself to the function and any modification that we do to the local variables will have an effect in their counterpart variables passed as arguments in the call to the function.<br>
+<br>
+<img src="function_by_reference.gif" alt="">
+<br>
+To explain it in another way, we associate <tt>a</tt>, <tt>b</tt> and <tt>c</tt> with the arguments passed on the function call (<tt>x</tt>, <tt>y</tt> and <tt>z</tt>) and any change that we do on <tt>a</tt> within the function will affect the value of <tt>x</tt> outside it. Any change that we do on <tt>b</tt> will affect <tt>y</tt>, and the same with <tt>c</tt> and <tt>z</tt>. <br>
+<br>
+That is why our program's output, that shows the values stored in <tt>x</tt>, <tt>y</tt> and <tt>z</tt> after the call to <tt>duplicate</tt>, shows the values of all the three variables of <tt>main</tt> doubled.<br>
+<br>
+If when declaring the following function:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>void</var> duplicate (<var>int</var>&amp; a, <var>int</var>&amp; b, <var>int</var>&amp; c)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+we had declared it this way:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>void</var> duplicate (<var>int</var> a, <var>int</var> b, <var>int</var> c)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+i.e., without the ampersand signs (<tt>&</tt>), we would have not passed the variables by reference, but a copy of their values instead, and therefore, the output on screen of our program would have been the values of <tt>x</tt>, <tt>y</tt> and <tt>z</tt> without having been modified.<br>
+<br>
+Passing by reference is also an effective way to allow a function to return more than one value. For example, here is a function that returns the previous and next numbers of the first parameter passed.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></code></pre></td>
+<td class="source"><pre><code><cite>// more than one returning value</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> prevnext (<var>int</var> x, <var>int</var>&amp; prev, <var>int</var>&amp; next)
+{
+  prev = x-1;
+  next = x+1;
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> x=100, y, z;
+  prevnext (x, y, z);
+  cout &lt;&lt; <kbd>"Previous="</kbd> &lt;&lt; y &lt;&lt; <kbd>", Next="</kbd> &lt;&lt; z;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Previous=99, Next=101  </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<a name="default_values"></a><h3>Default values in parameters.</h3>
+When declaring a function we can specify a default value for each of the last parameters. This value will be used if the corresponding argument is left blank when calling to the function. To do that, we simply have to use the assignment operator and a value for the arguments in the function declaration. If a value for that parameter is not passed when the function is called, the default value is used, but if a value is specified this default value is ignored and the passed value is used instead. For example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br></code></pre></td>
+<td class="source"><pre><code><cite>// default values in functions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> divide (<var>int</var> a, <var>int</var> b=2)
+{
+  <var>int</var> r;
+  r=a/b;
+  <var>return</var> (r);
+}
+
+<var>int</var> main ()
+{
+  cout &lt;&lt; divide (12);
+  cout &lt;&lt; endl;
+  cout &lt;&lt; divide (20,4);
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>6
+5</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As we can see in the body of the program there are two calls to function <tt>divide</tt>. In the first one:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>divide (12)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+we have only specified one argument, but the function <tt>divide</tt> allows up to two. So the function <tt>divide</tt> has assumed that the second parameter is <tt>2</tt> since that is what we have specified to happen if this parameter was not passed (notice the function declaration, which finishes with <tt>int b=2</tt>, not just <tt>int b</tt>). Therefore the result of this function call is <tt>6</tt> (<tt>12/2</tt>).<br>
+<br>
+In the second call:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>divide (20,4)</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+there are two parameters, so the default value for <tt>b</tt> (<tt>int b=2</tt>) is ignored and <tt>b</tt> takes the value passed as argument, that is <tt>4</tt>, making the result returned equal to <tt>5</tt> (<tt>20/4</tt>).<br>
+<br>
+<a name="function_overload"></a><h3>Overloaded functions.</h3>
+In C++ two different functions can have the same name if their parameter types or number are different. That means that you can give the same name to more than one function if they have either a different number of parameters or different types in their parameters. For example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br></code></pre></td>
+<td class="source"><pre><code><cite>// overloaded function</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> operate (<var>int</var> a, <var>int</var> b)
+{
+  <var>return</var> (a*b);
+}
+
+<var>float</var> operate (<var>float</var> a, <var>float</var> b)
+{
+  <var>return</var> (a/b);
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> x=5,y=2;
+  <var>float</var> n=5.0,m=2.0;
+  cout &lt;&lt; operate (x,y);
+  cout &lt;&lt; <kbd>"\n"</kbd>;
+  cout &lt;&lt; operate (n,m);
+  cout &lt;&lt; <kbd>"\n"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>10
+2.5</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case we have defined two functions with the same name, <tt>operate</tt>, but one of them accepts two parameters of type <tt>int</tt> and the other one accepts them of type <tt>float</tt>. The compiler knows which one to call in each case by examining the types passed as arguments when the function is called. If it is called with two ints as its arguments it calls to the function that has two <tt>int</tt> parameters in its prototype and if it is called with two floats it will call to the one which has two <tt>float</tt> parameters in its prototype. <br>
+<br>
+In the first call to <tt>operate</tt> the two arguments passed are of type <tt>int</tt>, therefore, the function with the first prototype is called; This function returns the result of multiplying both parameters. While the second call passes two arguments of type <tt>float</tt>, so the function with the second prototype is called. This one has a different behavior: it divides one parameter by the other. So the behavior of a call to <tt>operate</tt> depends on the type of the arguments passed because the function has been <i>overloaded</i>.<br>
+<br>
+Notice that a function cannot be overloaded only by its return type. At least one of its parameters must have a different type.<br>
+<br>
+<a name="inline"></a><h3>inline functions.</h3>
+The <tt>inline</tt> specifier indicates the compiler that inline substitution is preferred to the usual function call mechanism for a specific function. This does not change the behavior of a function itself, but is used to suggest to the compiler that the code generated by the function body is inserted at each point the function is called, instead of being inserted only once and perform a regular call to it, which generally involves some additional overhead in running time.<br>
+<br>
+The format for its declaration is:<br>
+<br>
+<tt>
+inline type name ( arguments ... ) { instructions ... }<br>
+</tt>
+<br>
+and the call is just like the call to any other function. You do not have to include the <tt>inline</tt> keyword when calling the function, only in its declaration.<br>
+<br>
+Most compilers already optimize code to generate inline functions when it is more convenient. This specifier only indicates the compiler that inline is preferred for this function.<br>
+<br>
+<a name="recursive"></a><h3>Recursivity.</h3>
+Recursivity is the property that functions have to be called by themselves. It is useful for many tasks, like sorting or calculate the factorial of numbers. For example, to obtain the factorial of a number (n!) the mathematical formula would be:<br>
+<br>
+<pre >
+n! = n * (n-1) * (n-2) * (n-3) ... * 1
+</pre>
+<br>
+more concretely, 5! (factorial of 5) would be:<br>
+<br>
+<pre >
+5! = 5 * 4 * 3 * 2 * 1 = 120
+</pre>
+<br>
+and a recursive function to calculate this in C++ could be:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br></code></pre></td>
+<td class="source"><pre><code><cite>// factorial calculator</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>long</var> factorial (<var>long</var> a)
+{
+  <var>if</var> (a &gt; 1)
+   <var>return</var> (a * factorial (a-1));
+  <var>else</var>
+   <var>return</var> (1);
+}
+
+<var>int</var> main ()
+{
+  <var>long</var> number;
+  cout &lt;&lt; <kbd>"Please type a number: "</kbd>;
+  cin &gt;&gt; number;
+  cout &lt;&lt; number &lt;&lt; <kbd>"! = "</kbd> &lt;&lt; factorial (number);
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Please type a number: 9
+9! = 362880  </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice how in function <tt>factorial</tt> we included a call to itself, but only if the argument passed was greater than 1, since otherwise the function would perform an infinite recursive loop in which once it arrived to <tt>0</tt> it would continue multiplying by all the negative numbers (probably provoking a stack overflow error on runtime).<br>
+<br>
+This function has a limitation because of the data type we used in its design (<tt>long</tt>) for more simplicity. The results given will not be valid for values much greater than 10! or 15!, depending on the system you compile it.<br>
+<br>
+<a name="declaring"></a><h3>Declaring functions.</h3>
+Until now, we have defined all of the functions before the first appearance of calls to them in the source code. These calls were generally in function <tt>main</tt> which we have always left at the end of the source code. If you try to repeat some of the examples of functions described so far, but placing the function <tt>main</tt> before any of the other functions that were called from within it, you will most likely obtain compiling errors. The reason is that to be able to call a function it must have been declared in some earlier point of the code, like we have done in all our examples.<br>
+<br>
+But there is an alternative way to avoid writing the whole code of a function before it can be used in main or in some other function. This can be achieved by declaring just a prototype of the function before it is used, instead of the entire definition. This declaration is shorter than the entire definition, but significant enough for the compiler to determine its return type and the types of its parameters.<br>
+<br>
+Its form is: <br>
+<br>
+<tt>
+type name ( argument_type1, argument_type2, ...);<br>
+</tt>
+<br>
+It is identical to a function definition, except that it does not include the body of the function itself (i.e., the function statements that in normal definitions are enclosed in braces <tt>{ }</tt>) and instead of that we end the prototype declaration with a mandatory semicolon (<tt>;</tt>).<br>
+<br>
+The parameter enumeration does not need to include the identifiers, but only the type specifiers. The inclusion of a name for each parameter as in the function definition is optional in the prototype declaration. For example, we can declare a function called <tt>protofunction</tt> with two <tt>int</tt> parameters with any of the following declarations:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> protofunction (<var>int</var> first, <var>int</var> second);
+<var>int</var> protofunction (<var>int</var>, <var>int</var>);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Anyway, including a name for each variable makes the prototype more legible.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br></code></pre></td>
+<td class="source"><pre><code><cite>// declaring functions prototypes</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> odd (<var>int</var> a);
+<var>void</var> even (<var>int</var> a);
+
+<var>int</var> main ()
+{
+  <var>int</var> i;
+  <var>do</var> {
+    cout &lt;&lt; <kbd>"Type a number (0 to exit): "</kbd>;
+    cin &gt;&gt; i;
+    odd (i);
+  } <var>while</var> (i!=0);
+  <var>return</var> 0;
+}
+
+<var>void</var> odd (<var>int</var> a)
+{
+  <var>if</var> ((a%2)!=0) cout &lt;&lt; <kbd>"Number is odd.\n"</kbd>;
+  <var>else</var> even (a);
+}
+
+<var>void</var> even (<var>int</var> a)
+{
+  <var>if</var> ((a%2)==0) cout &lt;&lt; <kbd>"Number is even.\n"</kbd>;
+  <var>else</var> odd (a);
+}</code></pre></td>
+<td class="output"><pre><samp>Type a number (0 to exit): 9
+Number is odd.
+Type a number (0 to exit): 6
+Number is even.
+Type a number (0 to exit): 1030
+Number is even.
+Type a number (0 to exit): 0
+Number is even.</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This example is indeed not an example of efficiency. I am sure that at this point you can already make a program with the same result, but using only half of the code lines that have been used in this example. Anyway this example illustrates how prototyping works. Moreover, in this concrete example the prototyping of at least one of the two functions is necessary in order to compile the code without errors.<br>
+<br>
+The first things that we see are the declaration of functions <tt>odd</tt> and <tt>even</tt>: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>void</var> odd (<var>int</var> a);
+<var>void</var> even (<var>int</var> a); </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This allows these functions to be used before they are defined, for example, in <tt>main</tt>, which now is located where some people find it to be a more logical place for the start of a program: the beginning of the source code. <br>
+<br>
+Anyway, the reason why this program needs at least one of the functions to be declared before it is defined is because in <tt>odd</tt> there is a call to <tt>even</tt> and in <tt>even</tt> there is a call to <tt>odd</tt>. If none of the two functions had been previously declared, a compilation error would happen, since either <tt>odd</tt> would not be visible from <tt>even</tt> (because it has still not been declared), or <tt>even</tt> would not be visible from <tt>odd</tt> (for the same reason).<br>
+<br>
+Having the prototype of all functions together in the same place within the source code is found practical by some programmers, and this can be easily achieved by declaring all functions prototypes at the beginning of a program.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/functions/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Functions (I)</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/arrays/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Arrays</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="/doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="/doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Ffunctions2%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+functions2'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+functions2'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

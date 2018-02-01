@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Exceptions - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/exceptions/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Exceptions</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Exceptions</h1>
+Exceptions provide a way to react to exceptional circumstances (like runtime errors) in our program by transferring control to special functions called <i>handlers</i>.<br>
+<br>
+To catch exceptions we must place a portion of code under exception inspection. This is done by enclosing that portion of code in a <i>try block</i>. When an exceptional circumstance arises within that block, an exception is thrown that transfers the control to the exception handler. If no exception is thrown, the code continues normally and all handlers are ignored.<br>
+<br>
+An exception is thrown by using the throw keyword from inside the try block. Exception handlers are declared with the keyword <tt>catch</tt>, which must be placed immediately after the try block:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br></code></pre></td>
+<td class="source"><pre><code><cite>// exceptions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main () {
+  <var>try</var>
+  {
+    <var>throw</var> 20;
+  }
+  <var>catch</var> (<var>int</var> e)
+  {
+    cout &lt;&lt; <kbd>"An exception occurred. Exception Nr. "</kbd> &lt;&lt; e &lt;&lt; endl;
+  }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>An exception occurred. Exception Nr. 20</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The code under exception handling is enclosed in a <tt>try</tt> block. In this example this code simply throws an exception:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>throw</var> 20;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+A throw expression accepts one parameter (in this case the integer value <tt>20</tt>), which is passed as an argument to the exception handler.<br>
+<br>
+The exception handler is declared with the <tt>catch</tt> keyword. As you can see, it follows immediately the closing brace of the <tt>try</tt> block. The catch format is similar to a regular function that always has at least one parameter. The type of this parameter is very important, since the type of the argument passed by the throw expression is checked against it, and only in the case they match, the exception is caught.<br>
+<br>
+We can chain multiple handlers (catch expressions), each one with a different parameter type. Only the handler that matches its type with the argument specified in the throw statement is executed.<br>
+<br>
+If we use an ellipsis (<tt>...</tt>) as the parameter of <tt>catch</tt>, that handler will catch any exception no matter what the type of the <tt>throw</tt> exception is. This can be used as a default handler that catches all exceptions not caught by other handlers if it is specified at last:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br></code></pre></td>
+<td class="source"><pre><code><var>try</var> {
+  <cite>// code here</cite>
+}
+<var>catch</var> (<var>int</var> param) { cout &lt;&lt; <kbd>"int exception"</kbd>; }
+<var>catch</var> (<var>char</var> param) { cout &lt;&lt; <kbd>"char exception"</kbd>; }
+<var>catch</var> (...) { cout &lt;&lt; <kbd>"default exception"</kbd>; }</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case the last handler would catch any exception thrown with any parameter that is neither an <tt>int</tt> nor a <tt>char</tt>.<br>
+<br>
+After an exception has been handled the program execution resumes after the <tt>try-catch</tt> block, not after the <tt>throw</tt> statement!.<br>
+<br>
+It is also possible to nest <tt>try-catch</tt> blocks within more external <tt>try</tt> blocks. In these cases, we have the possibility that an internal <tt>catch</tt> block forwards the exception to its external level. This is done with the expression <tt>throw;</tt> with no arguments. For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br></code></pre></td>
+<td class="source"><pre><code><var>try</var> {
+  <var>try</var> {
+      <cite>// code here</cite>
+  }
+  <var>catch</var> (<var>int</var> n) {
+      <var>throw</var>;
+  }
+}
+<var>catch</var> (...) {
+  cout &lt;&lt; <kbd>"Exception occurred"</kbd>;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<h3>Exception specifications</h3>
+<br>
+When declaring a function we can limit the exception type it might directly or indirectly throw by appending a <tt>throw</tt> suffix to the function declaration:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>float</var> myfunction (<var>char</var> param) <var>throw</var> (<var>int</var>);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This declares a function called <tt>myfunction</tt> which takes one argument of type <tt>char</tt> and returns an element of type <tt>float</tt>. The only exception that this function might throw is an exception of type <tt>int</tt>. If it throws an exception with a different type, either directly or indirectly, it cannot be caught by a regular <tt>int</tt>-type handler.<br>
+<br>
+If this <tt>throw</tt> specifier is left empty with no type, this means the function is not allowed to throw exceptions. Functions with no <tt>throw</tt> specifier (regular functions) are allowed to throw exceptions with any type:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> myfunction (<var>int</var> param) <var>throw</var>(); <cite>// no exceptions allowed</cite>
+<var>int</var> myfunction (<var>int</var> param);         <cite>// all exceptions allowed </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<h3>Standard exceptions</h3>
+The C++ Standard library provides a base class specifically designed to declare objects to be thrown as exceptions. It is called <tt>exception</tt> and is defined in the <tt>&lt;exception&gt;</tt> header file under the <tt>namespace std</tt>. This class has the usual default and copy constructors, operators and destructors, plus an additional virtual member function called <tt>what</tt> that returns a null-terminated character sequence (<tt>char *</tt>) and that can be overwritten in derived classes to contain some sort of description of the exception.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br></code></pre></td>
+<td class="source"><pre><code><cite>// standard exceptions</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;exception&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> myexception: <var>public</var> exception
+{
+  <var>virtual</var> <var>const</var> <var>char</var>* what() <var>const</var> <var>throw</var>()
+  {
+    <var>return</var> <kbd>"My exception happened"</kbd>;
+  }
+} myex;
+
+<var>int</var> main () {
+  <var>try</var>
+  {
+    <var>throw</var> myex;
+  }
+  <var>catch</var> (exception&amp; e)
+  {
+    cout &lt;&lt; e.what() &lt;&lt; endl;
+  }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>My exception happened.</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+We have placed a handler that catches exception objects by reference (notice the ampersand <tt>&</tt> after the type), therefore this catches also classes derived from <tt>exception</tt>, like our <tt>myex</tt> object of class <tt>myexception</tt>.<br>
+<br>
+All exceptions thrown by components of the C++ Standard library throw exceptions derived from this <tt>std::exception</tt> class. These are:<br>
+<br>
+<table class="boxed">
+<tr><th>exception</th><th>description</th></tr>
+<tr><td>bad_alloc</td><td>thrown by new on allocation failure</td></tr>
+<tr><td>bad_cast</td><td>thrown by dynamic_cast when fails with a referenced type</td></tr>
+<tr><td>bad_exception</td><td>thrown when an exception type doesn't match any catch</td></tr>
+<tr><td>bad_typeid</td><td>thrown by typeid</td></tr>
+<tr><td>ios_base::failure</td><td>thrown by functions in the iostream library</td></tr>
+</table>
+<br>
+For example, if we use the operator <tt>new</tt> and the memory cannot be allocated, an exception of type <tt>bad_alloc</tt> is thrown:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br></code></pre></td>
+<td class="source"><pre><code><var>try</var>
+{
+  <var>int</var> * myarray= <var>new</var> <var>int</var>[1000];
+}
+<var>catch</var> (bad_alloc&amp;)
+{
+  cout &lt;&lt; <kbd>"Error allocating memory."</kbd> &lt;&lt; endl;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+It is recommended to include all dynamic memory allocations within a try block that catches this type of exception to perform a clean action instead of an abnormal program termination, which is what happens when this type of exception is thrown and not caught. If you want to force a <tt>bad_alloc</tt> exception to see it in action, you can try to allocate a huge array; On my system, trying to allocate 1 billion <tt>int</tt>s threw a <tt>bad_alloc</tt> exception.<br>
+<br>
+Because <tt>bad_alloc</tt> is derived from the standard base class <tt>exception</tt>, we can handle that same exception by catching references to the <tt>exception</tt> class:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br></code></pre></td>
+<td class="source"><pre><code><cite>// bad_alloc standard exception</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;exception&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main () {
+  <var>try</var>
+  {
+    <var>int</var>* myarray= <var>new</var> <var>int</var>[1000];
+  }
+  <var>catch</var> (exception&amp; e)
+  {
+    cout &lt;&lt; <kbd>"Standard exception: "</kbd> &lt;&lt; e.what() &lt;&lt; endl;
+  }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp> </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/namespaces/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Namespaces</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/typecasting/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Type Casting</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="/doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="/doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fexceptions%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+exceptions'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+exceptions'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Structure of a program - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/program_structure/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Structure of a program</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Structure of a program</h1>
+Probably the best way to start learning a programming language is by writing a program. Therefore, here is our first program: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br></code></pre></td>
+<td class="source"><pre><code><cite>// my first program in C++</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  cout &lt;&lt; <kbd>"Hello World!"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Hello World!</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first panel (in light blue) shows the source code for our first program. The second one (in light gray) shows the result of the program once compiled and executed. To the left, the grey numbers represent the line numbers - these are not part of the program, and are shown here merely for informational purposes.<br>
+<br>
+The way to edit and compile a program depends on the compiler you are using. Depending on whether it has a Development Interface or not and on its version. Consult the compilers section and the manual or help included with your compiler if you have doubts on how to compile a C++ console program.<br>
+<br>
+The previous program is the typical program that programmer apprentices write for the first time, and its result is the printing on screen of the "Hello World!" sentence. It is one of the simplest programs that can be written in C++, but it already contains the fundamental components that every C++ program has. We are going to look line by line at the code we have just written:<br>
+<br>
+<dl>
+<dt><code>// my first program in C++</code></dt>
+<dd>
+This is a comment line. All lines beginning with two slash signs (<code>//</code>) are considered comments and do not have any effect on the behavior of the program. The programmer can use them to include short explanations or observations within the source code itself. In this case, the line is a brief description of what our program is. <br>
+</dd>
+<dt><code>#include &lt;iostream&gt;</code></dt>
+<dd>
+Lines beginning with a hash sign (<code>#</code>) are directives for the preprocessor. They are not regular code lines with expressions but indications for the compiler's preprocessor. In this case the directive <code>#include &lt;iostream&gt;</code> tells the preprocessor to include the iostream standard file. This specific file (iostream) includes the declarations of the basic standard input-output library in C++, and it is included because its functionality is going to be used later in the program. <br>
+</dd>
+<dt><code>using namespace std;</code></dt>
+<dd>
+All the elements of the standard C++ library are declared within what is called a namespace, the namespace with the name <var>std</var>. So in order to access its functionality we declare with this expression that we will be using these entities. This line is very frequent in C++ programs that use the standard library, and in fact it will be included in most of the source codes included in these tutorials.<br>
+</dd>
+<dt><code>int main ()</code></dt>
+<dd>
+This line corresponds to the beginning of the definition of the main function. The main function is the point by where all C++ programs start their execution, independently of its location within the source code. It does not matter whether there are other functions with other names defined before or after it - the instructions contained within this function's definition will always be the first ones to be executed in any C++ program. For that same reason, it is essential that all C++ programs have a <var>main</var> function.<br>
+<br>
+The word <code>main</code> is followed in the code by a pair of parentheses (<code>()</code>). That is because it is a function declaration: In C++, what differentiates a function declaration from other types of expressions are these parentheses that follow its name. Optionally, these parentheses may enclose a list of parameters within them.<br>
+<br>
+Right after these parentheses we can find the body of the main function enclosed in braces (<code>{}</code>). What is contained within these braces is what the function does when it is executed.<br>
+</dd>
+<dt><code>cout &lt;&lt; "Hello World!";</code></dt>
+<dd>
+This line is a C++ statement. A statement is a simple or compound expression that can actually produce some effect. In fact, this statement performs the only action that generates a visible effect in our first program.<br>
+<br>
+<code>cout</code> is the name of the standard output stream in C++, and the meaning of the entire statement is to insert a sequence of characters (in this case the <samp>Hello World</samp> sequence of characters) into the standard output stream (<var>cout</var>, which usually corresponds to the screen).<br>
+<br>
+<var>cout</var> is declared in the <var>iostream</var> standard file within the <var>std</var> namespace, so that's why we needed to include that specific file and to declare that we were going to use this specific namespace earlier in our code.<br>
+<br>
+Notice that the statement ends with a semicolon character (<code>;</code>). This character is used to mark the end of the statement and in fact it must be included at the end of all expression statements in all C++ programs (one of the most common syntax errors is indeed to forget to include some semicolon after a statement).<br>
+</dd>
+<dt><code>return 0;</code></dt>
+<dd>
+The return statement causes the main function to finish. return may be followed by a return code (in our example is followed by the return code with a value of zero). A return code of <var>0</var> for the <var>main</var> function is generally interpreted as the program worked as expected without any errors during its execution. This is the most usual way to end a C++ console program.<br>
+</dd>
+</dl>
+<br>
+You may have noticed that not all the lines of this program perform actions when the code is executed. There were lines containing only comments (those beginning by <code>//</code>). There were lines with directives for the compiler's preprocessor (those beginning by <code>#</code>). Then there were lines that began the declaration of a function (in this case, the main function) and, finally lines with statements (like the insertion into <var>cout</var>), which were all included within the block delimited by the braces (<code>{}</code>) of the main function.<br>
+<br>
+The program has been structured in different lines in order to be more readable, but in C++, we do not have strict rules on how to separate instructions in different lines. For example, instead of <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> main ()
+{
+  cout &lt;&lt; <kbd>" Hello World!"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+We could have written:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> main () { cout &lt;&lt; <kbd>"Hello World!"</kbd>; <var>return</var> 0; }</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+All in just one line and this would have had exactly the same meaning as the previous code.<br>
+<br>
+In C++, the separation between statements is specified with an ending semicolon (<code>;</code>) at the end of each one, so the separation in different code lines does not matter at all for this purpose. We can write many statements per line or write a single statement that takes many code lines. The division of code in different lines serves only to make it more legible and schematic for the humans that may read it.<br>
+<br>
+Let us add an additional instruction to our first program:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br></code></pre></td>
+<td class="source"><pre><code><cite>// my second program in C++</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  cout &lt;&lt; <kbd>"Hello World! "</kbd>;
+  cout &lt;&lt; <kbd>"I'm a C++ program"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Hello World! I'm a C++ program</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case, we performed two insertions into cout in two different statements. Once again, the separation in different lines of code has been done just to give greater readability to the program, since <var>main</var> could have been perfectly valid defined this way:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> main () { cout &lt;&lt; <kbd>" Hello World! "</kbd>; cout &lt;&lt; <kbd>" I'm a C++ program "</kbd>; <var>return</var> 0; } </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+We were also free to divide the code into more lines if we considered it more convenient: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> main ()
+{
+  cout &lt;&lt;
+    <kbd>"Hello World!"</kbd>;
+  cout
+    &lt;&lt; <kbd>"I'm a C++ program"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+And the result would again have been exactly the same as in the previous examples.<br>
+<br>
+Preprocessor directives (those that begin by <code>#</code>) are out of this general rule since they are not statements. They are lines read and processed by the preprocessor and do not produce any code by themselves. Preprocessor directives must be specified in their own line and do not have to end with a semicolon (<code>;</code>).<br>
+<br>
+<h3>Comments</h3>
+<br>
+Comments are parts of the source code disregarded by the compiler. They simply do nothing. Their purpose is only to allow the programmer to insert notes or descriptions embedded within the source code. <br>
+<br>
+C++ supports two ways to insert comments: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><cite>// line comment</cite>
+<cite>/* block comment */</cite> </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first of them, known as line comment, discards everything from where the pair of slash signs (<code>//</code>) is found up to the end of that same line. The second one, known as block comment, discards everything between the <code>/*</code> characters and the first appearance of the <code>*/</code> characters, with the possibility of including more than one line.<br>
+We are going to add comments to our second program: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br></code></pre></td>
+<td class="source"><pre><code><cite>/* my second program in C++
+   with more comments */</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  cout &lt;&lt; <kbd>"Hello World! "</kbd>;     <cite>// prints Hello World!</cite>
+  cout &lt;&lt; <kbd>"I'm a C++ program"</kbd>; <cite>// prints I'm a C++ program</cite>
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Hello World! I'm a C++ program</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+If you include comments within the source code of your programs without using the comment characters combinations <code>//</code>, <code>/*</code> or <code>*/</code>, the compiler will take them as if they were C++ expressions, most likely causing one or several error messages when you compile it.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/introduction/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Instructions for use</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/variables/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Variables. Data Types.</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="/doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li class="selected"><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="/doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fprogram_structure%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+program_structure'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+program_structure'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

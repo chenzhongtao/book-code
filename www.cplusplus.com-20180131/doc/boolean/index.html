@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Boolean Operations - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/boolean/">
+<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../v321/main.css">
+<script src="../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../doc/">Tutorials</a></li>
+<li class="here">Boolean Operations</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Boolean Operations</h1>
+A <i>bit</i> is the minimum amount of information that we can imagine, since it only stores either value 1 or 0, which represents either YES or NO, activated or deactivated, true or false, etc... that is: two possible states each one opposite to the other, without possibility of any shades. We are going to consider that the two possible values of a bit are 0 and 1.<br>
+<br>
+Several operations can be performed with bits, either in conjunction with other bits or themselves alone. These operations receive the name of <tt>boolean operations</tt>, a word that comes from the name of one of the mathematicians who contributed the more to this field: George Boole (1815-1864). <br>
+<br>
+All these operations have an established behavior and all of them can be applied to any bit no matter which value they contain (either 0 or 1). Next you have a list of the basic boolean operations and a table with the behavior of that operation with every possible combination of bits. <br>
+<br>
+<h3>AND</h3>
+This operation is performed between two bits, which we will call <tt>a</tt> and <tt>b</tt>. The result of applying this AND operation is 1 if both <tt>a</tt> and <tt>b</tt> are equal to 1, and 0 in all other cases (i.e., if one or both of the variables is 0).<br>
+<br>
+<b>AND (&)</b>
+<table class="boxed">
+<tr><th>a</th><th>b</th><th>a&b</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr> <br>
+<tr><td>1</td><td>0</td><td>0</td></tr> <br>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+<br>
+<h3>OR</h3>
+This operation is performed between two bits (<tt>a</tt> and <tt>b</tt>). The result is 1 if either one of the two bits is 1, or if both are 1. If none is equal to 1 the result is 0.<br>
+<br>
+<b>OR (|)</b>
+<table class="boxed">
+<tr><th>a</th><th>b</th><th>a|b</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+<br>
+<h3>XOR (Exclusive Or)</h3>
+This operation is performed between two bits (<tt>a</tt> and <tt>b</tt>). The result is 1 if either one of the two bits is 1, but not in the case that both are. There for, if neither or both of them are equal to 1 the result is 0.<br>
+<br>
+<b>XOR (^)</b>
+<table class="boxed">
+<tr><th>a</th><th>b</th><th>a^b</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td></tr>
+</table>
+<br>
+<h3>NOT</h3>
+This operation is performed on a single bit. Its result is the inversion of the actual value of the bit: if it was set to 1 it becomes 0, and if it was 0 it becomes 1: <br>
+<br>
+<b>NOT (~)</b>
+<table class="boxed">
+<tr><th>a</th><th>~a</th></tr>
+<tr><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td></tr>
+</table>
+<br>
+These are the 4 basic boolean operations (AND, OR, XOR and NOT). Combining these operations we can obtain any possible result from two bits.<br>
+<br>
+In C++, these operators can be used with variables of any integer data type; the boolean operation is performed to all of the bits of each variable involved. For example, supposing two variables: <tt>a</tt> and <tt>b</tt>, both of type <tt>unsigned char</tt>, where <tt>a</tt> contains 195 (11000011 in binary) and <tt>b</tt> contains 87 (or 01010111 in binary). If we write the following code: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>unsigned</var> <var>char</var> a=195;
+<var>unsigned</var> <var>char</var> b=87;
+<var>unsigned</var> <var>char</var> c;
+c=a&amp;b;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+That means, that we conducted a bitwise AND operation between <tt>a</tt> and <tt>b</tt>. The operation is performed between the bits of the two variables that are located at the same position: The rightmost bit of <tt>c</tt> will contain the result of conducting the AND operation between the rightmost bits of <tt>a</tt> and <tt>b</tt>:<br>
+<br>
+<img src="bitwise_and.gif" alt="">
+<br>
+The same operation is also performed between the second bits of both variables, and the third, and so on, until the operation is performed between all bits of both variables (each one only with the same bit of the other variable).<br>
+<br>
+The final binary value of <tt>c</tt> is 01000011, that is 67 in decimal numbers. So <tt>195&87</tt> is equal to <tt>67</tt>.<br>
+</div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li class="selected"><a href="../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Fboolean%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=boolean'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=boolean'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>is_move_assignable - C++ Reference</title>
+<link rel="canonical" href="http://www.cplusplus.com/reference/type_traits/is_move_assignable/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../reference/">Reference</a></li>
+<li><a href="../../../reference/type_traits/">&lt;type_traits&gt;</a></li>
+<li class="here">is_move_assignable</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<div id="I_type">class template</div>
+<div id="I_file">&lt;type_traits&gt;</div>
+<h1><span class="namespace" title="namespace std">std::</span>is_move_assignable<span class="C_ico cpp11warning" title="This page describes a feature introduced by the latest revision of the C++ standard (2011). Older compilers may not support it." alt="This page describes a feature introduced by the latest revision of the C++ standard (2011). Older compilers may not support it."></span></h1>
+<div class="C_prototype"><pre>template &lt;class T&gt; struct is_move_assignable;</pre></div><div id="I_description">Is move assignable</div>
+<section id="description">
+<div class="hierarchy">
+<ul>
+<li><b><a href="../../../integral_constant">integral_constant</a></b></li>
+<li><b>is_move_assignable</b></li>
+</ul>
+</div>
+<br>
+Trait class that identifies whether <tt>T</tt> is a <i>move assignable type</i>.<br>
+<br>
+A <dfn>move assignable type</dfn> is a type that can be assigned an rvalue reference of the same type. This includes <a href="../../../is_scalar">scalar types</a> and <i>move assignable classes</i>.<br>
+<br>
+A <dfn>move assignable class</dfn> is a class that either has its move assignment operator defined (either the implicitly provided one or a custom defined one), or a copy assignment that is called for rvalue references (these are always called unless the class has a deleted <i>move assignment operator</i>).<br>
+<br>
+The <tt>is_move_assignable</tt> class inherits from <a href="../../../integral_constant">integral_constant</a> as being either <a href="/true_type">true_type</a> or <a href="/false_type">false_type</a>, depending on whether <tt>T</tt> is move assignable.<br>
+</section>
+<br>
+<section id="parameters">
+<h3>Template parameters</h3>
+<dl>
+<dt>T</dt>
+<dd>A complete type, or <tt>void</tt> (possible cv-qualified), or an array of unknown bound.</dd>
+</dl>
+</section>
+<br>
+<section id="types">
+<h3>Member types</h3>
+Inherited from <a href="../../../integral_constant">integral_constant</a>:<br>
+<table class="boxed">
+<tr><th>member type</th><th>definition</th></tr>
+<tr><td><tt>value_type</tt></td><td><tt>bool</tt></td></tr>
+<tr><td><tt>type</tt></td><td>either <a href="/true_type">true_type</a> or <a href="/false_type">false_type</a></td></tr>
+</table>
+</section>
+<br>
+<section id="constants">
+<h3>Member constants</h3>
+Inherited from <a href="../../../integral_constant">integral_constant</a>:<br>
+<table class="boxed">
+<tr><th>member constant</th><th>definition</th></tr>
+<tr><td><tt>value</tt></td><td>either <tt>true</tt> or <tt>false</tt></td></tr>
+</table>
+</section>
+<br>
+<section id="functions">
+<h3>Member functions</h3>
+Inherited from <a href="/integral_constant">integral_constant</a>:<br>
+<dl class="links"><dt><a href= "/reference/type_traits/integral_constant/operator value_type/"><b>operator bool</b></a></dt><dd>Returns value <span class="typ">(public member function)</span></dd></dl>
+</section>
+<br>
+<section id="example">
+<h3>Example</h3>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br></code></pre></td>
+<td class="source"><pre><code><cite>// is_move_assignable example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;type_traits&gt;</dfn>
+
+<var>struct</var> A { };
+<var>struct</var> B { B&amp; <var>operator</var>= (B&amp;&amp;) = <var>delete</var>; };
+
+<var>int</var> main() {
+  std::cout &lt;&lt; std::boolalpha;
+  std::cout &lt;&lt; <kbd>"is_move_assignable:"</kbd> &lt;&lt; std::endl;
+  std::cout &lt;&lt; <kbd>"int: "</kbd> &lt;&lt; std::is_move_assignable&lt;<var>int</var>&gt;::value &lt;&lt; std::endl;
+  std::cout &lt;&lt; <kbd>"A: "</kbd> &lt;&lt; std::is_move_assignable&lt;A&gt;::value &lt;&lt; std::endl;
+  std::cout &lt;&lt; <kbd>"B: "</kbd> &lt;&lt; std::is_move_assignable&lt;B&gt;::value &lt;&lt; std::endl;
+  <var>return</var> 0;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Output:<br>
+<div class="auto"><table class="snippet"><tr><td class="output"><pre><samp>is_move_assignable:
+int: true
+A: true
+B: false
+</samp></pre></td></tr></table></div>
+</section>
+<br>
+<section id="see">
+<h3>See also</h3>
+<dl class="links"><dt><a href= "/reference/type_traits/is_assignable/"><b>is_assignable</b></a></dt><dd>Is assignable <span class="typ">(class template)</span></dd></dl><dl class="links"><dt><a href= "/reference/type_traits/is_copy_assignable/"><b>is_copy_assignable</b></a></dt><dd>Is copy assignable <span class="typ">(class template)</span></dd></dl><dl class="links"><dt><a href= "/reference/type_traits/is_move_constructible/"><b>is_move_constructible</b></a></dt><dd>Is move constructible <span class="typ">(class template)</span></dd></dl><dl class="links"><dt><a href= "/reference/type_traits/is_trivially_move_assignable/"><b>is_trivially_move_assignable</b></a></dt><dd>Is trivially move assignable <span class="typ">(class template)</span></dd></dl><dl class="links"><dt><a href= "/reference/type_traits/is_nothrow_move_assignable/"><b>is_nothrow_move_assignable</b></a></dt><dd>Is move assignable throwing no exception <span class="typ">(class template)</span></dd></dl>
+</section></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder selected reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="reference_box">
+<h3><b><a href="../../../reference/">Reference</a></b></h3>
+<ul>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/clibrary/">C library:</a></h4><ul>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cassert/"><span>&lt;cassert&gt; (assert.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cctype/"><span>&lt;cctype&gt; (ctype.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cerrno/"><span>&lt;cerrno&gt; (errno.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cfenv/"><span>&lt;cfenv&gt; (fenv.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cfloat/"><span>&lt;cfloat&gt; (float.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cinttypes/"><span>&lt;cinttypes&gt; (inttypes.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ciso646/"><span>&lt;ciso646&gt; (iso646.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/climits/"><span>&lt;climits&gt; (limits.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/clocale/"><span>&lt;clocale&gt; (locale.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cmath/"><span>&lt;cmath&gt; (math.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csetjmp/"><span>&lt;csetjmp&gt; (setjmp.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csignal/"><span>&lt;csignal&gt; (signal.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdarg/"><span>&lt;cstdarg&gt; (stdarg.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cstdbool/"><span>&lt;cstdbool&gt; (stdbool.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstddef/"><span>&lt;cstddef&gt; (stddef.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cstdint/"><span>&lt;cstdint&gt; (stdint.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdio/"><span>&lt;cstdio&gt; (stdio.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdlib/"><span>&lt;cstdlib&gt; (stdlib.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstring/"><span>&lt;cstring&gt; (string.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/ctgmath/"><span>&lt;ctgmath&gt; (tgmath.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ctime/"><span>&lt;ctime&gt; (time.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cuchar/"><span>&lt;cuchar&gt; (uchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwchar/"><span>&lt;cwchar&gt; (wchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwctype/"><span>&lt;cwctype&gt; (wctype.h)</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/stl/">Containers:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/array/"><span>&lt;array&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/deque/"><span>&lt;deque&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/forward_list/"><span>&lt;forward_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/list/"><span>&lt;list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/map/"><span>&lt;map&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/queue/"><span>&lt;queue&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/set/"><span>&lt;set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stack/"><span>&lt;stack&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_map/"><span>&lt;unordered_map&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_set/"><span>&lt;unordered_set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/vector/"><span>&lt;vector&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/iolibrary/">Input/Output:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/fstream/"><span>&lt;fstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iomanip/"><span>&lt;iomanip&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ios/"><span>&lt;ios&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iosfwd/"><span>&lt;iosfwd&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iostream/"><span>&lt;iostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/istream/"><span>&lt;istream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ostream/"><span>&lt;ostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/sstream/"><span>&lt;sstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/streambuf/"><span>&lt;streambuf&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/multithreading/">Multi-threading:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/atomic/"><span>&lt;atomic&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/condition_variable/"><span>&lt;condition_variable&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/future/"><span>&lt;future&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/mutex/"><span>&lt;mutex&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/thread/"><span>&lt;thread&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4><a href="../../../reference/std/">Other:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/algorithm/"><span>&lt;algorithm&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/bitset/"><span>&lt;bitset&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/chrono/"><span>&lt;chrono&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/codecvt/"><span>&lt;codecvt&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/complex/"><span>&lt;complex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/exception/"><span>&lt;exception&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/functional/"><span>&lt;functional&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/initializer_list/"><span>&lt;initializer_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iterator/"><span>&lt;iterator&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/limits/"><span>&lt;limits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/locale/"><span>&lt;locale&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/memory/"><span>&lt;memory&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/new/"><span>&lt;new&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/numeric/"><span>&lt;numeric&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/random/"><span>&lt;random&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/ratio/"><span>&lt;ratio&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/regex/"><span>&lt;regex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stdexcept/"><span>&lt;stdexcept&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/string/"><span>&lt;string&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/system_error/"><span>&lt;system_error&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/tuple/"><span>&lt;tuple&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/typeindex/"><span>&lt;typeindex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/typeinfo/"><span>&lt;typeinfo&gt;</span></a></li>
+<li class="cpp11 selected folder"><a href="../../../reference/type_traits/"><span>&lt;type_traits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/utility/"><span>&lt;utility&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/valarray/"><span>&lt;valarray&gt;</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect cpp11" id="type_traits_box">
+<h3><b><a href="../../../reference/type_traits/">&lt;type_traits&gt;</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>helper classes:</h4><ul>
+<li class="cpp11"><a href="../../../reference/type_traits/false_type/"><span>false_type</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/type_traits/integral_constant/"><span>integral_constant</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/true_type/"><span>true_type</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>type traits:</h4><ul>
+<li class="cpp11"><a href="../../../reference/type_traits/alignment_of/"><span>alignment_of</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/extent/"><span>extent</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/has_virtual_destructor/"><span>has_virtual_destructor</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_abstract/"><span>is_abstract</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_arithmetic/"><span>is_arithmetic</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_array/"><span>is_array</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_assignable/"><span>is_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_base_of/"><span>is_base_of</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_class/"><span>is_class</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_compound/"><span>is_compound</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_const/"><span>is_const</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_constructible/"><span>is_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_convertible/"><span>is_convertible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_copy_assignable/"><span>is_copy_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_copy_constructible/"><span>is_copy_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_default_constructible/"><span>is_default_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_destructible/"><span>is_destructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_empty/"><span>is_empty</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_enum/"><span>is_enum</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_floating_point/"><span>is_floating_point</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_function/"><span>is_function</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_fundamental/"><span>is_fundamental</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_integral/"><span>is_integral</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_literal_type/"><span>is_literal_type</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_lvalue_reference/"><span>is_lvalue_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_member_function_pointer/"><span>is_member_function_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_member_object_pointer/"><span>is_member_object_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_member_pointer/"><span>is_member_pointer</span></a></li>
+<li class="cpp11 selected"><a href="../../../reference/type_traits/is_move_assignable/"><span>is_move_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_move_constructible/"><span>is_move_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_assignable/"><span>is_nothrow_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_constructible/"><span>is_nothrow_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_copy_assignable/"><span>is_nothrow_copy_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_copy_constructible/"><span>is_nothrow_copy_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_default_constructible/"><span>is_nothrow_default_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_destructible/"><span>is_nothrow_destructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_move_assignable/"><span>is_nothrow_move_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_nothrow_move_constructible/"><span>is_nothrow_move_constructible</span></a></li>
+<li class="cpp14"><a href="../../../reference/type_traits/is_null_pointer/"><span>is_null_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_object/"><span>is_object</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_pod/"><span>is_pod</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_pointer/"><span>is_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_polymorphic/"><span>is_polymorphic</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_reference/"><span>is_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_rvalue_reference/"><span>is_rvalue_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_same/"><span>is_same</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_scalar/"><span>is_scalar</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_signed/"><span>is_signed</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_standard_layout/"><span>is_standard_layout</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivial/"><span>is_trivial</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_assignable/"><span>is_trivially_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_constructible/"><span>is_trivially_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_copyable/"><span>is_trivially_copyable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_copy_assignable/"><span>is_trivially_copy_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_copy_constructible/"><span>is_trivially_copy_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_default_constructible/"><span>is_trivially_default_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_destructible/"><span>is_trivially_destructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_move_assignable/"><span>is_trivially_move_assignable</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_trivially_move_constructible/"><span>is_trivially_move_constructible</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_union/"><span>is_union</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_unsigned/"><span> is_unsigned</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_void/"><span>is_void</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/is_volatile/"><span>is_volatile</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/rank/"><span>rank</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>type transformations:</h4><ul>
+<li class="cpp11"><a href="../../../reference/type_traits/add_const/"><span>add_const</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/add_cv/"><span>add_cv</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/add_lvalue_reference/"><span>add_lvalue_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/add_pointer/"><span>add_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/add_rvalue_reference/"><span>add_rvalue_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/add_volatile/"><span>add_volatile</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/aligned_storage/"><span>aligned_storage</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/aligned_union/"><span>aligned_union</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/common_type/"><span>common_type</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/conditional/"><span>conditional</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/decay/"><span>decay</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/enable_if/"><span>enable_if</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/make_signed/"><span>make_signed</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/make_unsigned/"><span>make_unsigned</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_all_extents/"><span>remove_all_extents</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_const/"><span>remove_const</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_cv/"><span>remove_cv</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_extent/"><span>remove_extent</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_pointer/"><span>remove_pointer</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_reference/"><span>remove_reference</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/remove_volatile/"><span>remove_volatile</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/result_of/"><span>result_of</span></a></li>
+<li class="cpp11"><a href="../../../reference/type_traits/underlying_type/"><span>underlying_type</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Freference%2Ftype_traits%2Fis_move_assignable%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/reference/edit.cgi?a=type_traits+is_move_assignable'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/reference/delete.cgi?a=type_traits+is_move_assignable'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ascii Codes - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/ascii/">
+<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../v321/main.css">
+<script src="../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../doc/">Tutorials</a></li>
+<li class="here">Ascii Codes</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Ascii Codes</h1>
+It is a very well-known fact that computers can manage internally only 0s (zeros) and 1s (ones). This is true, and by means of sequences of 0s and 1s the computer can express any numerical value as its binary translation, which is a very simple mathematical operation (as explained in the paper <a href="../../doc/hex/">numerical bases</a>).<br>
+<br>
+Nevertheless, there is no such evident way to represent letters and other non-numeric characters with 0s and 1s. Therefore, in order to do that, computers use <i>ASCII tables</i>, which are tables or lists that contain all the letters in the roman alphabet plus some additional characters. In these tables each character is always represented by the same order number. For example, the ASCII code for the capital letter "A" is always represented by the order number 65, which is easily representable using 0s and 1s in binary: 65 expressed as a binary number is 1000001.<br>
+<br>
+The standard ASCII table defines 128 character codes (from 0 to 127), of which, the first 32 are control codes (non-printable), and the remaining 96 character codes are representable characters: <br>
+<br>
+<table class="boxed">
+<tr><th>*</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td>NUL</td><td>SOH</td><td>STX</td><td>ETX</td><td>EOT</td><td>ENQ</td><td>ACK</td><td>BEL</td><td>BS </td><td>TAB</td><td>LF </td><td>VT </td><td>FF </td><td>CR </td><td>SO </td><td>SI </td></tr>
+<tr><th>1</th><td>DLE</td><td>DC1</td><td>DC2</td><td>DC3</td><td>DC4</td><td>NAK</td><td>SYN</td><td>ETB</td><td>CAN</td><td>EM </td><td>SUB</td><td>ESC</td><td>FS </td><td>GS </td><td>RS </td><td>US </td></tr>
+<tr><th>2</th><td><tt> </tt></td><td><tt>!</tt></td><td><tt>"</tt></td><td><tt>#</tt></td><td><tt>$</tt></td><td><tt>%</tt></td><td><tt>&</tt></td><td><tt>'</tt></td><td><tt>(</tt></td><td><tt>)</tt></td><td><tt>*</tt></td><td><tt>+</tt></td><td><tt>,</tt></td><td><tt>-</tt></td><td><tt>.</tt></td><td><tt>/</tt></td></tr>
+<tr><th>3</th><td><tt>0</tt></td><td><tt>1</tt></td><td><tt>2</tt></td><td><tt>3</tt></td><td><tt>4</tt></td><td><tt>5</tt></td><td><tt>6</tt></td><td><tt>7</tt></td><td><tt>8</tt></td><td><tt>9</tt></td><td><tt>:</tt></td><td><tt>;</tt></td><td><tt>&lt;</tt></td><td><tt>=</tt></td><td><tt>&gt;</tt></td><td><tt>?</tt></td></tr>
+<tr><th>4</th><td><tt>@</tt></td><td><tt>A</tt></td><td><tt>B</tt></td><td><tt>C</tt></td><td><tt>D</tt></td><td><tt>E</tt></td><td><tt>F</tt></td><td><tt>G</tt></td><td><tt>H</tt></td><td><tt>I</tt></td><td><tt>J</tt></td><td><tt>K</tt></td><td><tt>L</tt></td><td><tt>M</tt></td><td><tt>N</tt></td><td><tt>O</tt></td></tr>
+<tr><th>5</th><td><tt>P</tt></td><td><tt>Q</tt></td><td><tt>R</tt></td><td><tt>S</tt></td><td><tt>T</tt></td><td><tt>U</tt></td><td><tt>V</tt></td><td><tt>W</tt></td><td><tt>X</tt></td><td><tt>Y</tt></td><td><tt>Z</tt></td><td><tt>[</tt></td><td><tt>\</tt></td><td><tt>]</tt></td><td><tt>^</tt></td><td><tt>_</tt></td></tr>
+<tr><th>6</th><td><tt>`</tt></td><td><tt>a</tt></td><td><tt>b</tt></td><td><tt>c</tt></td><td><tt>d</tt></td><td><tt>e</tt></td><td><tt>f</tt></td><td><tt>g</tt></td><td><tt>h</tt></td><td><tt>i</tt></td><td><tt>j</tt></td><td><tt>k</tt></td><td><tt>l</tt></td><td><tt>m</tt></td><td><tt>n</tt></td><td><tt>o</tt></td></tr>
+<tr><th>7</th><td><tt>p</tt></td><td><tt>q</tt></td><td><tt>r</tt></td><td><tt>s</tt></td><td><tt>t</tt></td><td><tt>u</tt></td><td><tt>v</tt></td><td><tt>w</tt></td><td><tt>x</tt></td><td><tt>y</tt></td><td><tt>z</tt></td><td><tt>{</tt></td><td><tt>|</tt></td><td><tt>}</tt></td><td><tt>~</tt></td><td><tt> </tt></td></tr>
+</table>
+<br>
+* This panel is organized to be easily read in hexadecimal: row numbers represent the first digit and the column numbers represent the second one. For example, the "A" character is located at the 4th row and the 1st column, for that it would be represented in hexadecimal as 0x41 (65).<br>
+<br>
+Because most systems nowadays work with 8bit bytes, which can represent 256 different values, in addition to the 128 standard ASCII codes there are other 128 that are known as <i>extended ASCII</i>, which are platform- and locale-dependent. So there is more than one extended ASCII character set.<br>
+<br>
+The two most used extended ASCII character sets are the one known as OEM, that comes from the default character set incorporated by default in the IBM-PC and the other is the ANSI extend ASCII which is used by most recent operating systems. <br>
+<br>
+The first of them, the OEM character set, is the one used by the hardware of the immense majority of PC compatible machines, and was also used under the old DOS system. It includes some foreign signs, some marked characters and pieces to represent panels.<br>
+<br>
+<img src="ascii_oem.gif" alt="">
+<br>
+The ANSI character set is a standard that many systems incorporate, like Windows, some UNIX platforms and many standalone applications. It includes many more local symbols and marked letters so that it can be used with no need of being redefined in many more languages: <br>
+<br>
+<img src="ascii_ansi.gif" alt="">
+<br>
+</div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li class="selected"><a href="../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Fascii%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=ascii'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=ascii'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

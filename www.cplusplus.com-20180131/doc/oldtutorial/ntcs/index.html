@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Character Sequences - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/ntcs/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Character Sequences</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Character Sequences</h1>
+As you may already know, the C++ Standard Library implements a powerful <a href="../../../string">string</a> class, which is very useful to handle and manipulate strings of characters. However, because strings are in fact sequences of characters, we can represent them also as plain arrays of <tt>char</tt> elements.<br>
+<br>
+For example, the following array:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>char</var> jenny [20];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+is an array that can store up to 20 elements of type <tt>char</tt>. It can be represented as:<br>
+<br>
+<img src="c_strings1.gif" alt="">
+<br>
+Therefore, in this array, in theory, we can store sequences of characters up to 20 characters long. But we can also store shorter sequences. For example, <tt>jenny</tt> could store at some point in a program either the sequence <tt>"Hello"</tt> or the sequence <tt>"Merry christmas"</tt>, since both are shorter than 20 characters.<br>
+<br>
+Therefore, since the array of characters can store shorter sequences than its total length, a special character is used to signal the end of the valid sequence: the <i>null character</i>, whose literal constant can be written as <tt>'\0'</tt> (backslash, zero).<br>
+<br>
+Our array of 20 elements of type <tt>char</tt>, called <tt>jenny</tt>, can be represented storing the characters sequences <tt>"Hello"</tt> and <tt>"Merry Christmas"</tt> as:<br>
+<br>
+<img src="c_strings2.gif" alt="">
+<br>
+Notice how after the valid content a null character (<tt>'\0'</tt>) has been included in order to indicate the end of the sequence. The panels in gray color represent <tt>char</tt> elements with undetermined values.<br>
+<br>
+<h3>Initialization of null-terminated character sequences</h3>
+Because arrays of characters are ordinary arrays they follow all their same rules. For example, if we want to initialize an array of characters with some predetermined sequence of characters we can do it just like any other array: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>char</var> myword[] = { <kbd>'H'</kbd>, <kbd>'e'</kbd>, <kbd>'l'</kbd>, <kbd>'l'</kbd>, <kbd>'o'</kbd>, <kbd>'\0'</kbd> }; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case we would have declared an array of 6 elements of type <tt>char</tt> initialized with the characters that form the word <tt>"Hello"</tt> plus a null character <tt>'\0'</tt> at the end.<br>
+But arrays of <tt>char</tt> elements have an additional method to initialize their values: using string literals.<br>
+<br>
+In the expressions we have used in some examples in previous chapters, constants that represent entire strings of characters have already showed up several times. These are specified enclosing the text to become a string literal between double quotes ("). For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><kbd>"the result is: "</kbd></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+is a constant string literal that we have probably used already.<br>
+<br>
+Double quoted strings (<tt>"</tt>) are literal constants whose type is in fact a null-terminated array of characters. So string literals enclosed between double quotes always have a null character (<tt>'\0'</tt>) automatically appended at the end.<br>
+<br>
+Therefore we can initialize the array of <tt>char</tt> elements called <tt>myword</tt> with a null-terminated sequence of characters by either one of these two methods:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>char</var> myword [] = { <kbd>'H'</kbd>, <kbd>'e'</kbd>, <kbd>'l'</kbd>, <kbd>'l'</kbd>, <kbd>'o'</kbd>, <kbd>'\0'</kbd> };
+<var>char</var> myword [] = <kbd>"Hello"</kbd>; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In both cases the array of characters <tt>myword</tt> is declared with a size of 6 elements of type <tt>char</tt>: the 5 characters that compose the word <tt>"Hello"</tt> plus a final null character (<tt>'\0'</tt>) which specifies the end of the sequence and that, in the second case, when using double quotes (<tt>"</tt>) it is appended automatically.<br>
+<br>
+Please notice that we are talking about initializing an array of characters in the moment it is being declared, and not about assigning values to them once they have already been declared. In fact because this type of null-terminated arrays of characters are regular arrays we have the same restrictions that we have with any other array, so we are not able to copy blocks of data with an assignment operation.<br>
+<br>
+Assuming <tt>mystext</tt> is a <tt>char[]</tt> variable, expressions within a source code like:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>mystext = <kbd>"Hello"</kbd>;
+mystext[] = <kbd>"Hello"</kbd>; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+would <strong>not</strong> be valid, like neither would be:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>mystext = { <kbd>'H'</kbd>, <kbd>'e'</kbd>, <kbd>'l'</kbd>, <kbd>'l'</kbd>, <kbd>'o'</kbd>, <kbd>'\0'</kbd> };</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The reason for this may become more comprehensible once you know a bit more about pointers, since then it will be clarified that an array is in fact a constant pointer pointing to a block of memory.<br>
+<br>
+<h3>Using null-terminated sequences of characters</h3>
+<br>
+Null-terminated sequences of characters are the natural way of treating strings in C++, so they can be used as such in many procedures. In fact, regular string literals have this type (<tt>char[]</tt>) and can also be used in most cases.<br>
+<br>
+For example, <tt>cin</tt> and <tt>cout</tt> support null-terminated sequences as valid containers for sequences of characters, so they can be used directly to extract strings of characters from <tt>cin</tt> or to insert them into <tt>cout</tt>. For example:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br></code></pre></td>
+<td class="source"><pre><code><cite>// null-terminated sequences of characters</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>char</var> question[] = <kbd>"Please, enter your first name: "</kbd>;
+  <var>char</var> greeting[] = <kbd>"Hello, "</kbd>;
+  <var>char</var> yourname [80];
+  cout &lt;&lt; question;
+  cin &gt;&gt; yourname;
+  cout &lt;&lt; greeting &lt;&lt; yourname &lt;&lt; <kbd>"!"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Please, enter your first name: John
+Hello, John!</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As you can see, we have declared three arrays of <tt>char</tt> elements. The first two were initialized with string literal constants, while the third one was left uninitialized. In any case, we have to specify the size of the array:  in the first two (<tt>question</tt> and <tt>greeting</tt>) the size was implicitly defined by the length of the literal constant they were initialized to. While for <tt>yourname</tt> we have explicitly specified that it has a size of 80 chars.<br>
+<br>
+Finally, sequences of characters stored in <tt>char</tt> arrays can easily be converted into <tt>string</tt> objects just by using the assignment operator:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>string mystring;
+<var>char</var> myntcs[]=<kbd>"some text"</kbd>;
+mystring = myntcs;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/arrays/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Arrays</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/pointers/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Pointers</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="/doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="/doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fntcs%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+ntcs'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+ntcs'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Dynamic Memory - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/dynamic/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Dynamic Memory</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Dynamic Memory</h1>
+Until now, in all our programs, we have only had as much memory available as we declared for our variables, having the size of all of them to be determined in the source code, before the execution of the program. But, what if we need a variable amount of memory that can only be determined during runtime? For example, in the case that we need some user input to determine the necessary amount of memory space.<br>
+<br>
+The answer is <i>dynamic memory</i>, for which C++ integrates the operators <tt>new</tt> and <tt>delete</tt>.<br>
+<br>
+<a name="new"></a><h3>Operators new and new[]</h3>
+In order to request dynamic memory we use the operator <tt>new</tt>. <tt>new</tt> is followed by a data type specifier and -if a sequence of more than one element is required- the number of these within brackets <tt>[]</tt>. It returns a pointer to the beginning of the new block of memory allocated. Its form is: <br>
+<br>
+<tt>
+pointer = new type<br>
+pointer = new type [number_of_elements]<br>
+</tt>
+<br>
+The first expression is used to allocate memory to contain one single element of type <tt>type</tt>. The second one is used to assign a block (an array) of elements of type <tt>type</tt>, where <tt>number_of_elements</tt> is an integer value representing the amount of these. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> * bobby;
+bobby = <var>new</var> <var>int</var> [5];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case, the system dynamically assigns space for five elements of type <tt>int</tt> and returns a pointer to the first element of the sequence, which is assigned to <tt>bobby</tt>. Therefore, now, <tt>bobby</tt> points to a valid block of memory with space for five elements of type <tt>int</tt>.<br>
+<br>
+<img src="dynamic.gif" alt=""> <br>
+<br>
+The first element pointed by bobby can be accessed either with the expression <tt>bobby[0]</tt> or the expression <tt>*bobby</tt>. Both are equivalent as has been explained in the section about pointers. The second element can be accessed either with <tt>bobby[1]</tt> or <tt>*(bobby+1)</tt> and so on...<br>
+<br>
+You could be wondering the difference between declaring a normal array and assigning dynamic memory to a pointer, as we have just done. The most important difference is that the size of an array has to be a constant value, which limits its size to what we decide at the moment of designing the program, before its execution, whereas the dynamic memory allocation allows us to assign memory during the execution of the program (runtime) using any variable or constant value as its size.<br>
+<br>
+The dynamic memory requested by our program is allocated by the system from the memory heap. However, computer memory is a limited resource, and it can be exhausted. Therefore, it is important to have some mechanism to check if our request to allocate memory was successful or not.<br>
+<br>
+C++ provides two standard methods to check if the allocation was successful:<br>
+<br>
+One is by handling exceptions. Using this method an exception of type <tt>bad_alloc</tt> is thrown when the allocation fails. Exceptions are a powerful C++ feature explained later in these tutorials. But for now you should know that if this exception is thrown and it is not handled by a specific handler, the program execution is terminated.<br>
+<br>
+This exception method is the default method used by new, and is the one used in a declaration like:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>bobby = <var>new</var> <var>int</var> [5];  <cite>// if it fails an exception is thrown </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The other method is known as <tt>nothrow</tt>, and what happens when it is used is that when a memory allocation fails, instead of throwing a <tt>bad_alloc</tt> exception or terminating the program, the pointer returned by <tt>new</tt> is a null pointer, and the program continues its execution.<br>
+<br>
+This method can be specified by using a special object called <tt>nothrow</tt>, declared in header <tt>&lt;new&gt;</tt>, as argument for <tt>new</tt>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>bobby = <var>new</var> (nothrow) <var>int</var> [5]; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case, if the allocation of this block of memory failed, the failure could be detected by checking if <tt>bobby</tt> took a null pointer value:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> * bobby;
+bobby = <var>new</var> (nothrow) <var>int</var> [5];
+<var>if</var> (bobby == 0) {
+  <cite>// error assigning memory. Take measures.</cite>
+  }; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This <tt>nothrow</tt> method requires more work than the exception method, since the value returned has to be checked after each and every memory allocation, but I will use it in our examples due to its simplicity. Anyway this method can become tedious for larger projects, where the exception method is generally preferred. The exception method will be explained in detail later in this tutorial.<br>
+<br>
+<h3>Operators delete and delete[]</h3>
+Since the necessity of dynamic memory is usually limited to specific moments within a program, once it is no longer needed it should be freed so that the memory becomes available again for other requests of dynamic memory. This is the purpose of the operator <tt>delete</tt>, whose format is:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>delete</var> pointer;
+<var>delete</var> [] pointer;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first expression should be used to delete memory allocated for a single element, and the second one for memory allocated for arrays of elements. <br>
+<br>
+The value passed as argument to delete must be either a pointer to a memory block previously allocated with <tt>new</tt>, or a null pointer (in the case of a null pointer, <tt>delete</tt> produces no effect).<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br></code></pre></td>
+<td class="source"><pre><code><cite>// rememb-o-matic</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;new&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main ()
+{
+  <var>int</var> i,n;
+  <var>int</var> * p;
+  cout &lt;&lt; <kbd>"How many numbers would you like to type? "</kbd>;
+  cin &gt;&gt; i;
+  p= <var>new</var> (nothrow) <var>int</var>[i];
+  <var>if</var> (p == 0)
+    cout &lt;&lt; <kbd>"Error: memory could not be allocated"</kbd>;
+  <var>else</var>
+  {
+    <var>for</var> (n=0; n&lt;i; n++)
+    {
+      cout &lt;&lt; <kbd>"Enter number: "</kbd>;
+      cin &gt;&gt; p[n];
+    }
+    cout &lt;&lt; <kbd>"You have entered: "</kbd>;
+    <var>for</var> (n=0; n&lt;i; n++)
+      cout &lt;&lt; p[n] &lt;&lt; <kbd>", "</kbd>;
+    <var>delete</var>[] p;
+  }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>How many numbers would you like to type? 5
+Enter number : 75
+Enter number : 436
+Enter number : 1067
+Enter number : 8
+Enter number : 32
+You have entered: 75, 436, 1067, 8, 32,</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice how the value within brackets in the <tt>new</tt> statement is a variable value entered by the user (<tt>i</tt>), not a constant value:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>p= <var>new</var> (nothrow) <var>int</var>[i];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+But the user could have entered a value for i so big that our system could not handle it. For example, when I tried to give a value of 1 billion to the "How many numbers" question, my system could not allocate that much memory for the program and I got the text message we prepared for this case (<tt>Error: memory could not be allocated</tt>). Remember that in the case that we tried to allocate the memory without specifying the nothrow parameter in the new expression, an exception would be thrown, which if it's not handled terminates the program.<br>
+<br>
+It is a good practice to always check if a dynamic memory block was successfully allocated. Therefore, if you use the <tt>nothrow</tt> method, you should always check the value of the pointer returned. Otherwise, use the exception method, even if you do not handle the exception. This way, the program will terminate at that point without causing the unexpected results of continuing executing a code that assumes a block of memory to have been allocated when in fact it has not.<br>
+<br>
+<h3>Dynamic memory in ANSI-C</h3>
+<br>
+Operators <tt>new</tt> and <tt>delete</tt> are exclusive of C++. They are not available in the C language. But using pure C language and its library, dynamic memory can also be used through the functions <a href="/malloc">malloc</a>, <a href="/calloc">calloc</a>, <a href="/realloc">realloc</a> and <a href="/free">free</a>, which are also available in C++ including the <tt>&lt;cstdlib&gt;</tt> header file (see <a href="/cstdlib">cstdlib</a> for more info).<br>
+<br>
+The memory blocks allocated by these functions are not necessarily compatible with those returned by new, so each one should be manipulated with its own set of functions or operators.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/pointers/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Pointers</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/structures/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Data Structures</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="/doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="/doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fdynamic%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+dynamic'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+dynamic'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

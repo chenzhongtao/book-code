@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Constants - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/constants/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Constants</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Constants</h1>
+<dfn>Constants</dfn> are expressions with a fixed value.<br>
+<br>
+<h3>Literals</h3>
+<dfn>Literals</dfn> are the most obvious kind of constants. They are used to express particular values within the source code of a program. We have already used these previously to give concrete values to variables or to express messages we wanted our programs to print out, for example, when we wrote:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>a = 5;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+the <code>5</code> in this piece of code was a <em>literal constant</em>.<br>
+<br>
+Literal constants can be divided in <em>Integer Numerals</em>, <em>Floating-Point Numerals</em>, <em>Characters</em>, <em>Strings</em> and <em>Boolean Values</em>.<br>
+<br>
+<h4>Integer Numerals</h4>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>1776
+707
+-273</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+They are numerical constants that identify integer decimal values. Notice that to express a numerical constant we do not have to write quotes (<code>"</code>) nor any special character. There is no doubt that it is a constant: whenever we write <code>1776</code> in a program, we will be referring to the value 1776.<br>
+<br>
+In addition to decimal numbers (those that all of us are used to using every day), C++ allows the use of octal numbers (<em>base 8</em>) and hexadecimal numbers (<em>base 16</em>) as literal constants. If we want to express an octal number we have to precede it with a <code>0</code> (a <em>zero</em> character). And in order to express a hexadecimal number we have to precede it with the characters <code>0x</code> (<em>zero</em>, <em>x</em>). For example, the following literal constants are all equivalent to each other: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code>75         <cite>// decimal</cite>
+0113       <cite>// octal</cite>
+0x4b       <cite>// hexadecimal </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+All of these represent the same number: 75 (seventy-five) expressed as a base-10 numeral, octal numeral and hexadecimal numeral, respectively. <br>
+<br>
+Literal constants, like variables, are considered to have a specific data type. By default, integer literals are of type <var>int</var>. However, we can force them to either be unsigned by appending the <var>u</var> character to it, or long by appending <var>l</var>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>75         <cite>// int</cite>
+75u        <cite>// unsigned int</cite>
+75l        <cite>// long</cite>
+75ul       <cite>// unsigned long </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In both cases, the suffix can be specified using either upper or lowercase letters.<br>
+<br>
+<h4>Floating Point Numbers</h4>
+They express numbers with decimals and/or exponents. They can include either a decimal point, an <code>e</code> character (that expresses "by ten at the Xth height", where X is an integer value that follows the <code>e</code> character), or both a decimal point and an <code>e</code> character:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>3.14159    <cite>// 3.14159</cite>
+6.02e23    <cite>// 6.02 x 10^23</cite>
+1.6e-19    <cite>// 1.6 x 10^-19</cite>
+3.0        <cite>// 3.0 </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+These are four valid numbers with decimals expressed in C++. The first number is PI, the second one is the number of Avogadro, the third is the electric charge of an electron (an extremely small number) -all of them approximated- and the last one is the number three expressed as a floating-point numeric literal.<br>
+<br>
+The default type for floating point literals is <var>double</var>. If you explicitly want to express a <var>float</var> or a <var>long double</var> numerical literal, you can use the <code>f</code> or <code>l</code> suffixes respectively:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>3.14159L   <cite>// long double</cite>
+6.02e23f   <cite>// float </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Any of the letters that can be part of a floating-point numerical constant (<code>e</code>, <code>f</code>, <code>l</code>) can be written using either lower or uppercase letters without any difference in their meanings.<br>
+<br>
+<h4>Character and string literals</h4>
+There also exist non-numerical constants, like: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><kbd>'z'</kbd>
+<kbd>'p'</kbd>
+<kbd>"Hello world"</kbd>
+<kbd>"How do you do?"</kbd> </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The first two expressions represent single character constants, and the following two represent string literals composed of several characters. Notice that to represent a single character we enclose it between single quotes (<code>'</code>) and to express a string (which generally consists of more than one character) we enclose it between double quotes (<code>"</code>). <br>
+<br>
+When writing both single character and string literals, it is necessary to put the quotation marks surrounding them to distinguish them from possible variable identifiers or reserved keywords. Notice the difference between these two expressions: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>x
+<kbd>'x'</kbd></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<code>x</code> alone would refer to a variable whose identifier is <code>x</code>, whereas <code>'x'</code> (enclosed within single quotation marks) would refer to the character constant <var>'x'</var>.<br>
+<br>
+Character and string literals have certain peculiarities, like the escape codes. These are special characters that are difficult or impossible to express otherwise in the source code of a program, like newline (<code>\n</code>) or tab (<code>\t</code>). All of them are preceded by a backslash (<code>\</code>). Here you have a list of some of such escape codes: <br>
+<br>
+<table class="boxed">
+<tr><td><code>\n</code></td><td>newline</td></tr>
+<tr><td><code>\r</code></td><td>carriage return</td></tr>
+<tr><td><code>\t</code></td><td>tab</td></tr>
+<tr><td><code>\v</code></td><td>vertical tab</td></tr>
+<tr><td><code>\b</code></td><td>backspace</td></tr>
+<tr><td><code>\f</code></td><td>form feed (page feed)</td></tr>
+<tr><td><code>\a</code></td><td>alert (beep)</td></tr>
+<tr><td><code>\'</code></td><td>single quote (<samp>'</samp>)</td></tr>
+<tr><td><code>\"</code></td><td>double quote (<samp>"</samp>)</td></tr>
+<tr><td><code>\?</code></td><td>question mark (<samp>?</samp>)</td></tr>
+<tr><td><code>\\</code></td><td>backslash (<samp>\</samp>)</td></tr>
+</table>
+<br>
+For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><kbd>'\n'</kbd>
+<kbd>'\t'</kbd>
+<kbd>"Left \t Right"</kbd>
+<kbd>"one\ntwo\nthree"</kbd> </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Additionally, you can express any character by its numerical ASCII code by writing a backslash character (<code>\</code>) followed by the ASCII code expressed as an octal (<em>base-8</em>) or hexadecimal (<em>base-16</em>) number. In the first case (octal) the digits must immediately follow the backslash (for example <code>\23</code> or <code>\40</code>), in the second case (hexadecimal), an <code>x</code> character must be written before the digits themselves (for example <code>\x20</code> or <code>\x4A</code>).<br>
+<br>
+String literals can extend to more than a single line of code by putting a backslash sign (<code>\</code>) at the end of each unfinished line.<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><kbd>"string expressed in \
+two lines"</kbd> </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+You can also concatenate several string constants separating them by one or several blank spaces, tabulators, newline or any other valid blank character: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><kbd>"this forms"</kbd> <kbd>"a single"</kbd> <kbd>"string"</kbd> <kbd>"of characters"</kbd></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Finally, if we want the string literal to be explicitly made of wide characters (<var>wchar_t</var> type), instead of narrow characters (<var>char</var> type), we can precede the constant with the <code>L</code> prefix:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>L<kbd>"This is a wide character string"</kbd></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Wide characters are used mainly to represent non-English or exotic character sets.<br>
+<br>
+<h4>Boolean literals</h4>
+There are only two valid Boolean values: <var>true</var> and <var>false</var>. These can be expressed in C++ as values of type <var>bool</var> by using the Boolean literals <code>true</code> and <code>false</code>.<br>
+<br>
+<h3>Defined constants (#define)</h3>
+You can define your own names for constants that you use very often without having to resort to memory-consuming variables, simply by using the <code>#define</code> preprocessor directive. Its format is:<br>
+<br>
+<code>#define identifier value</code>
+<br>
+For example: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><dfn>#define PI 3.14159</dfn>
+<dfn>#define NEWLINE '\n' </dfn></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This defines two new constants: <var>PI</var> and <var>NEWLINE</var>. Once they are defined, you can use them in the rest of the code as if they were any other regular constant, for example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br></code></pre></td>
+<td class="source"><pre><code><cite>// defined constants: calculate circumference</cite>
+
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<dfn>#define PI 3.14159</dfn>
+<dfn>#define NEWLINE '\n'</dfn>
+
+<var>int</var> main ()
+{
+  <var>double</var> r=5.0;               <cite>// radius</cite>
+  <var>double</var> circle;
+
+  circle = 2 * PI * r;
+  cout &lt;&lt; circle;
+  cout &lt;&lt; NEWLINE;
+
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>31.4159</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In fact the only thing that the compiler preprocessor does when it encounters <code>#define</code> directives is to literally replace any occurrence of their identifier (in the previous example, these were <var>PI</var> and <var>NEWLINE</var>) by the code to which they have been defined (<code>3.14159</code> and <code>'\n'</code> respectively).<br>
+<br>
+The <code>#define</code> directive is not a C++ statement but a directive for the preprocessor; therefore it assumes the entire line as the directive and does not require a semicolon (<code>;</code>) at its end. If you append a semicolon character (<code>;</code>) at the end, it will also be appended in all occurrences of the identifier within the body of the program that the preprocessor replaces.<br>
+<br>
+<h3>Declared constants (const)</h3>
+With the <code>const</code> prefix you can declare constants with a specific type in the same way as you would do with a variable: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>const</var> <var>int</var> pathwidth = 100;
+<var>const</var> <var>char</var> tabulator = <kbd>'\t'</kbd>;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, <code>pathwidth</code> and <code>tabulator</code> are two typed constants. They are treated just like regular variables except that their values cannot be modified after their definition.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/variables/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Variables. Data Types.</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/operators/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Operators</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="/doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="/doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Fconstants%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+constants'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+constants'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

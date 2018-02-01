@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Type Casting - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/typecasting/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Type Casting</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Type Casting</h1>
+Converting an expression of a given type into another type is known as <i>type-casting</i>. We have already seen some ways to type cast:<br>
+<br>
+<h3>Implicit conversion</h3>
+Implicit conversions do not require any operator. They are automatically performed when a value is copied to a compatible type. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br></code></pre></td>
+<td class="source"><pre><code><var>short</var> a=2000;
+<var>int</var> b;
+b=a;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, the value of <tt>a</tt> has been promoted from <tt>short</tt> to <tt>int</tt> and we have not had to specify any type-casting operator. This is known as a standard conversion. Standard conversions affect fundamental data types, and allow conversions such as the conversions between numerical types (<tt>short</tt> to <tt>int</tt>, <tt>int</tt> to <tt>float</tt>, <tt>double</tt> to <tt>int</tt>...), to or from <tt>bool</tt>, and some pointer conversions. Some of these conversions may imply a loss of precision, which the compiler can signal with a warning. This warning can be avoided with an explicit conversion.<br>
+<br>
+Implicit conversions also include constructor or operator conversions, which affect classes that include specific constructors or operator functions to perform conversions. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br></code></pre></td>
+<td class="source"><pre><code><var>class</var> A {};
+<var>class</var> B { <var>public</var>: B (A a) {} };
+
+A a;
+B b=a;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here, an implicit conversion happened between objects of <tt>class A</tt> and <tt>class B</tt>, because <tt>B</tt> has a constructor that takes an object of class <tt>A</tt> as parameter. Therefore implicit conversions from <tt>A</tt> to <tt>B</tt> are allowed.<br>
+<br>
+<h3>Explicit conversion</h3>
+C++ is a strong-typed language. Many conversions, specially those that imply a different interpretation of the value, require an explicit conversion. We have already seen two notations for explicit type conversion: functional and c-like casting:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>short</var> a=2000;
+<var>int</var> b;
+b = (<var>int</var>) a;    <cite>// c-like cast notation</cite>
+b = <var>int</var> (a);    <cite>// functional notation </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The functionality of these explicit conversion operators is enough for most needs with fundamental data types. However, these operators can be applied indiscriminately on classes and pointers to classes, which can lead to code that while being syntactically correct can cause runtime errors. For example, the following code is syntactically correct: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br></code></pre></td>
+<td class="source"><pre><code><cite>// class type-casting</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> CDummy {
+    <var>float</var> i,j;
+};
+
+<var>class</var> CAddition {
+	<var>int</var> x,y;
+  <var>public</var>:
+	CAddition (<var>int</var> a, <var>int</var> b) { x=a; y=b; }
+	<var>int</var> result() { <var>return</var> x+y;}
+};
+
+<var>int</var> main () {
+  CDummy d;
+  CAddition * padd;
+  padd = (CAddition*) &amp;d;
+  cout &lt;&lt; padd-&gt;result();
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp> </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The program declares a pointer to <tt>CAddition</tt>, but then it assigns to it a reference to an object of another incompatible type using explicit type-casting:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>padd = (CAddition*) &amp;d;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Traditional explicit type-casting allows to convert any pointer into any other pointer type, independently of the types they point to. The subsequent call to member <tt>result</tt> will produce either a run-time error or a unexpected result.<br>
+<br>
+In order to control these types of conversions between classes, we have four specific casting operators: <tt>dynamic_cast</tt>, <tt>reinterpret_cast</tt>, <tt>static_cast</tt> and <tt>const_cast</tt>. Their format is to follow the new type enclosed between angle-brackets (<tt>&lt;&gt;</tt>) and immediately after, the expression to be converted between parentheses.<br>
+<br>
+<tt>
+dynamic_cast &lt;new_type&gt; (expression)<br>
+reinterpret_cast &lt;new_type&gt; (expression)<br>
+static_cast &lt;new_type&gt; (expression)<br>
+const_cast &lt;new_type&gt; (expression)<br>
+</tt>
+<br>
+The traditional type-casting equivalents to these expressions would be:<br>
+ <br>
+<tt>
+(new_type) expression<br>
+new_type (expression)<br>
+</tt>
+<br>
+but each one with its own special characteristics:<br>
+<br>
+<h3>dynamic_cast</h3>
+<br>
+<tt>dynamic_cast</tt> can be used only with pointers and references to objects. Its purpose is to ensure that the result of the type conversion is a valid complete object of the requested class.<br>
+<br>
+Therefore, <tt>dynamic_cast</tt> is always successful when we cast a class to one of its base classes:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br></code></pre></td>
+<td class="source"><pre><code><var>class</var> CBase { };
+<var>class</var> CDerived: <var>public</var> CBase { };
+
+CBase b; CBase* pb;
+CDerived d; CDerived* pd;
+
+pb = <var>dynamic_cast</var>&lt;CBase*&gt;(&amp;d);     <cite>// ok: derived-to-base</cite>
+pd = <var>dynamic_cast</var>&lt;CDerived*&gt;(&amp;b);  <cite>// wrong: base-to-derived </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The second conversion in this piece of code would produce a compilation error since base-to-derived conversions are not allowed with <tt>dynamic_cast</tt> unless the base class is polymorphic.<br>
+<br>
+When a class is polymorphic, <tt>dynamic_cast</tt> performs a special checking during runtime to ensure that the expression yields a valid complete object of the requested class:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br></code></pre></td>
+<td class="source"><pre><code><cite>// dynamic_cast</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;exception&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> CBase { <var>virtual</var> <var>void</var> dummy() {} };
+<var>class</var> CDerived: <var>public</var> CBase { <var>int</var> a; };
+
+<var>int</var> main () {
+  <var>try</var> {
+    CBase * pba = <var>new</var> CDerived;
+    CBase * pbb = <var>new</var> CBase;
+    CDerived * pd;
+
+    pd = <var>dynamic_cast</var>&lt;CDerived*&gt;(pba);
+    <var>if</var> (pd==0) cout &lt;&lt; <kbd>"Null pointer on first type-cast"</kbd> &lt;&lt; endl;
+
+    pd = <var>dynamic_cast</var>&lt;CDerived*&gt;(pbb);
+    <var>if</var> (pd==0) cout &lt;&lt; <kbd>"Null pointer on second type-cast"</kbd> &lt;&lt; endl;
+
+  } <var>catch</var> (exception&amp; e) {cout &lt;&lt; <kbd>"Exception: "</kbd> &lt;&lt; e.what();}
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>Null pointer on second type-cast</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<table class="boxed"><tr><td>
+<b>Compatibility note:</b> <tt>dynamic_cast</tt> requires the Run-Time Type Information (RTTI) to keep track of dynamic types. Some compilers support this feature as an option which is disabled by default. This must be enabled for runtime type checking using <tt>dynamic_cast</tt> to work properly.<br>
+</td></tr></table>
+<br>
+The code tries to perform two dynamic casts from pointer objects of type <tt>CBase*</tt> (<tt>pba</tt> and <tt>pbb</tt>) to a pointer object of type <tt>CDerived*</tt>, but only the first one is successful. Notice their respective initializations:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>CBase * pba = <var>new</var> CDerived;
+CBase * pbb = <var>new</var> CBase;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Even though both are pointers of type <tt>CBase*</tt>, <tt>pba</tt> points to an object of type <tt>CDerived</tt>, while <tt>pbb</tt> points to an object of type <tt>CBase</tt>. Thus, when their respective type-castings are performed using <tt>dynamic_cast</tt>, <tt>pba</tt> is pointing to a full object of class <tt>CDerived</tt>, whereas <tt>pbb</tt> is pointing to an object of class <tt>CBase</tt>, which is an incomplete object of class <tt>CDerived</tt>.<br>
+ <br>
+When <tt>dynamic_cast</tt> cannot cast a pointer because it is not a complete object of the required class -as in the second conversion in the previous example- it returns a null pointer to indicate the failure. If <tt>dynamic_cast</tt> is used to convert to a reference type and the conversion is not possible, an exception of type <tt>bad_cast</tt> is thrown instead.<br>
+<br>
+<tt>dynamic_cast</tt> can also cast null pointers even between pointers to unrelated classes, and can also cast pointers of any type to void pointers (<tt>void*</tt>).<br>
+<br>
+<h3>static_cast</h3>
+<tt>static_cast</tt> can perform conversions between pointers to related classes, not only from the derived class to its base, but also from a base class to its derived. This ensures that at least the classes are compatible if the proper object is converted, but no safety check is performed during runtime to check if the object being converted is in fact a full object of the destination type. Therefore, it is up to the programmer to ensure that the conversion is safe. On the other side, the overhead of the type-safety checks of <tt>dynamic_cast</tt> is avoided.<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>class</var> CBase {};
+<var>class</var> CDerived: <var>public</var> CBase {};
+CBase * a = <var>new</var> CBase;
+CDerived * b = <var>static_cast</var>&lt;CDerived*&gt;(a);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This would be valid, although <tt>b</tt> would point to an incomplete object of the class and could lead to runtime errors if dereferenced.<br>
+<br>
+<tt>static_cast</tt> can also be used to perform any other non-pointer conversion that could also be performed implicitly, like for example standard conversion between fundamental types:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>double</var> d=3.14159265;
+<var>int</var> i = <var>static_cast</var>&lt;<var>int</var>&gt;(d); </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Or any conversion between classes with explicit constructors or operator functions as described in "implicit conversions" above.<br>
+<br>
+<h3>reinterpret_cast</h3>
+<tt>reinterpret_cast</tt> converts any pointer type to any other pointer type, even of unrelated classes. The operation result is a simple binary copy of the value from one pointer to the other. All pointer conversions are allowed: neither the content pointed nor the pointer type itself is checked.<br>
+<br>
+It can also cast pointers to or from integer types. The format in which this integer value represents a pointer is platform-specific. The only guarantee is that a pointer cast to an integer type large enough to fully contain it, is granted to be able to be cast back to a valid pointer.<br>
+<br>
+The conversions that can be performed by <tt>reinterpret_cast</tt> but not by <tt>static_cast</tt> are low-level operations, whose interpretation results in code which is generally system-specific, and thus non-portable. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>class</var> A {};
+<var>class</var> B {};
+A * a = <var>new</var> A;
+B * b = <var>reinterpret_cast</var>&lt;B*&gt;(a);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This is valid C++ code, although it does not make much sense, since now we have a pointer that points to an object of an incompatible class, and thus dereferencing it is unsafe.<br>
+<br>
+<h3>const_cast</h3>
+This type of casting manipulates the constness of an object, either to be set or to be removed. For example, in order to pass a const argument to a function that expects a non-constant parameter:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br></code></pre></td>
+<td class="source"><pre><code><cite>// const_cast</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> print (<var>char</var> * str)
+{
+  cout &lt;&lt; str &lt;&lt; endl;
+}
+
+<var>int</var> main () {
+  <var>const</var> <var>char</var> * c = <kbd>"sample text"</kbd>;
+  print ( <var>const_cast</var>&lt;<var>char</var> *&gt; (c) );
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>sample text</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<h3>typeid</h3>
+<tt>typeid</tt> allows to check the type of an expression: <br>
+<br>
+<tt>
+typeid (expression)<br>
+</tt>
+<br>
+This operator returns a reference to a constant object of type <tt>type_info</tt> that is defined in the standard header file <tt>&lt;typeinfo&gt;</tt>. This returned value can be compared with another one using operators <tt>==</tt> and <tt>!=</tt> or can serve to obtain a null-terminated character sequence representing the data type or class name by using its <tt>name()</tt> member.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br></code></pre></td>
+<td class="source"><pre><code><cite>// typeid</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;typeinfo&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> main () {
+  <var>int</var> * a,b;
+  a=0; b=0;
+  <var>if</var> (<var>typeid</var>(a) != <var>typeid</var>(b))
+  {
+    cout &lt;&lt; <kbd>"a and b are of different types:\n"</kbd>;
+    cout &lt;&lt; <kbd>"a is: "</kbd> &lt;&lt; <var>typeid</var>(a).name() &lt;&lt; <kbd>'\n'</kbd>;
+    cout &lt;&lt; <kbd>"b is: "</kbd> &lt;&lt; <var>typeid</var>(b).name() &lt;&lt; <kbd>'\n'</kbd>;
+  }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>a and b are of different types:
+a is: int *
+b is: int  </samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+When <tt>typeid</tt> is applied to classes <tt>typeid</tt> uses the RTTI to keep track of the type of dynamic objects. When typeid is applied to an expression whose type is a polymorphic class, the result is the type of the most derived complete object:<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br></code></pre></td>
+<td class="source"><pre><code><cite>// typeid, polymorphic class</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<dfn>#include &lt;typeinfo&gt;</dfn>
+<dfn>#include &lt;exception&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>class</var> CBase { <var>virtual</var> <var>void</var> f(){} };
+<var>class</var> CDerived : <var>public</var> CBase {};
+
+<var>int</var> main () {
+  <var>try</var> {
+    CBase* a = <var>new</var> CBase;
+    CBase* b = <var>new</var> CDerived;
+    cout &lt;&lt; <kbd>"a is: "</kbd> &lt;&lt; <var>typeid</var>(a).name() &lt;&lt; <kbd>'\n'</kbd>;
+    cout &lt;&lt; <kbd>"b is: "</kbd> &lt;&lt; <var>typeid</var>(b).name() &lt;&lt; <kbd>'\n'</kbd>;
+    cout &lt;&lt; <kbd>"*a is: "</kbd> &lt;&lt; <var>typeid</var>(*a).name() &lt;&lt; <kbd>'\n'</kbd>;
+    cout &lt;&lt; <kbd>"*b is: "</kbd> &lt;&lt; <var>typeid</var>(*b).name() &lt;&lt; <kbd>'\n'</kbd>;
+  } <var>catch</var> (exception&amp; e) { cout &lt;&lt; <kbd>"Exception: "</kbd> &lt;&lt; e.what() &lt;&lt; endl; }
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>a is: class CBase *
+b is: class CBase *
+*a is: class CBase
+*b is: class CDerived</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<i>Note: The string returned by member <tt>name</tt> of <a href="../../../type_info">type_info</a> depends on the specific implementation of your compiler and library. It is not necessarily a simple string with its typical type name, like in the compiler used to produce this output.</i>
+<br>
+Notice how the type that <tt>typeid</tt> considers for pointers is the pointer type itself (both <tt>a</tt> and <tt>b</tt> are of type <tt>class CBase *</tt>). However, when <tt>typeid</tt> is applied to objects (like <tt>*a</tt> and <tt>*b</tt>) <tt>typeid</tt> yields their dynamic type (i.e. the type of their most derived complete object).<br>
+<br>
+If the type <tt>typeid</tt> evaluates is a pointer preceded by the dereference operator (<tt>*</tt>), and this pointer has a null value, <tt>typeid</tt> throws a <tt>bad_typeid</tt> exception.<br>
+<br>
+The compiler in the examples above generates names with <samp><a href="../../../type_info::name">type_info::name</a></samp> that are easily readable by users, but this is not a requirement: a compiler may just return any string.<br>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/exceptions/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Exceptions</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/preprocessor/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Preprocessor directives</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="/doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="/doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Ftypecasting%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+typecasting'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+typecasting'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

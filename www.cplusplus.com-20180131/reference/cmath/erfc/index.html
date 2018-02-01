@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>erfc - C++ Reference</title>
+<link rel="canonical" href="http://www.cplusplus.com/reference/cmath/erfc/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../reference/">Reference</a></li>
+<li><a href="../../../reference/cmath/">&lt;cmath&gt; </a></li>
+<li class="here">erfc</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<div id="I_type">function</div>
+<div id="I_file">&lt;cmath&gt; &lt;ctgmath&gt;</div>
+<h1>erfc<span class="C_ico cpp11warning" title="This page describes a feature introduced by the latest revision of the C++ standard (2011). Older compilers may not support it." alt="This page describes a feature introduced by the latest revision of the C++ standard (2011). Older compilers may not support it."></span></h1>
+<div class="C_prototype"><div class="C_SwitchCases">
+<div title="C99">
+<pre>     double erfc  (double x);      float erfcf (float x);long double erfcl (long double x);</pre></div>
+<div title="C++11" class="off">
+<pre>     double erfc (double x);      float erfc (float x);long double erfc (long double x);     double erfc (T x);           // additional overloads for integral types</pre></div>
+</div>
+</div><div id="I_description">Compute complementary error function</div>
+<section id="description">
+<img src="erfc.png" alt="complementary error function" title="complementary error function" width="300" height="270" class="floatright">
+Returns the <i>complementary error function</i> value for <var>x</var>.<br>
+<br>
+The <dfn>complementary error function</dfn> is equivalent to:<br>
+<code>erfc(x) = 1-erf(x)</code>
+<br>
+<div class="C_SwitchCases">
+<div title="C99">
+Header <samp><a href="../../../&lt;ctgmath&gt;">&lt;tgmath.h&gt;</a></samp> provides a type-generic macro version of this function.<br>
+</div>
+<div title="C++11">
+<i>Additional overloads</i> are provided in this header (<code><a href="/&lt;cmath&gt;">&lt;cmath&gt;</a></code>) for the <a href="/is_integral">integral types</a>: These overloads effectively cast <var>x</var> to a <code>double</code> before calculations (defined for <samp>T</samp> being any <i><a href="/is_integral">integral type</a></i>).<br>
+</div>
+</div>
+</section>
+<br>
+<section id="parameters">
+<h3>Parameters</h3>
+<dl>
+<dt>x</dt>
+<dd>Parameter for the <i>complementary error function</i>.</dd>
+</dl>
+</section>
+<br>
+<section id="return">
+<h3>Return Value</h3>
+Complementary error function value for <var>x</var>.<br>
+If <var>x</var> is too large, an underflow <i>range error</i> occurs.<br>
+<br>
+If an underflow <i>range error</i> occurs:<br>
+- And <samp><a href="/math_errhandling">math_errhandling</a></samp> has <samp><a href="/MATH_ERRNO">MATH_ERRNO</a></samp> set: the global variable <samp><a href="/errno">errno</a></samp> is set to <samp><a href="/ERANGE">ERANGE</a></samp>.<br>
+- And <samp><a href="/math_errhandling">math_errhandling</a></samp> has <samp><a href="/MATH_ERREXCEPT">MATH_ERREXCEPT</a></samp> set: <samp><a href="/FE_UNDERFLOW">FE_UNDERFLOW</a></samp> is raised.<br>
+</section>
+<br>
+<section id="example">
+<h3>Example</h3>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br></code></pre></td>
+<td class="source"><pre><code><cite>/* erfc example */</cite>
+<dfn>#include &lt;stdio.h&gt;      </dfn><cite>/* printf */</cite><dfn></dfn>
+<dfn>#include &lt;math.h&gt;       </dfn><cite>/* erfc */</cite><dfn></dfn>
+
+<var>int</var> main ()
+{
+  <var>double</var> param, result;
+  param = 1.0;
+  result = erfc (param);
+  printf (<kbd>"erfc(%f) = %f\n"</kbd>, param, result );
+  <var>return</var> 0;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Output:<br>
+<div class="auto"><table class="snippet"><tr><td class="output"><pre><samp>
+erfc (1.000000) = 0.157299
+</samp></pre></td></tr></table></div>
+</section>
+<br>
+<section id="see">
+<h3>See also</h3>
+<dl class="links"><dt><a href= "/reference/cmath/erf/"><b>erf</b></a></dt><dd>Compute error function <span class="typ">(function)</span></dd></dl><dl class="links"><dt><a href= "/reference/cmath/lgamma/"><b>lgamma</b></a></dt><dd>Compute log-gamma function <span class="typ">(function)</span></dd></dl><dl class="links"><dt><a href= "/reference/cmath/tgamma/"><b>tgamma</b></a></dt><dd>Compute gamma function <span class="typ">(function)</span></dd></dl>
+</section></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder selected reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="reference_box">
+<h3><b><a href="../../../reference/">Reference</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4><a href="../../../reference/clibrary/">C library:</a></h4><ul>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cassert/"><span>&lt;cassert&gt; (assert.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cctype/"><span>&lt;cctype&gt; (ctype.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cerrno/"><span>&lt;cerrno&gt; (errno.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cfenv/"><span>&lt;cfenv&gt; (fenv.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cfloat/"><span>&lt;cfloat&gt; (float.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cinttypes/"><span>&lt;cinttypes&gt; (inttypes.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ciso646/"><span>&lt;ciso646&gt; (iso646.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/climits/"><span>&lt;climits&gt; (limits.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/clocale/"><span>&lt;clocale&gt; (locale.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 selected folder"><a href="../../../reference/cmath/"><span>&lt;cmath&gt; (math.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csetjmp/"><span>&lt;csetjmp&gt; (setjmp.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/csignal/"><span>&lt;csignal&gt; (signal.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdarg/"><span>&lt;cstdarg&gt; (stdarg.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cstdbool/"><span>&lt;cstdbool&gt; (stdbool.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstddef/"><span>&lt;cstddef&gt; (stddef.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/cstdint/"><span>&lt;cstdint&gt; (stdint.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdio/"><span>&lt;cstdio&gt; (stdio.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstdlib/"><span>&lt;cstdlib&gt; (stdlib.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cstring/"><span>&lt;cstring&gt; (string.h)</span></a></li>
+<li class="c99 cpp11 folder"><a href="../../../reference/ctgmath/"><span>&lt;ctgmath&gt; (tgmath.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/ctime/"><span>&lt;ctime&gt; (time.h)</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/cuchar/"><span>&lt;cuchar&gt; (uchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwchar/"><span>&lt;cwchar&gt; (wchar.h)</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11 folder"><a href="../../../reference/cwctype/"><span>&lt;cwctype&gt; (wctype.h)</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/stl/">Containers:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/array/"><span>&lt;array&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/deque/"><span>&lt;deque&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/forward_list/"><span>&lt;forward_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/list/"><span>&lt;list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/map/"><span>&lt;map&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/queue/"><span>&lt;queue&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/set/"><span>&lt;set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stack/"><span>&lt;stack&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_map/"><span>&lt;unordered_map&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/unordered_set/"><span>&lt;unordered_set&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/vector/"><span>&lt;vector&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/iolibrary/">Input/Output:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/fstream/"><span>&lt;fstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iomanip/"><span>&lt;iomanip&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ios/"><span>&lt;ios&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iosfwd/"><span>&lt;iosfwd&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iostream/"><span>&lt;iostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/istream/"><span>&lt;istream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/ostream/"><span>&lt;ostream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/sstream/"><span>&lt;sstream&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/streambuf/"><span>&lt;streambuf&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/multithreading/">Multi-threading:</a></h4><ul>
+<li class="cpp11 folder"><a href="../../../reference/atomic/"><span>&lt;atomic&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/condition_variable/"><span>&lt;condition_variable&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/future/"><span>&lt;future&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/mutex/"><span>&lt;mutex&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/thread/"><span>&lt;thread&gt;</span></a></li>
+</ul></li>
+<li class="C_Collapsable collapsed"><h4><a href="../../../reference/std/">Other:</a></h4><ul>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/algorithm/"><span>&lt;algorithm&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/bitset/"><span>&lt;bitset&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/chrono/"><span>&lt;chrono&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/codecvt/"><span>&lt;codecvt&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/complex/"><span>&lt;complex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/exception/"><span>&lt;exception&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/functional/"><span>&lt;functional&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/initializer_list/"><span>&lt;initializer_list&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/iterator/"><span>&lt;iterator&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/limits/"><span>&lt;limits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/locale/"><span>&lt;locale&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/memory/"><span>&lt;memory&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/new/"><span>&lt;new&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/numeric/"><span>&lt;numeric&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/random/"><span>&lt;random&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/ratio/"><span>&lt;ratio&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/regex/"><span>&lt;regex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/stdexcept/"><span>&lt;stdexcept&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/string/"><span>&lt;string&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/system_error/"><span>&lt;system_error&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/tuple/"><span>&lt;tuple&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/typeindex/"><span>&lt;typeindex&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/typeinfo/"><span>&lt;typeinfo&gt;</span></a></li>
+<li class="cpp11 folder"><a href="../../../reference/type_traits/"><span>&lt;type_traits&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/utility/"><span>&lt;utility&gt;</span></a></li>
+<li class="cpp98 cpp11 folder"><a href="../../../reference/valarray/"><span>&lt;valarray&gt;</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect c90 c99 arm cpp98 cpp11" id="cmath_box">
+<h3><b><a href="../../../reference/cmath/">&lt;cmath&gt; (math.h)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>functions:</h4><ul>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/abs/"><span>abs</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/acos/"><span>acos</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/acosh/"><span>acosh</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/asin/"><span>asin</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/asinh/"><span>asinh</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/atan/"><span>atan</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/atan2/"><span>atan2</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/atanh/"><span>atanh</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/cbrt/"><span>cbrt</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/ceil/"><span>ceil</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/copysign/"><span>copysign</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/cos/"><span>cos</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/cosh/"><span>cosh</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/erf/"><span>erf</span></a></li>
+<li class="c99 cpp11 selected"><a href="../../../reference/cmath/erfc/"><span>erfc</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/exp/"><span>exp</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/exp2/"><span>exp2</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/expm1/"><span>expm1</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/fabs/"><span>fabs</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/fdim/"><span>fdim</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/floor/"><span>floor</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/fma/"><span>fma</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/fmax/"><span>fmax</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/fmin/"><span>fmin</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/fmod/"><span>fmod</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/fpclassify/"><span>fpclassify</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/frexp/"><span>frexp</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/hypot/"><span>hypot</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/ilogb/"><span>ilogb</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isfinite/"><span>isfinite</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isgreater/"><span>isgreater</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isgreaterequal/"><span>isgreaterequal</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isinf/"><span>isinf</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isless/"><span>isless</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/islessequal/"><span>islessequal</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/islessgreater/"><span>islessgreater</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isnan/"><span>isnan</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isnormal/"><span>isnormal</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/isunordered/"><span>isunordered</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/ldexp/"><span>ldexp</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/lgamma/"><span>lgamma</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/llrint/"><span>llrint</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/llround/"><span>llround</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/log/"><span>log</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/log10/"><span>log10</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/log1p/"><span>log1p</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/log2/"><span>log2</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/logb/"><span>logb</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/lrint/"><span>lrint</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/lround/"><span>lround</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/modf/"><span>modf</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nan-function/"><span>nan</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nanf/"><span>nanf</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nanl/"><span>nanl</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nearbyint/"><span>nearbyint</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nextafter/"><span>nextafter</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/nexttoward/"><span>nexttoward</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/pow/"><span>pow</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/remainder/"><span>remainder</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/remquo/"><span>remquo</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/rint/"><span>rint</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/round/"><span>round</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/scalbln/"><span>scalbln</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/scalbn/"><span>scalbn</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/signbit/"><span>signbit</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/sin/"><span>sin</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/sinh/"><span>sinh</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/sqrt/"><span>sqrt</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/tan/"><span>tan</span></a></li>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/tanh/"><span>tanh</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/tgamma/"><span>tgamma</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/trunc/"><span>trunc</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>macro constants:</h4><ul>
+<li class="c90 c99 arm cpp98 cpp11"><a href="../../../reference/cmath/HUGE_VAL/"><span>HUGE_VAL</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/HUGE_VALF/"><span>HUGE_VALF</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/HUGE_VALL/"><span>HUGE_VALL</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/INFINITY/"><span>INFINITY</span></a></li>
+<li class="c99 cpp11"><a href="../../../reference/cmath/math_errhandling/"><span>math_errhandling</span></a></li>
+<li class="cpp99 cpp11"><a href="../../../reference/cmath/NAN/"><span>NAN</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>types:</h4><ul>
+<li class="c99 cpp11"><a href="../../../reference/cmath/double_t/"><span>double_t</span></a></li>
+<li class="cpp99 cpp11"><a href="../../../reference/cmath/float_t/"><span>float_t</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Freference%2Fcmath%2Ferfc%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/reference/edit.cgi?a=cmath+erfc'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/reference/delete.cgi?a=cmath+erfc'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

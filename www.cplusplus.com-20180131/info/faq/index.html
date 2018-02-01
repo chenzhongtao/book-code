@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>C++ Language FAQ - C++ Information</title>
+<link rel="canonical" href="http://www.cplusplus.com/info/faq/">
+<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../v321/main.css">
+<script src="../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../info/">Information</a></li>
+<li class="here">C++ Language FAQ</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>C++ Language FAQ</h1>
+<dl>
+<dt>What is C++?</dt>
+<dd>C++ is a programming language. It literally means "increased C", reflecting its nature as an evolution of the C language.<br>
+</dd>
+<dt>Is it necessary to already know another programming language before learning C++? </dt>
+<dd>Not necessarily. C++ is a simple and clear language in its expressions. It is true that a piece of code written with C++ may be seen by a stranger of programming a bit more cryptic than some other languages due to the intensive use of special characters ({}[]*&!|...), but once one knows the meaning of such characters it can be even more schematic and clear than other languages that rely more on English words.<br>
+Also, the simplification of the input/output interface of C++ in comparison to C and the incorporation of the standard template library in the language, makes the communication and manipulation of data in a program written in C++ as simple as in other languages, without losing the power it offers.<br>
+</dd>
+<dt>How can I learn C++?</dt>
+<dd>There are many ways. Depending on the time you have and your preferences. The language is taught in many types of academic forms throughout the world, and can also be learnt by oneself with the help of tutorials and books. The <a href="../../doc/">documentation section</a> of this Website contains an online tutorial to help you achieve the objective of learning this language.<br>
+</dd>
+<dt>What is OOP: Object-oriented programming? </dt>
+<dd>It is a programming model that treats programming from a perspective where each component is considered an object, with its own properties and methods, replacing or complementing structured programming paradigm, where the focus was on procedures and parameters.<br>
+</dd>
+<dt>Is C++ a proprietary language?</dt>
+<dd>No. No one owns the C++ language. Anyone can use the language royalty-free.<br>
+</dd>
+<dt>What is ANSI-C++? </dt>
+<dd>ANSI-C++ is the name by which the international ANSI/ISO standard for the C++ language is known. But before this standard was published, C++ was already widely used and therefore there is a lot of code out there written in pre-standard C++. Referring to ANSI-C++ explicitly differenciates it from pre-standard C++ code, which is incompatible in some ways.<br>
+</dd>
+<dt>How may I know if my compiler supports ANSI-C++?</dt>
+<dd>The standard was published in 1998, followed by a revision in 2003. Some compilers older than the standard implement already some of its features, and many newer compilers don't implement all ANSI-C++ features. If you have doubts on whether your compiler will be able to compile ANSI-C++ code, you can try to compile a piece of code with some of the new features introduced mainly after the publication of the standard. For example, the following code fragment uses the <tt>bool</tt> type, and uses namespaces and templates.<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br></code></pre></td>
+<td class="source"><pre><code><dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+<var>template</var> &lt;<var>class</var> T&gt;
+<var>bool</var> ansisupported (T x) { <var>return</var> <var>true</var>; }
+
+<var>int</var> main() {
+  <var>if</var> (ansisupported(0)) cout &lt;&lt; <kbd>"ANSI OK"</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>ANSI OK</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+If your compiler is able to compile this program, you will be able to compile most of the existing ANSI-C++ code.<br>
+</dd>
+<dt>How can I make windowed programs?</dt>
+<dd>You need a C++ compiler and linker that can generate code for your windowing environment (Windows, XWindow, MacOS, ...). Windowed programs do not generally use the console to communicate with the user. They use a set of functions or classes to manipulate windows instead, which are specific to each environment. Anyway, the same principles apply both for console and windowed programs, except for communicating with the user.<br>
+</dd>
+<dt>What is Visual C++? And what does "visual programming" mean?</dt>
+<dd>Visual C++ is the name of a C++ compiler with an integrated environment from Microsoft. It includes special tools that simplify the development of large applications as well as specific libraries that improve productivity. The use of these tools is generally known as visual programming. Other manufacturers also develop these types of tools and libraries, like Borland C++, Visual Age, etc...<br>
+</dd>
+</dl></div><div id="CH_bb"></div></div>
+</div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder selected info"><a href="../../info/">Information</a></li>
+<li class="folder doc"><a href="../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="info_box">
+<h3><b><a href="../../info/">Information</a></b></h3>
+<ul>
+<li class="selected"><a href="../../info/faq/"><span>C++ Language FAQ</span></a></li>
+<li><a href="../../info/history/"><span>History of C++</span></a></li>
+<li><a href="../../info/description/"><span>A Brief Description</span></a></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Finfo%2Ffaq%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/info/edit.cgi?a=faq'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/info/delete.cgi?a=faq'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

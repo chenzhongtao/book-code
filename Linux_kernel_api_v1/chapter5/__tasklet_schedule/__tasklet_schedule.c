@@ -26,7 +26,7 @@ static int  __init __tasklet_schedule_init(void)
   	printk("<0>into __tasklet_schedule\n"); 
 	tasklet_init(&tasklet,irq_tasklet_action,data); //初始化一个struct tasklet_struct 变量，即申请一个软中断变量
 	printk("<0>the state of the tasklet after tasklet_init is :%ld\n",(&tasklet)->state); //显示软中断状态
-	if (!test_and_set_bit(TASKLET_STATE_SCHED, &tasklet.state))
+	if (!test_and_set_bit(TASKLET_STATE_SCHED, &tasklet.state))  // TASKLET_STATE_SCHED = 0, TASKLET_STATE_RUN = 1
 		__tasklet_schedule(&tasklet);                //将中断变量放入软中断执行队列
 	printk("<0>the state of the tasklet after __tasklet_schedule is :%ld\n",(&tasklet)->state);   //显示中断当前状态	 
 	printk("<0>out __tasklet_schedule_init\n"); 
@@ -41,3 +41,12 @@ static void  __exit __tasklet_schedule_exit(void)
 
 module_init(__tasklet_schedule_init); 
 module_exit(__tasklet_schedule_exit);
+
+/*
+into __tasklet_schedule
+the state of the tasklet after tasklet_init is :0
+the state of the tasklet after __tasklet_schedule is :1
+in the irq_tasklet_action the state of the tasklet is :2
+tasklet running. by author
+out __tasklet_schedule_init
+*/

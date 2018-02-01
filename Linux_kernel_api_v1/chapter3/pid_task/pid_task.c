@@ -24,8 +24,8 @@ static int __init pid_task_init(void)
 	printk("<0> into pid_task_init.\n");		
 	result=kernel_thread(my_function,NULL,CLONE_KERNEL); //ŽŽœšÐÂœø³Ì
 	struct pid * kpid=find_get_pid(result);		 //»ñÈ¡ÐÂœø³ÌµÄÃèÊö·ûÐÅÏ¢
-        struct task_struct * task=pid_task(kpid,PIDTYPE_PID); //»ñÈ¡œø³ÌµÄÈÎÎñÃèÊö·ûÐÅÏ¢
-        printk("<0>the state of the task is:%d\n",task->state);  //ÏÔÊŸÈÎÎñµ±Ç°ËùŽŠµÄ×ŽÌ¬
+    struct task_struct * task=pid_task(kpid,PIDTYPE_PID); //»ñÈ¡œø³ÌµÄÈÎÎñÃèÊö·ûÐÅÏ¢
+    printk("<0>the state of the task is:%d\n",task->state);  //ÏÔÊŸÈÎÎñµ±Ç°ËùŽŠµÄ×ŽÌ¬
 	printk("<0>the pid of the task is:%d\n",task->pid);  //ÏÔÊŸÈÎÎñµÄœø³ÌºÅ
 	printk("<0>the tgid of the task is:%d\n",task->tgid);  //ÏÔÊŸÈÎÎñµÄÏß³Ì×éºÅ
 	printk("<0>the kernel_thread result is:%d\n",result);  //ÏÔÊŸº¯Êýkernel_thread()º¯ÊýÖŽÐÐœá¹û

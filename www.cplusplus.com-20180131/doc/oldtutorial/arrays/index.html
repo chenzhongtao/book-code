@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Arrays - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/arrays/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Arrays</li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Arrays</h1>
+An array is a series of elements of the same type placed in contiguous memory locations that can be individually referenced by adding an index to a unique identifier.<br>
+<br>
+That means that, for example, we can store 5 values of type <tt>int</tt> in an array without having to declare 5 different variables, each one with a different identifier. Instead of that, using an array we can store 5 different values of the same type, <tt>int</tt> for example, with a unique identifier.<br>
+<br>
+For example, an array to contain 5 integer values of type <tt>int</tt> called <tt>billy</tt> could be represented like this:<br>
+<br>
+<img src="arrays1.gif" alt="">
+<br>
+where each blank panel represents an element of the array, that in this case are integer values of type <tt>int</tt>. These elements are numbered from <tt>0</tt> to <tt>4</tt> since in arrays the first index is always <tt>0</tt>, independently of its length.<br>
+<br>
+Like a regular variable, an array must be declared before it is used. A typical declaration for an array in C++ is:<br>
+<br>
+<tt>
+type name [elements];<br>
+</tt>
+<br>
+where <tt>type</tt> is a valid type (like <tt>int</tt>, <tt>float</tt>...), <tt>name</tt> is a valid identifier and the <tt>elements</tt> field (which is always enclosed in square brackets <tt>[]</tt>), specifies how many of these elements the array has to contain.<br>
+<br>
+Therefore, in order to declare an array called <tt>billy</tt> as the one shown in the above diagram it is as simple as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> billy [5];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<b>NOTE</b>: The <tt>elements</tt> field within brackets <tt>[]</tt> which represents the number of elements the array is going to hold, must be a <strong>constant</strong> value, since arrays are blocks of non-dynamic memory whose size must be determined before execution. In order to create arrays with a variable length dynamic memory is needed, which is explained later in these tutorials.<br>
+<br>
+<a name="initilize_array"></a><h3>Initializing arrays.</h3>
+When declaring a regular array of local scope (within a function, for example), if we do not specify otherwise, its elements will not be initialized to any value by default, so their content will be undetermined until we store some value in them. The elements of global and static arrays, on the other hand, are automatically initialized with their default values, which for all fundamental types this means they are filled with zeros.<br>
+<br>
+In both cases, local and global, when we declare an array, we have the possibility to assign initial values to each one of its elements by enclosing the values in braces <tt>{ }</tt>. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> billy [5] = { 16, 2, 77, 40, 12071 }; </code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+This declaration would have created an array like this:<br>
+<br>
+<img src="arrays2.gif" alt="">
+<br>
+The amount of values between braces <tt>{ }</tt> must not be larger than the number of elements that we declare for the array between square brackets <tt>[ ]</tt>. For example, in the example of array <tt>billy</tt> we have declared that it has 5 elements and in the list of initial values within braces <tt>{ }</tt> we have specified 5 values, one for each element.<br>
+<br>
+When an initialization of values is provided for an array, C++ allows the possibility of leaving the square brackets empty <tt>[ ]</tt>. In this case, the compiler will assume a size for the array that matches the number of values included between braces <tt>{ }</tt>:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> billy [] = { 16, 2, 77, 40, 12071 };</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+After this declaration, array <tt>billy</tt> would be 5 ints long, since we have provided 5 initialization values.<br>
+<br>
+<a name="accessing_values"></a><h3>Accessing the values of an array.</h3>
+<br>
+In any point of a program in which an array is visible, we can access the value of any of its elements individually as if it was a normal variable, thus being able to both read and modify its value. The format is as simple as:<br>
+<br>
+<tt>
+name[index]<br>
+</tt>
+<br>
+Following the previous examples in which <tt>billy</tt> had 5 elements and each of those elements was of type <tt>int</tt>, the name which we can use to refer to each element is the following:<br>
+<br>
+<img src="arrays3.gif" alt="">
+<br>
+For example, to store the value <tt>75</tt> in the third element of <tt>billy</tt>, we could write the following statement:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>billy[2] = 75;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+and, for example, to pass the value of the third element of <tt>billy</tt> to a variable called <tt>a</tt>, we could write:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>a = billy[2];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Therefore, the expression <tt>billy[2]</tt> is for all purposes like a variable of type <tt>int</tt>.<br>
+<br>
+Notice that the third element of <tt>billy</tt> is specified <tt>billy[2]</tt>, since the first one is <tt>billy[0]</tt>, the second one is <tt>billy[1]</tt>, and therefore, the third one is <tt>billy[2]</tt>. By this same reason, its last element is <tt>billy[4]</tt>. Therefore, if we write billy[5], we would be accessing the sixth element of <tt>billy</tt> and therefore exceeding the size of the array.<br>
+<br>
+In C++ it is syntactically correct to exceed the valid range of indices for an array. This can create problems, since accessing out-of-range elements do not cause compilation errors but can cause runtime errors. The reason why this is allowed will be seen further ahead when we begin to use pointers.<br>
+<br>
+At this point it is important to be able to clearly distinguish between the two uses that brackets <tt>[ ]</tt> have related to arrays. They perform two different tasks: one is to specify the size of arrays when they are declared; and the second one is to specify indices for concrete array elements. Do not confuse these two possible uses of brackets <tt>[ ]</tt> with arrays.<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> billy[5];         <cite>// declaration of a new array</cite>
+billy[2] = 75;        <cite>// access to an element of the array. </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+If you read carefully, you will see that a type specifier always precedes a variable or array declaration, while it never precedes an access.<br>
+<br>
+Some other valid operations with arrays:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code>billy[0] = a;
+billy[a] = 75;
+b = billy [a+2];
+billy[billy[a]] = billy[2] + 5;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br></code></pre></td>
+<td class="source"><pre><code><cite>// arrays example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> billy [] = {16, 2, 77, 40, 12071};
+<var>int</var> n, result=0;
+
+<var>int</var> main ()
+{
+  <var>for</var> ( n=0 ; n&lt;5 ; n++ )
+  {
+    result += billy[n];
+  }
+  cout &lt;&lt; result;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>12206</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<a name="multidimensional_arrays"></a><h3>Multidimensional arrays</h3>
+<br>
+Multidimensional arrays can be described as "arrays of arrays". For example, a bidimensional array can be imagined as a bidimensional table made of elements, all of them of a same uniform data type.<br>
+<br>
+<img src="bidimensional_arrays1.gif" alt="">
+<br>
+<tt>jimmy</tt> represents a bidimensional array of 3 per 5 elements of type <tt>int</tt>. The way to declare this array in C++ would be:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> jimmy [3][5];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+and, for example, the way to reference the second element vertically and fourth horizontally in an expression would be: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>jimmy[1][3]</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<img src="bidimensional_arrays2.gif" alt="">
+<br>
+(remember that array indices always begin by zero).<br>
+<br>
+Multidimensional arrays are not limited to two indices (i.e., two dimensions). They can contain as many indices as needed. But be careful! The amount of memory needed for an array rapidly increases with each dimension. For example:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>char</var> century [100][365][24][60][60];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+declares an array with a <tt>char</tt> element for each second in a century, that is more than 3 billion chars. So this declaration would consume more than 3 gigabytes of memory!<br>
+<br>
+Multidimensional arrays are just an abstraction for programmers, since we can obtain the same results with a simple array just by putting a factor between its indices:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code><var>int</var> jimmy [3][5];   <cite>// is equivalent to</cite>
+<var>int</var> jimmy [15];     <cite>// (3 * 5 = 15) </cite></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+With the only difference that with multidimensional arrays the compiler remembers the depth of each imaginary dimension for us. Take as example these two pieces of code, with both exactly the same result. One uses a bidimensional array and the other one uses a simple array: <br>
+<br>
+<table class="boxed">
+<tr><th>multidimensional array</th><th>pseudo-multidimensional array</th></tr>
+<tr><td><pre >
+#define WIDTH 5
+#define HEIGHT 3
+
+int jimmy [HEIGHT][WIDTH];
+int n,m;
+
+int main ()
+{
+  for (n=0;n&lt;HEIGHT;n++)
+    for (m=0;m&lt;WIDTH;m++)
+    {
+      jimmy[n][m]=(n+1)*(m+1);
+    }
+  return 0;
+}
+</pre></td><td><pre >
+#define WIDTH 5
+#define HEIGHT 3
+
+int jimmy [HEIGHT * WIDTH];
+int n,m;
+
+int main ()
+{
+  for (n=0;n&lt;HEIGHT;n++)
+    for (m=0;m&lt;WIDTH;m++)
+    {
+      jimmy[n*WIDTH+m]=(n+1)*(m+1);
+    }
+  return 0;
+}
+</pre></td></tr>
+</table>
+<br>
+None of the two source codes above produce any output on the screen, but both assign values to the memory block called jimmy in the following way: <br>
+<br>
+<img src="bidimensional_arrays3.gif" alt="">
+<br>
+We have used "defined constants" (<tt>#define</tt>) to simplify possible future modifications of the program. For example, in case that we decided to enlarge the array to a height of 4 instead of 3 it could be done simply by changing the line:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><dfn>#define HEIGHT 3 </dfn></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+to:<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><dfn>#define HEIGHT 4 </dfn></code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+with no need to make any other modifications to the program. <br>
+<br>
+<h3>Arrays as parameters</h3>
+At some moment we may need to pass an array to a function as a parameter. In C++ it is not possible to pass a complete block of memory by value as a parameter to a function, but we are allowed to pass its address. In practice this has almost the same effect and it is a much faster and more efficient operation.<br>
+<br>
+In order to accept arrays as parameters the only thing that we have to do when declaring the function is to specify in its parameters the element type of the array, an identifier and a pair of void brackets <tt>[]</tt>. For example, the following function: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>void</var> procedure (<var>int</var> arg[])</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+accepts a parameter of type "array of <tt>int</tt>" called <tt>arg</tt>. In order to pass to this function an array declared as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>int</var> myarray [40];</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+it would be enough to write a call like this:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>procedure (myarray);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Here you have a complete example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br></code></pre></td>
+<td class="source"><pre><code><cite>// arrays as parameters</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> printarray (<var>int</var> arg[], <var>int</var> length) {
+  <var>for</var> (<var>int</var> n=0; n&lt;length; n++)
+    cout &lt;&lt; arg[n] &lt;&lt; <kbd>" "</kbd>;
+  cout &lt;&lt; <kbd>"\n"</kbd>;
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> firstarray[] = {5, 10, 15};
+  <var>int</var> secondarray[] = {2, 4, 6, 8, 10};
+  printarray (firstarray,3);
+  printarray (secondarray,5);
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>5 10 15
+2 4 6 8 10</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As you can see, the first parameter (<tt>int arg[]</tt>) accepts any array whose elements are of type <tt>int</tt>, whatever its length. For that reason we have included a second parameter that tells the function the length of each array that we pass to it as its first parameter. This allows the <tt>for</tt> loop that prints out the array to know the range to iterate in the passed array without going out of range.<br>
+<br>
+In a function declaration it is also possible to include multidimensional arrays. The format for a tridimensional array parameter is:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>base_type[][depth][depth]</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+for example, a function with a multidimensional array as argument could be: <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>void</var> procedure (<var>int</var> myarray[][3][4])</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Notice that the first brackets <tt>[]</tt> are left empty while the following ones specify sizes for their respective dimensions. This is necessary in order for the compiler to be able to determine the depth of each additional dimension.<br>
+<br>
+Arrays, both simple or multidimensional, passed as function parameters are a quite common source of errors for novice programmers. I recommend the reading of the chapter about Pointers for a better understanding on how arrays operate.<br>
+	<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/functions2/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Functions (II)</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/ntcs/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Character Sequences</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="../../../doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="/doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li class="selected"><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="/doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Farrays%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+arrays'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+arrays'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>

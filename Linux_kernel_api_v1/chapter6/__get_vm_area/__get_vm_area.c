@@ -42,3 +42,8 @@ void __exit __get_vm_area_exit(void)
 
 module_init(__get_vm_area_init); 
 module_exit(__get_vm_area_exit); 
+
+/*
+vm->size ：36864
+vm->addr ：0xc0000100
+*/

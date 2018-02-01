@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Functions (I) - C++ Tutorials</title>
+<link rel="canonical" href="http://www.cplusplus.com/doc/oldtutorial/functions/">
+<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../v321/main.css">
+<script src="../../../v321/main.js" type="text/javascript"></script>
+<script>
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/32882001/L', [728, 90], 'div-gpt-ad-1473193443042-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+</script>
+</head>
+<body>
+<div id="I_top">
+<div id="I_header">
+<div id="I_logo"><a href="../../../" title="cplusplus.com"><div></div></a></div>
+<div id="I_search">
+<form id="search" action="/search.do" method="get">
+Search: <input name="q" size="20" class="txt"> <input type="submit" value="Go" class="btn">
+</form>
+</div>
+<div id="I_bar">
+<ul>
+<li><a href="../../../doc/">Tutorials</a></li>
+<li><a href="../../../doc/oldtutorial/">C++ Language </a></li>
+<li class="here">Functions </li>
+</ul>
+</div>
+<div id="I_user" class="C_LoginBox"><span title="ajax"></span></div>
+</div>
+</div>
+<div id="I_mid">
+<div id="I_wrap">
+<div id="I_minheight"></div>
+<div id="I_main">
+<div class="C_support">
+<div id='div-gpt-ad-1473193443042-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1473193443042-0'); });
+</script>
+</div>
+</div>
+<div id="I_content">
+<div class="C_doc">
+<h1>Functions (I)</h1>
+Using functions we can structure our programs in a more modular way, accessing all the potential that structured programming can offer to us in C++.<br>
+<br>
+A function is a group of statements that is executed when it is called from some point of the program. The following is its format:<br>
+<br>
+<tt>
+type name ( parameter1, parameter2, ...) { statements }<br>
+</tt>
+<br>
+where:<br>
+<ul>
+<li><tt>type</tt> is the data type specifier of the data returned by the function.</li>
+<li><tt>name</tt> is the identifier by which it will be possible to call the function.</li>
+<li><tt>parameters</tt> (as many as needed): Each parameter consists of a data type specifier followed by an identifier, like any regular variable declaration (for example: <tt>int x</tt>) and which acts within the function as a regular local variable. They allow to pass arguments to the function when it is called. The different parameters are separated by commas.</li>
+<li><tt>statements</tt> is the function's body. It is a block of statements surrounded by braces <tt>{ }</tt>.</li>
+</ul>
+<br>
+Here you have the first function example: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br></code></pre></td>
+<td class="source"><pre><code><cite>// function example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> addition (<var>int</var> a, <var>int</var> b)
+{
+  <var>int</var> r;
+  r=a+b;
+  <var>return</var> (r);
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> z;
+  z = addition (5,3);
+  cout &lt;&lt; <kbd>"The result is "</kbd> &lt;&lt; z;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>The result is 8</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In order to examine this code, first of all remember something said at the beginning of this tutorial: a C++ program always begins its execution by the <tt>main</tt> function. So we will begin there.<br>
+<br>
+We can see how the <tt>main</tt> function begins by declaring the variable <tt>z</tt> of type <tt>int</tt>. Right after that, we see a call to a function called <tt>addition</tt>. Paying attention we will be able to see the similarity between the structure of the call to the function and the declaration of the function itself some code lines above: <br>
+<br>
+<img src="function_arguments.gif" alt=""> <br>
+<br>
+The parameters and arguments have a clear correspondence. Within the <tt>main</tt> function we called to <tt>addition</tt> passing two values: <tt>5</tt> and <tt>3</tt>, that correspond to the <tt>int a</tt> and <tt>int b</tt> parameters declared for function addition.<br>
+<br>
+At the point at which the function is called from within <tt>main</tt>, the control is lost by <tt>main</tt> and passed to function <tt>addition</tt>. The value of both arguments passed in the call (<tt>5</tt> and <tt>3</tt>) are copied to the local variables <tt>int a</tt> and <tt>int b</tt> within the function.<br>
+<br>
+Function <tt>addition</tt> declares another local variable (<tt>int r</tt>), and by means of the expression <tt>r=a+b</tt>, it assigns to <tt>r</tt> the result of <tt>a</tt> plus <tt>b</tt>. Because the actual parameters passed for <tt>a</tt> and <tt>b</tt> are <tt>5</tt> and <tt>3</tt> respectively, the result is <tt>8</tt>.<br>
+<br>
+The following line of code:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code><var>return</var> (r);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+finalizes function <tt>addition</tt>, and returns the control back to the function that called it in the first place (in this case, <tt>main</tt>). At this moment the program follows its regular course from the same point at which it was interrupted by the call to <tt>addition</tt>. But additionally, because the <tt>return</tt> statement in function <tt>addition</tt> specified a value: the content of variable <tt>r</tt> (<tt>return (r);</tt>), which at that moment had a value of <tt>8</tt>. This value becomes the value of evaluating the function call.<br>
+<br>
+<img src="function_return_value.gif" alt="">
+<br>
+So being the value returned by a function the value given to the function call itself when it is evaluated, the variable <tt>z</tt> will be set to the value returned by <tt>addition (5, 3)</tt>, that is <tt>8</tt>. To explain it another way, you can imagine that the call to a function (<tt>addition (5,3)</tt>) is literally replaced by the value it returns (<tt>8</tt>).<br>
+<br>
+The following line of code in main is:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>cout &lt;&lt; <kbd>"The result is "</kbd> &lt;&lt; z;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+That, as you may already expect, produces the printing of the result on the screen.<br>
+<br>
+<table class="boxed"><tr><td>
+<a name="scope"></a><h4>Scope of variables</h4>
+<br>
+The scope of variables declared within a function or any other inner block is only their own function or their own block and cannot be used outside of them. For example, in the previous example it would have been impossible to use the variables <tt>a</tt>, <tt>b</tt> or <tt>r</tt> directly in function <tt>main</tt> since they were variables local to function <tt>addition</tt>. Also, it would have been impossible to use the variable <tt>z</tt> directly within function <tt>addition</tt>, since this was a variable local to the function <tt>main</tt>.<br>
+<br>
+<img src="scope_of_variables.gif" alt="">
+<br>
+Therefore, the scope of local variables is limited to the same block level in which they are declared. Nevertheless, we also have the possibility to declare global variables; These are visible from any point of the code, inside and outside all functions. In order to declare global variables you simply have to declare the variable outside any function or block; that means, directly in the body of the program.<br>
+</td></tr></table>
+<br>
+And here is another example about functions: <br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br></code></pre></td>
+<td class="source"><pre><code><cite>// function example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>int</var> subtraction (<var>int</var> a, <var>int</var> b)
+{
+  <var>int</var> r;
+  r=a-b;
+  <var>return</var> (r);
+}
+
+<var>int</var> main ()
+{
+  <var>int</var> x=5, y=3, z;
+  z = subtraction (7,2);
+  cout &lt;&lt; <kbd>"The first result is "</kbd> &lt;&lt; z &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; <kbd>"The second result is "</kbd> &lt;&lt; subtraction (7,2) &lt;&lt; <kbd>'\n'</kbd>;
+  cout &lt;&lt; <kbd>"The third result is "</kbd> &lt;&lt; subtraction (x,y) &lt;&lt; <kbd>'\n'</kbd>;
+  z= 4 + subtraction (x,y);
+  cout &lt;&lt; <kbd>"The fourth result is "</kbd> &lt;&lt; z &lt;&lt; <kbd>'\n'</kbd>;
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>The first result is 5
+The second result is 5
+The third result is 2
+The fourth result is 6</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+In this case we have created a function called <tt>subtraction</tt>. The only thing that this function does is to subtract both passed parameters and to return the result.<br>
+<br>
+Nevertheless, if we examine function <tt>main</tt> we will see that we have made several calls to function <tt>subtraction</tt>. We have used some different calling methods so that you see other ways or moments when a function can be called. <br>
+<br>
+In order to fully understand these examples you must consider once again that a call to a function could be replaced by the value that the function call itself is going to return. For example, the first case (that you should already know because it is the same pattern that we have used in previous examples):<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>z = subtraction (7,2);
+cout &lt;&lt; <kbd>"The first result is "</kbd> &lt;&lt; z;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+If we replace the function call by the value it returns (i.e., <tt>5</tt>), we would have:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>z = 5;
+cout &lt;&lt; <kbd>"The first result is "</kbd> &lt;&lt; z;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+As well as <br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>cout &lt;&lt; <kbd>"The second result is "</kbd> &lt;&lt; subtraction (7,2);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+has the same result as the previous call, but in this case we made the call to <tt>subtraction</tt> directly as an insertion parameter for <tt>cout</tt>. Simply consider that the result is the same as if we had written:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>cout &lt;&lt; <kbd>"The second result is "</kbd> &lt;&lt; 5;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+since <tt>5</tt> is the value returned by <tt>subtraction (7,2)</tt>.<br>
+<br>
+In the case of:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>cout &lt;&lt; <kbd>"The third result is "</kbd> &lt;&lt; subtraction (x,y);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The only new thing that we introduced is that the parameters of <tt>subtraction</tt> are variables instead of constants. That is perfectly valid. In this case the values passed to function <tt>subtraction</tt> are the values of <tt>x</tt> and <tt>y</tt>, that are <tt>5</tt> and <tt>3</tt> respectively, giving <tt>2</tt> as result. <br>
+<br>
+The fourth case is more of the same. Simply note that instead of:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>z = 4 + subtraction (x,y);</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+we could have written:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>z = subtraction (x,y) + 4;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+with exactly the same result. I have switched places so you can see that the semicolon sign (<tt>;</tt>) goes at the end of the whole statement. It does not necessarily have to go right after the function call. The explanation might be once again that you imagine that a function can be replaced by its returned value:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br></code></pre></td>
+<td class="source"><pre><code>z = 4 + 2;
+z = 2 + 4;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<a name="void"></a><h3>Functions with no type. The use of void.</h3>
+<br>
+If you remember the syntax of a function declaration:<br>
+<br>
+<tt>
+type name ( argument1, argument2 ...) statement<br>
+</tt>
+<br>
+you will see that the declaration begins with a <tt>type</tt>, that is the type of the function itself (i.e., the type of the datum that will be returned by the function with the return statement). But what if we want to return no value?<br>
+<br>
+Imagine that we want to make a function just to show a message on the screen. We do not need it to return any value. In this case we should use the <tt>void</tt> type specifier for the function. This is a special specifier that indicates absence of type.<br>
+<br>
+<div class="auto"><table class="split"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br></code></pre></td>
+<td class="source"><pre><code><cite>// void function example</cite>
+<dfn>#include &lt;iostream&gt;</dfn>
+<var>using</var> <var>namespace</var> std;
+
+<var>void</var> printmessage ()
+{
+  cout &lt;&lt; <kbd>"I'm a function!"</kbd>;
+}
+
+<var>int</var> main ()
+{
+  printmessage ();
+  <var>return</var> 0;
+}</code></pre></td>
+<td class="output"><pre><samp>I'm a function!</samp></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+<tt>void</tt> can also be used in the function's parameter list to explicitly specify that we want the function to take no actual parameters when it is called. For example, function <tt>printmessage</tt> could have been declared as:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>1<br>2<br>3<br>4<br></code></pre></td>
+<td class="source"><pre><code><var>void</var> printmessage (<var>void</var>)
+{
+  cout &lt;&lt; <kbd>"I'm a function!"</kbd>;
+}</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+Although it is optional to specify <tt>void</tt> in the parameter list. In C++, a parameter list can simply be left blank if we want a function with no parameters.<br>
+ <br>
+What you must always remember is that the format for calling a function includes specifying its name and enclosing its parameters between parentheses. The non-existence of parameters does not exempt us from the obligation to write the parentheses. For that reason the call to <tt>printmessage</tt> is:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>printmessage ();</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<br>
+<br>
+The parentheses clearly indicate that this is a call to a function and not the name of a variable or some other C++ statement. The following call would have been incorrect:<br>
+<br>
+<div class="auto"><table class="snippet"><tr><td class="rownum"><pre><code>&nbsp;</code></pre></td>
+<td class="source"><pre><code>printmessage;</code></pre></td><td class="C_btnholder"></td></tr></table></div>
+<table class="C_docPrevNext"><tr><td class="prev"><a href="../../../doc/oldtutorial/control/" rel="prev"><img src="/ico/32arrowleft.png" width="32" height="32" alt="Previous">Previous:<br><b>Simple control structures</b></a></td><td class="index"><a href="../../../doc/oldtutorial/" rel="index"><img src="/ico/32doc.png" width="32" height="32" alt="Index"><br>Index</a></td><td class="next"><a href="../../../doc/oldtutorial/functions2/" rel="next"><img src="/ico/32arrowright.png" width="32" height="32" alt="Next">Next:<br><b>Functions (II)</b></a></td></tr></table></div><div id="CH_bb"></div></div>
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="9701143201"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="I_nav">
+<div class="sect root">
+<h3><b><a href="/">C++</a></b></h3>
+<ul>
+<li class="folder info"><a href="../../../info/">Information</a></li>
+<li class="folder selected doc"><a href="../../../doc/">Tutorials</a></li>
+<li class="folder reference"><a href="../../../reference/">Reference</a></li>
+<li class="folder articles"><a href="../../../articles/">Articles</a></li>
+<li class="folder forum"><a href="../../../forum/">Forum</a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="doc_box">
+<h3><b><a href="../../../doc/">Tutorials</a></b></h3>
+<ul>
+<li class="cpp98 cpp11 folder"><a href="../../../doc/tutorial/"><span>C++ Language</span></a></li>
+<li><a href="../../../doc/ascii/"><span>Ascii Codes</span></a></li>
+<li><a href="../../../doc/boolean/"><span>Boolean Operations</span></a></li>
+<li><a href="../../../doc/hex/"><span>Numerical Bases</span></a></li>
+</ul>
+</div>
+<div class="C_BoxLabels C_BoxSort sect" id="oldtutorial_box">
+<h3><b><a href="/doc/oldtutorial/">C++ Language (C++98)</a></b></h3>
+<ul>
+<li class="C_Collapsable"><h4>Introduction:</h4><ul>
+<li><a href="../../../doc/oldtutorial/introduction/"><span>Instructions for use</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Basics of C++:</h4><ul>
+<li><a href="../../../doc/oldtutorial/program_structure/"><span>Structure of a program</span></a></li>
+<li><a href="../../../doc/oldtutorial/variables/"><span>Variables. Data Types.</span></a></li>
+<li><a href="../../../doc/oldtutorial/constants/"><span>Constants</span></a></li>
+<li><a href="../../../doc/oldtutorial/operators/"><span>Operators</span></a></li>
+<li><a href="../../../doc/oldtutorial/basic_io/"><span>Basic Input/Output</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Control Structures:</h4><ul>
+<li><a href="/doc/oldtutorial/control/"><span>Simple control structures</span></a></li>
+<li class="selected"><a href="../../../doc/oldtutorial/functions/"><span>Functions (I)</span></a></li>
+<li><a href="/doc/oldtutorial/functions2/"><span>Functions (II)</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Compound Data Types:</h4><ul>
+<li><a href="../../../doc/oldtutorial/arrays/"><span>Arrays</span></a></li>
+<li><a href="../../../doc/oldtutorial/ntcs/"><span>Character Sequences</span></a></li>
+<li><a href="../../../doc/oldtutorial/pointers/"><span>Pointers</span></a></li>
+<li><a href="../../../doc/oldtutorial/dynamic/"><span>Dynamic Memory</span></a></li>
+<li><a href="../../../doc/oldtutorial/structures/"><span>Data Structures</span></a></li>
+<li><a href="../../../doc/oldtutorial/other_data_types/"><span>Other Data Types</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Object Oriented Programming:</h4><ul>
+<li><a href="../../../doc/oldtutorial/classes/"><span>Classes (I)</span></a></li>
+<li><a href="../../../doc/oldtutorial/classes2/"><span>Classes (II)</span></a></li>
+<li><a href="../../../doc/oldtutorial/inheritance/"><span>Friendship and inheritance</span></a></li>
+<li><a href="../../../doc/oldtutorial/polymorphism/"><span>Polymorphism</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>Advanced Concepts:</h4><ul>
+<li><a href="../../../doc/oldtutorial/templates/"><span>Templates</span></a></li>
+<li><a href="../../../doc/oldtutorial/namespaces/"><span>Namespaces</span></a></li>
+<li><a href="../../../doc/oldtutorial/exceptions/"><span>Exceptions</span></a></li>
+<li><a href="../../../doc/oldtutorial/typecasting/"><span>Type Casting</span></a></li>
+<li><a href="../../../doc/oldtutorial/preprocessor/"><span>Preprocessor directives</span></a></li>
+</ul></li>
+<li class="C_Collapsable"><h4>C++ Standard Library:</h4><ul>
+<li><a href="../../../doc/oldtutorial/files/"><span>Input/Output with files</span></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="I_subnav"></div>
+<div class="C_ad234">
+<script async src="../../..//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- leftbutton -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:234px;height:60px"
+     data-ad-client="ca-pub-1444228343479937"
+     data-ad-slot="3817422056"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+</div></div>
+<div id="I_midclear"></div>
+</div>
+</div>
+<div id="I_bottom">
+<div id="I_footer">
+	<a href="/">Home page</a> | <a href="/privacy.do">Privacy policy</a><br>&copy; cplusplus.com, 2000-2017 - All rights reserved - <i>v3.1</i><br><a href="/contact.do?referrer=www.cplusplus.com%2Fdoc%2Foldtutorial%2Ffunctions%2F">Spotted an error? contact us</a>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+ onSession ( function(us) {
+		el=document.getElementById('CH_bb'); el.innerHTML='';
+		if (us.auth(4096)) {
+			
+			el.appendChild(btn('Edit Page','Edit Page','edit','/doc/edit.cgi?a=oldtutorial+functions'));
+			el.appendChild(btn('Delete Page','Delete Page','delete','javascript:docdel()'));
+		}
+	});
+	function docdel() { if (confirm('WARNING: You are about to delete this page. Confirm?')) window.location='/doc/delete.cgi?a=oldtutorial+functions'; }
+	ready();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-521783-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+//-->
+</script>
+
+<script>
+(function(){
+  // mini cookie-consent code (c) Juan Soulie, 2016
+  var s ='consent=cookie';
+  var e = document.createElement('div');
+  e.innerHTML = '<div style="background:#eed;padding:10px;margin:0;text-align:center;border-bottom:1px solid #446"><span style="color:#210;font-weight:bold">This website uses cookies. By continuing, you give permission to deploy cookies, as detailed in our <a href="/privacy.do">privacy policy</a>.</span> <span style="margin-left:10px;border-radius:5px;padding:1px 10px;background:#bcd;border:1px solid #789;cursor:pointer">ok</span></div>';
+  if (document.cookie.indexOf(s)!==-1) return;
+  var b = document.getElementsByTagName('body')[0];
+  b.insertBefore(e,b.firstChild);
+  var x = function() { document.cookie = s+'; path=/'; e.parentNode.removeChild(e); };
+  e.addEventListener('click',x);
+  document.addEventListener('scroll',x);
+})();
+</script>
+
+</body>
+</html>
